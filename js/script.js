@@ -19,7 +19,7 @@ $(document).ready(function() {
         getDate.text(`${months[month]} ${year}`);
     })();
 
-    btnSubmit.click(function() {
+    /*btnSubmit.click(function() {
         let currDate = $('#date').val();
         let categories = $('#categories option:selected').val()
         let number = $('#number').val();
@@ -96,5 +96,5 @@ $(document).ready(function() {
             localStorage.clear();
             location.reload();
         })();
-    });
+    });*/
 });

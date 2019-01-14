@@ -1,7 +1,4 @@
-// var express = require('express');
 var mysql = require('mysql');
-// var app = express();
-
 
 var connection = mysql.createConnection({
 
@@ -17,11 +14,8 @@ var connection = mysql.createConnection({
 connection.connect(function(err) {
     if (err) throw err;
     console.log("Connected!");
-    connection.query("SELECT * FROM transakcija", function (err, result, fields) {
+    connection.query("SELECT * FROM ijs_money_tracker_g1.categories", function (err, result, fields) {
         if (err) throw err;
-        console.log(result);
+        console.log(err, result, fields)
       })
   });
-
-  
-// app.listen('3306');
