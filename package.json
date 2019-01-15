@@ -1,8 +1,8 @@
 {
-  "name": "money",
+  "name": "moneytracker",
   "version": "1.0.0",
-  "description": "money tracker",
-  "main": "js/index.js",
+  "description": "Money tracker app",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/BogdanMaximovic/money.git"
   },
-  "author": "bogdan",
+  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/BogdanMaximovic/money/issues"
@@ -18,8 +18,8 @@
   "homepage": "https://github.com/BogdanMaximovic/money#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
     "express": "^4.16.4",
-    "mysql": "^2.16.0",
-    "uniq": "^1.0.1"
+    "mysql": "^2.16.0"
   }
 }

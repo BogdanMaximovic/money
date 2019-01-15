@@ -1,21 +1,48 @@
+var express = require('express');
+var bodyParser = require('body-parser');
+var path = require('path')
+var http = require('http');
 var mysql = require('mysql');
+var app = express();
 
-var connection = mysql.createConnection({
-
+const con = mysql.createConnection({
     host: 'sqldemo.softmetrixgroup.com',
     port: '3306',
     user: 'root',
     password: 'smx1111',
     database: 'ijs_money_tracker_g1'
-    
-
 });
 
-connection.connect(function(err) {
-    if (err) throw err;
-    console.log("Connected!");
-    connection.query("SELECT * FROM ijs_money_tracker_g1.categories", function (err, result, fields) {
-        if (err) throw err;
-        console.log(err, result, fields)
-      })
-  });
+global.db = con;
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'))
+
+
+
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false}));
+
+app.use(express.static(path.join(__dirname, 'public')))
+
+app.get('/', function (req, res){
+
+    //res.render('pages/index');
+
+    con.query("SELECT categories_name FROM ijs_money_tracker_g1.categories", function (err, result, fields){
+      var name = result
+        for (obj of name) {
+          res.render('pages/index' ,{
+            name: name
+          });
+        }
+
+      console.log(name)
+    })
+});
+
+
+app.listen(4000,function(){
+    console.log("Server start...")
+})
