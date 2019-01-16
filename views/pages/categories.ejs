@@ -1,18 +1,12 @@
 <% include ../partials/header %>
 
 <section class="row">
-    <div class="btn-group mx-auto my-4">
-        <button class="btn btn-success btn-lg" type="button">Expense</button>
-        <button class="btn btn-outline-success btn-lg" type="button">Income</button>
-    </div>
-</section>
-<section class="row">
     <div class="col-10 offset-1">
-        <h5 class="text-center text-info pb-3 text-uppercase">Categories</h5>
-        <ul class="nav nav-pills flex-column bg-success">
+        <h5 class="text-center text-info py-3 text-uppercase">Categories</h5>
+        <ul class="nav nav-pills flex-column bg-success border border-primary rounded">
         <% print.forEach(function(name){ %>
             <li class="nav-item m-1"><a class="nav-link text-light" href="#"><%= name.categories_name %></a></li>
-        <% }) %>
+        <% }) %></ul>
     </div>
 </section>
 
