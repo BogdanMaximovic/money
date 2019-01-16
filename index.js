@@ -38,7 +38,19 @@ app.get('/', function (req, res){
   })
 });
 
+app.get('/', function(req,res){
+  con.query("SELECT transactions_catid, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN categories ON transactons.transactions_catid=categories.categories_name", function (err,result){
+    if(err){
+      throw err;
+    } else {
+      console.log(result)
+      obj = {print:result}
+      res.render('pages/transactions', obj)
+    }
+  })
+});
 
-app.listen(4000,function(){
+
+app.listen(4200,function(){
     console.log("Server start...")
 })
