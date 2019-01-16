@@ -1,0 +1,64 @@
+<% include ../partials/header %>
+
+<form>
+    <div class="row">
+            <div class="col-md-6">
+                    <button class="btn btn-primary">All</button>
+                 </div>
+         <div class="col-md-6">
+            <button class="btn btn-success">Expense</button>
+         </div>
+         <div class="col-md-6">
+            <button class="btn btn-danger">Income</button>
+         </div>
+    </div>
+     <table class="table">
+          <thead>
+              <tr>
+                  <th>
+                      Category
+                  </th>
+                  <th>
+                      Date
+                  </th>
+                  <th>
+                      Amount
+                  </th>
+                  <th>
+                      Details
+                  </th>
+                  <th>
+                      Comment
+                  </th>
+                  <th>
+
+                  </th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <td>
+                        <% print.forEach(function(category){ %>
+                            <a  href="#"><%= category.transactions_catid%></a>
+                        <% }) %>
+                  </td>
+                  <td>
+                     
+                    </td>
+                    <td>
+                     
+                        </td>
+                        <td>
+                     
+                            </td>
+                            <td>
+                     
+                                </td>
+                                <td>
+                                   <button>Delete</button>
+                                    </td>
+              </tr>
+          </tbody>
+     </table>
+
+</form>
