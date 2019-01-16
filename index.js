@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({ extended: false}));
 app.use(express.static(path.join(__dirname, '/public/')))
 
 app.get('/', function (req, res){
-  con.query("SELECT * FROM ijs_money_tracker_g1.categories", function (err, result){
+  con.query("SELECT categories_name FROM ijs_money_tracker_g1.categories", function (err, result){
     if (err) {
       throw err;
     }else {
