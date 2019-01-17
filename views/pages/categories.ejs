@@ -1,13 +1,15 @@
 <% include ../partials/header %>
+<% include ../pages/button %>
 
 <section class="row">
-    <div class="col-10 offset-1">
-        <h5 class="text-center text-info py-3 text-uppercase">Categories</h5>
-        <ul class="nav nav-pills flex-column bg-success border border-primary rounded">
+    <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-12">
+        <h5 class="text-center text-light py-3 letter">Categories</h5>
+        <ul class="nav nav-pills flex-column bg-info border border-primary rounded">
         <% print.forEach(function(name){ %>
-            <li class="nav-item m-1"><a class="nav-link text-light" href="#"><%= name.categories_name %></a></li>
+            <li class="nav-item m-2 border-bottom" data-toggle="tooltip" data-placement="top" title="Click for more details"><a class="nav-link text-light" href="#<%= name.categories_id %>"><%= name.categories_name %></a></li>
         <% }) %></ul>
     </div>
 </section>
+
 
 <% include ../partials/footer %>

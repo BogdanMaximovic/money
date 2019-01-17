@@ -23,19 +23,24 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static(path.join(__dirname, '/public/')))
 
+app.use('/assets', express.static('assets'))
+
 app.get('/', function(req, res) {
-    res.render('pages/spending')
+    res.render('partials/header')
+})
+app.get('/spending', function(req, res) {
+    res.render('partials/header')
 })
 app.get('/categories', function(req, res) {
     res.render('partials/header')
 })
 app.get('/exp', function(req, res) {
-    con.query("SELECT categories_name FROM ijs_money_tracker_g1.categories WHERE categories_inc_exp = '0' ", function(err, result) {
+    con.query("SELECT categories_name,categories_id FROM ijs_money_tracker_g1.categories WHERE categories_inc_exp = '0' ", function(err, result) {
         if (err) {
             throw err;
         } else {
-            console.log(result)
             obj = { print: result }
+            console.log(obj)
             res.render('pages/categories', obj)
         }
     })
