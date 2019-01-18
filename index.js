@@ -24,6 +24,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '/public/')))
 
 app.use('/assets', express.static('assets'))
+app.use('/icons', express.static('icons'))
 
 app.get('/', function(req, res) {
     res.render('partials/header')
@@ -34,8 +35,9 @@ app.get('/spending', function(req, res) {
 app.get('/categories', function(req, res) {
     res.render('partials/header')
 })
-app.get('/exp', function(req, res) {
-    con.query("SELECT categories_name,categories_id FROM ijs_money_tracker_g1.categories WHERE categories_inc_exp = '0' ", function(err, result) {
+/*app.get('/exp', function(req, res) {
+    con.query("SELECT icons FROM ijs_money_tracker_g1.icons ", function(err, result) {
+      console.log(result);
         if (err) {
             throw err;
         } else {
@@ -44,9 +46,9 @@ app.get('/exp', function(req, res) {
             res.render('pages/categories', obj)
         }
     })
-})
+})*/
 app.get('/inc', function(req, res) {
-    con.query("SELECT categories_name FROM ijs_money_tracker_g1.categories WHERE categories_inc_exp = '1' ", function(err, result) {
+    con.query("SELECT categories_name,categories_id FROM ijs_money_tracker_g1.categories WHERE categories_inc_exp = '1' ", function(err, result) {
         if (err) {
             throw err;
         } else {
