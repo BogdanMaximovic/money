@@ -6,7 +6,7 @@ html,
 body {
 	font-size: 100%; 
 	font-family: inherit;
-	font-family: 'Lato', sans-serif;
+	font-family: 'Coiny', cursive;
 	font-size: 1rem;
 	background-image: -webkit-gradient(linear,left top, left bottom,from(rgba(0,0,0,0.7)),to(rgba(0,0,0,0.7))), url(https://i.pinimg.com/originals/06/2b/7f/062b7fb9cfd2a6351f4e0850c1e1ed50.jpg);
 	background-image: -moz-linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)), url(https://i.pinimg.com/originals/06/2b/7f/062b7fb9cfd2a6351f4e0850c1e1ed50.jpg);
@@ -28,4 +28,24 @@ body {
 	color: transparent;
 	letter-spacing: 1px;
 	word-spacing: .5rem;
+}
+#btnCenter{
+	text-align: center;
+}
+#middle {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+#btnLg {
+	line-height: 5rem;
+	background-color: #efc728;
+	font-size: 4rem;
+	color: #f2f4f7;
+	transition: all .5s ease-in-out;
+}
+#btnLg:hover{
+	color: #d6420c;
+	transform: scale(1.1);
 }

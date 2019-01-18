@@ -35,8 +35,8 @@ app.get('/spending', function(req, res) {
 app.get('/categories', function(req, res) {
     res.render('partials/header')
 })
-/*app.get('/exp', function(req, res) {
-    con.query("SELECT icons FROM ijs_money_tracker_g1.icons ", function(err, result) {
+app.get('/exp', function(req, res) {
+    con.query("SELECT categories_icons_id,categories_name,categories_id,icons FROM ijs_money_tracker_g1.categories JOIN ijs_money_tracker_g1.icons ON categories.categories_icons_id = icons.icons_id WHERE categories_inc_exp = '0'", function(err, result) {
       console.log(result);
         if (err) {
             throw err;
@@ -46,9 +46,9 @@ app.get('/categories', function(req, res) {
             res.render('pages/categories', obj)
         }
     })
-})*/
+})
 app.get('/inc', function(req, res) {
-    con.query("SELECT categories_name,categories_id FROM ijs_money_tracker_g1.categories WHERE categories_inc_exp = '1' ", function(err, result) {
+    con.query("SELECT categories_icons_id,categories_name,categories_id,icons FROM ijs_money_tracker_g1.categories JOIN ijs_money_tracker_g1.icons ON categories.categories_icons_id = icons.icons_id WHERE categories_inc_exp = '1'", function(err, result) {
         if (err) {
             throw err;
         } else {
@@ -61,4 +61,4 @@ app.get('/inc', function(req, res) {
 
 app.listen(4200, function() {
     console.log("Server start...")
-});
+})
