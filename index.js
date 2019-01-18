@@ -47,8 +47,6 @@ app.get('/', function(req,res){
   })
 });
 
-
-app.listen(4200,function(){
 app.get('/', function(req, res) {
     res.render('pages/spending')
 })
@@ -80,4 +78,4 @@ app.get('/inc', function(req, res) {
 
 app.listen(4200, function() {
     console.log("Server start...")
-})
+});
