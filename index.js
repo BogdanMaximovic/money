@@ -30,12 +30,13 @@ app.get('/', function(req, res) {
     res.render('partials/header')
 })
 app.get('/spending', function(req, res) {
-    con.query("SELECT categories_name,transactions_amount FROM ijs_money_tracker_g1.categories JOIN ijs_money_tracker_g1.transactions ON categories_id = transactions_catid", function(err, result) {
+    con.query("SELECT categories_name,transactions_amount, SUM(transactions_amount) FROM ijs_money_tracker_g1.categories JOIN ijs_money_tracker_g1.transactions ON categories_id = transactions_catid WHERE categories_inc_exp = '1';", function(err, result) {
+        console.log(req)
         if (err) {
             throw err;
         } else {
             data = { print: result }
-            console.log(data)
+            //console.log(data)
             res.render('pages/index', data)
         }
     })

@@ -21,9 +21,10 @@ $(document).ready(function() {
 		    ajax: {
 		        url: 'http://localhost:4200/spending',
 		        type: 'GET',
-		        dataType: "json"
+		        dataType: 'json',
+                data: 'data'
 		    },
-		  render: [
+		  columns: [
 		    { data: 'categories_name' },
 		    { data: 'transactions_amount' },
 		  ]
