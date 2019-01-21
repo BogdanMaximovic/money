@@ -14,4 +14,18 @@ $(document).ready(function() {
 
         getDate.text(`${months[month]} ${year}`);
     })();
+
+    /*$('#myTable').DataTable( {
+    	processing: true,
+    	serverSide: true,
+		    ajax: {
+		        url: 'http://localhost:4200/spending',
+		        type: 'GET',
+		        dataType: "json"
+		    },
+		  render: [
+		    { data: 'categories_name' },
+		    { data: 'transactions_amount' },
+		  ]
+	})*/
 })

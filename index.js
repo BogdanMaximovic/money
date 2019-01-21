@@ -19,7 +19,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'))
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, '/public/')))
 
@@ -30,10 +30,15 @@ app.get('/', function(req, res) {
     res.render('partials/header')
 })
 app.get('/spending', function(req, res) {
-    res.render('partials/header')
-})
-app.get('/categories', function(req, res) {
-    res.render('partials/header')
+    con.query("SELECT categories_name,transactions_amount FROM ijs_money_tracker_g1.categories JOIN ijs_money_tracker_g1.transactions ON categories_id = transactions_catid", function(err, result) {
+        if (err) {
+            throw err;
+        } else {
+            data = { print: result }
+            console.log(data)
+            res.render('pages/index', data)
+        }
+    })
 })
 app.get('/exp', function(req, res) {
     con.query("SELECT categories_icons_id,categories_name,categories_id,icons FROM ijs_money_tracker_g1.categories JOIN ijs_money_tracker_g1.icons ON categories.categories_icons_id = icons.icons_id WHERE categories_inc_exp = '0'", function(err, result) {

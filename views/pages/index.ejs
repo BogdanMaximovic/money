@@ -1,8 +1,28 @@
+<% include ../partials/header %>
+
 <div class="col-md-12">
 	<h1 class="text-center animated bounce font-weight-bold pt-4 coloring-text">Money Tracker for <p class="month"></p></h1>
 </div>
 <section class="row" id="btnCenter">
-    <div class="btn-group mx-auto m-5" id="middle" >
+    <div class="btn-group " id="middle" >
     	<a href="add" id="btnLg" class="btn border p-3">Add your spending</a>
     </div>
 </section>
+<!-- <section class="col-md-12 mt-5">
+	  <table id="myTable" class="table text-light">  
+        <thead>  
+            <tr>  
+                <th>Categories</th>  
+                <th>Amount</th>  
+            </tr>  
+        </thead>  
+         <tbody>  
+         <% print.forEach(function (user) { %>
+            <tr>  
+                <td><%= user.categories_name %></td>  
+                <td><%= user.transactions_amount %></td>
+            </tr>                                   
+         <% }) %>
+         </tbody>
+    </table>
+</section> -->
