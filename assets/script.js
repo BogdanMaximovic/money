@@ -15,31 +15,64 @@ $(document).ready(function() {
         getDate.text(`${months[month]} ${year}`);
     })();
 
-    /*$.ajax({
-        url: '/spending',
-        type: 'GET',
-        dataType: 'json',
-        contentType: 'application/json',
-        data: 'print',
-        success: function(print){
-            $('#myTable').DataTable()
-        }
-    });*/
-    
-
-    /*$('#myTable').DataTable( {
-    	processing: true,
-    	serverSide: true,
-		    ajax: {
-		        type: 'GET',
+    setTimeout(() => {
+        $('#myTable').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                type: 'GET',
                 url: 'http://localhost:4200/spending',
                 contentType: 'application/json',
-		        dataType: 'json',
-                dataSrc: 'data'
-		    },
-		  columns: [
-		    { data: 'categories_name' },
-		    { data: 'transactions_amount' },
-		  ]
-	})*/
-})
+                dataType: 'json',
+                dataSrc: '',
+                data: { "isAjax": true }
+            },
+            columns: [
+                { data: 'categories_name' },
+                { data: 'transactions_amount' },
+            ]
+        })
+    }, 200);
+
+// CHART.JS
+
+$.ajax({
+    url: "http://localhost:4200/spending",
+    method: "GET",
+    success: function(data) {
+        console.log(data);
+        var player = [];
+        var score = [];
+
+        for(var i in data) {
+            player.push("Player " + data[i].playerid);
+            score.push(data[i].score);
+        }
+
+        var chartdata = {
+            labels: player,
+            datasets : [
+                {
+                    label: 'Player Score',
+                    backgroundColor: 'rgba(200, 200, 200, 0.75)',
+                    borderColor: 'rgba(200, 200, 200, 0.75)',
+                    hoverBackgroundColor: 'rgba(200, 200, 200, 1)',
+                    hoverBorderColor: 'rgba(200, 200, 200, 1)',
+                    data: score
+                }
+            ]
+        };
+
+        var ctx = $("#mycanvas");
+
+        var barGraph = new Chart(ctx, {
+            type: 'bar',
+            data: chartdata
+        });
+    },
+    error: function(data) {
+        console.log(data);
+    }
+});
+
+}) // end
