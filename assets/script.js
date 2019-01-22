@@ -15,14 +15,27 @@ $(document).ready(function() {
         getDate.text(`${months[month]} ${year}`);
     })();
 
+    /*$.ajax({
+        url: '/spending',
+        type: 'GET',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: 'print',
+        success: function(print){
+            $('#myTable').DataTable()
+        }
+    });*/
+    
+
     /*$('#myTable').DataTable( {
     	processing: true,
     	serverSide: true,
 		    ajax: {
-		        url: 'http://localhost:4200/spending',
 		        type: 'GET',
+                url: 'http://localhost:4200/spending',
+                contentType: 'application/json',
 		        dataType: 'json',
-                data: 'data'
+                dataSrc: 'data'
 		    },
 		  columns: [
 		    { data: 'categories_name' },
