@@ -22,25 +22,10 @@ body {
 	letter-spacing: 1px;
 	word-spacing: .5rem;
 }
-/* #btnCenter{
-	text-align: center;
-}
-#middle {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	-webkit-transform: translate(-50%, -50%);
-	        transform: translate(-50%, -50%);
-}
-#btnLg {
-	line-height: 5rem;
-	background-color: #efc728;
-	font-size: 4rem;
-	color: #f2f4f7;
-	transition: all .5s ease-in-out;
-}
-#btnLg:hover{
-	color: #d6420c;
-	-webkit-transform: scale(1.1);
-	        transform: scale(1.1);
-} */
+
+.table-wrapper-scroll-y {
+    display: block;
+    max-height: 500px;
+    overflow-y: auto;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    }
