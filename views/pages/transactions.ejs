@@ -1,64 +1,92 @@
 <% include ../partials/header %>
 
+<br> 
+ <div class="text-center text-light">
+     <h1>Transactions</h1>
+ </div>
+ <br>
 <form>
     <div class="row">
-            <div class="col-md-6">
-                    <button class="btn btn-primary">All</button>
+            <div class="col-md-4 text-center">
+                    <button class="btn btn-primary btn-lg ">All</button>
                  </div>
-         <div class="col-md-6">
-            <button class="btn btn-success">Expense</button>
+         <div class="col-md-4 text-center">
+            <button class="btn btn-success btn-lg">Expense</button>
          </div>
-         <div class="col-md-6">
-            <button class="btn btn-danger">Income</button>
+         <div class="col-md-4 text-center">
+            <button class="btn btn-danger btn-lg ">Income</button>
          </div>
     </div>
-     <table class="table">
-          <thead>
-              <tr>
-                  <th>
-                      Category
-                  </th>
-                  <th>
-                      Date
-                  </th>
-                  <th>
-                      Amount
-                  </th>
-                  <th>
-                      Details
-                  </th>
-                  <th>
-                      Comment
-                  </th>
-                  <th>
-
-                  </th>
-              </tr>
-          </thead>
-          <tbody>
-              <tr>
-                  <td>
-                        <% print.forEach(function(category){ %>
-                            <a  href="#"><%= category.transactions_catid%></a>
-                        <% }) %>
-                  </td>
-                  <td>
-                     
-                    </td>
-                    <td>
-                     
-                        </td>
-                        <td>
-                     
-                            </td>
-                            <td>
-                     
-                                </td>
-                                <td>
-                                   <button>Delete</button>
-                                    </td>
-              </tr>
-          </tbody>
-     </table>
-
 </form>
+<br>
+<br>
+
+<div>
+<table id="tabledata" class="table table-bordered table-striped text-light table-hover" cellspacing="0">
+  <thead>
+      <tr>
+          <th scope="col">
+              Category
+          </th>
+          <th scope="col">
+              Date
+          </th scope="col">
+          <th scope="col">
+              Amount
+          </th>
+          <th scope="col"> 
+              Comment
+          </th>
+      </tr>
+  </thead>
+  <tbody>
+      
+        <% obj.forEach(function(name){ %>
+        <tr>
+        <td><%= name.categories_name %></td>
+         <td><%= name.main_date%></td>
+         <td><%= name.transactions_amount %></td>
+         <td><%= name. main_comment %></td>
+        </tr>
+          
+           <% }) %> 
+      
+  </tbody>
+  <tfoot>
+    <tr>
+        <th>
+            Category
+        </th>
+        <th>
+            Date
+        </th>
+        <th>
+            Amount
+        </th>
+        <th>
+            Comment
+        </th>
+    </tr>
+  </tfoot>
+</table>
+</div>
+
+<!--      
+<div class="jumbotron">
+        <ul><li>
+                <% obj.forEach(function(name){ %>
+                    <a href=""><%= name.categories_name %></a>
+                    <a href=""><%= name.main_date%></a>
+                    <a href=""><%= name.transactions_amount %></a>
+                    <a href=""><%= name. main_comment %></a>
+                  
+                   <% }) %> 
+         </li></ul>
+</div> -->
+
+     
+     
+  
+
+    
+
