@@ -49,12 +49,6 @@ app.get('/spending', function(req, res) {
         }
     })
 })
-// app.get('/categories', function(req, res) {
-//     res.render('partials/header')
-// })
-
-app.get('/exp', function(req, res) {
-    con.query("SELECT icons FROM ijs_money_tracker_g1.icons ", function(err, result) {
 
 app.get('/spendingData', function(req, res) {
             data = res;
@@ -130,9 +124,6 @@ app.get('/btninc', function(req,res){
         }
     })
 })
-
- 
-    
 
 app.listen(4200, function() {
     console.log("Server start...")
