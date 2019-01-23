@@ -1,3 +1,29 @@
+<% include ../partials/header %>
+
 <div class="col-md-12">
 	<h1 class="text-center animated bounce font-weight-bold pt-4 coloring-text">Money Tracker for <p class="month"></p></h1>
 </div>
+<section class="row">
+    <aside class="col-4 offset-4 btn-group">
+        <a href="add" class="btn btn-lg p-5 m-5 coloring-text border-info">Add your spending</a>
+    </aside>
+</section>
+<section class="row">
+	<aside class="col-4 offset-1 bg-info p-4">
+		<table id="myTable" class="table text-primary">
+			<thead>
+	        <tr>
+	            <th>Categori</th>
+	            <th>Summ</th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	    </tbody>
+		</table>
+	</aside>
+	<aside class="col-6 bg-info p-4">
+		<div class="text-primary">
+			<canvas id="myChart"></canvas>
+		</div>
+	</aside>
+</section>
