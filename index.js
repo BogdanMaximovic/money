@@ -77,5 +77,5 @@ app.get('/inc', function(req, res) {
 })
 
 app.listen(4200, function() {
-    console.log("Server start at localhost:4200");
+    console.log("Server start...")
 })
