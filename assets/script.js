@@ -13,12 +13,14 @@ $(document).ready(function() {
         year = now.getFullYear();
 
         getDate.text(`${months[month]} ${year}`);
-    })();
+    })();    
 
-    setTimeout(() => {
         $('#myTable').DataTable({
             processing: true,
             serverSide: true,
+            paging: true,
+            searchable: true,
+            ordering: true,
             ajax: {
                 type: 'GET',
                 url: 'http://localhost:4200/spending',
@@ -30,49 +32,26 @@ $(document).ready(function() {
             columns: [
                 { data: 'categories_name' },
                 { data: 'transactions_amount' },
-            ]
+            ],
         })
-    }, 200);
 
 // CHART.JS
 
-$.ajax({
-    url: "http://localhost:4200/spending",
-    method: "GET",
-    success: function(data) {
-        console.log(data);
-        var player = [];
-        var score = [];
+/*$.ajax({
+  url: 'http://localhost:4200/spending',
+  type: 'GET',
+  dataType: 'json',
+  data: 'print'
+  complete: function(xhr, textStatus) {
+    console
+  },
+  success: function(data, textStatus, xhr) {
+    console
+  },
+  error: function(xhr, textStatus, errorThrown) {
+    console
+  }
+});*/
 
-        for(var i in data) {
-            player.push("Player " + data[i].playerid);
-            score.push(data[i].score);
-        }
-
-        var chartdata = {
-            labels: player,
-            datasets : [
-                {
-                    label: 'Player Score',
-                    backgroundColor: 'rgba(200, 200, 200, 0.75)',
-                    borderColor: 'rgba(200, 200, 200, 0.75)',
-                    hoverBackgroundColor: 'rgba(200, 200, 200, 1)',
-                    hoverBorderColor: 'rgba(200, 200, 200, 1)',
-                    data: score
-                }
-            ]
-        };
-
-        var ctx = $("#mycanvas");
-
-        var barGraph = new Chart(ctx, {
-            type: 'bar',
-            data: chartdata
-        });
-    },
-    error: function(data) {
-        console.log(data);
-    }
-});
 
 }) // end
