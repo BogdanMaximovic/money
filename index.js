@@ -33,18 +33,19 @@ app.get('/', function(req, res) {
 })
 
 app.get('/spending', function(req, res) {
-    let sql = "SELECT categories_name,transactions_amount FROM ijs_money_tracker_g1.categories JOIN ijs_money_tracker_g1.transactions ON categories_id = transactions_catid WHERE categories_inc_exp = '0' LIMIT "+req.query.length+" OFFSET "+req.query.start+" ";
+    let order = req.query.order[0].dir;
+    let limitStart = req.query.length;
+    let limitEnd = req.query.start;
+    let sql = "SELECT categories_name,transactions_amount FROM ijs_money_tracker_g1.categories JOIN ijs_money_tracker_g1.transactions ON categories_id = transactions_catid WHERE categories_inc_exp = '0' AND categories_name like '%%' ORDER BY transactions_amount "+order+" LIMIT "+limitStart+" OFFSET "+limitEnd+" ";
     con.query(sql, function(err, result) {
-        //console.log(req)
         if (err) {
             throw err;
         } else {
             data = result;
             console.log("======== REQUEST ========");
-            console.log(req.query);
+            //console.log(req.query.search[0].value);
             console.log("======== END REQUEST ========");
             res.json(data)
-            //console.log(res)
             console.log("======== END DATA ========");
         }
     })
@@ -97,8 +98,6 @@ app.get('/transactions', function(req,res){
             
         }
     })
-
-   
 });
 
 app.get('/btnexp', function(req,res){
@@ -125,6 +124,8 @@ app.get('/btninc', function(req,res){
     })
 })
 
+
+// SERVER PORT //
 app.listen(4200, function() {
     console.log("Server start...")
 })

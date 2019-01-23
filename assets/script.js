@@ -35,23 +35,4 @@ $(document).ready(function() {
             ],
         })
 
-// CHART.JS
-
-/*$.ajax({
-  url: 'http://localhost:4200/spending',
-  type: 'GET',
-  dataType: 'json',
-  data: 'print'
-  complete: function(xhr, textStatus) {
-    console
-  },
-  success: function(data, textStatus, xhr) {
-    console
-  },
-  error: function(xhr, textStatus, errorThrown) {
-    console
-  }
-});*/
-
-
 }) // end
