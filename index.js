@@ -53,8 +53,7 @@ app.get('/spending', function(req, res) {
 //     res.render('partials/header')
 // })
 
-app.get('/exp', function(req, res) {
-    con.query("SELECT icons FROM ijs_money_tracker_g1.icons ", function(err, result) {
+
 
 app.get('/spendingData', function(req, res) {
             data = res;
