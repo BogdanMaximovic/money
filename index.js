@@ -81,6 +81,30 @@ app.get('/transactions', function(req,res){
    
 });
 
+app.get('/btnexp', function(req,res){
+    con.query("select transactions_id, transactions_amount, main_transid, main_date, main_comment, main_catid, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id WHERE categories_inc_exp = '0'", function (err, result){
+        if(err){
+            throw err;
+        }else{
+            obj = result;
+             console.log(obj)
+            res.render('pages/transactions', obj)
+        }
+    })
+})
+
+app.get('/btninc', function(req,res){
+    con.query("select transactions_id, transactions_amount, main_transid, main_date, main_comment, main_catid, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id WHERE categories_inc_exp = '1'", function (err, result){
+        if(err){
+            throw err;
+        }else{
+            obj = result;
+             console.log(obj)
+            res.render('pages/transactions', obj)
+        }
+    })
+})
+
  
     
 
