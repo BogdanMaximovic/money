@@ -13,26 +13,26 @@ $(document).ready(function() {
         year = now.getFullYear();
 
         getDate.text(`${months[month]} ${year}`);
-    })();    
+    })();
 
-        $('#myTable').DataTable({
-            processing: true,
-            serverSide: true,
-            paging: true,
-            searchable: true,
-            ordering: true,
-            ajax: {
-                type: 'GET',
-                url: 'http://localhost:4200/spending',
-                contentType: 'application/json',
-                dataType: 'json',
-                dataSrc: '',
-                data: { "isAjax": true }
-            },
-            columns: [
-                { data: 'categories_name' },
-                { data: 'transactions_amount' },
-            ],
-        })
+    $('#myTable').DataTable({
+        processing: true,
+        serverSide: true,
+        paging: true,
+        searchable: true,
+        ordering: true,
+        ajax: {
+            type: 'GET',
+            url: 'http://localhost:4200/spending',
+            contentType: 'application/json',
+            dataType: 'json',
+            dataSrc: '',
+            data: { "isAjax": true }
+        },
+        columns: [
+            { data: 'categories_name' },
+            { data: 'transactions_amount' },
+        ],
+    })
 
 }) // end
