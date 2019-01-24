@@ -67,6 +67,13 @@ app.get('/spending', function(req, res) {
         }
     })
 })
+/*
+app.get('/input', function(req, res) {  //Tamara,u radu
+    res.render('pages/input')
+})
+*/
+app.get('/categories', function(req, res) {
+    res.render('partials/header')
 
 app.get('/spendingData', function(req, res) {
     data = res;
@@ -98,6 +105,31 @@ app.get('/inc', function(req, res) {
         }
     })
 })
+
+//u radu
+//Tamara
+/*
+app.post('/input',function(req,res){ 
+    console.log(req.body);
+
+     var newInput= {    //format datuma nije isti kao u tabeli u bazi
+         date: req.body.date, //da li treba da pisu isti nazivi kao kolone u tabeli
+         category: req.body.category,
+         amount: req.body.amount,
+         comment: req.body.comment
+        }
+//Tamara
+    con.query('INSERT into ijs_money_tracker_g1.main SET ?',newInput,function(err,res){
+    if(err){
+        throw err;
+    }
+        else{
+        console.log(res);
+    }
+        })
+   res.send(JSON.stringify(req.body));
+})
+*/
 
 app.get('/adding', function(req, res) {
     data = res;
