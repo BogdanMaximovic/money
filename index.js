@@ -74,6 +74,7 @@ app.get('/input', function(req, res) {  //Tamara,u radu
 */
 app.get('/categories', function(req, res) {
     res.render('partials/header')
+})
 
 app.get('/spendingData', function(req, res) {
     data = res;
