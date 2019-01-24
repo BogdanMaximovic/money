@@ -172,8 +172,13 @@ body {
     max-height: 500px;
     overflow-y: auto;
     -ms-overflow-style: -ms-autohiding-scrollbar;
-<<<<<<< HEAD
-	}
-=======
 }
->>>>>>> 36b3c482ca0604af0748cf631e17f173da37d968
+
+.divdt{
+    background-color: lightgreen;
+    font-size: 1.7rem;
+}
+
+.txttbl{
+    font-size: 1.2rem;
+}

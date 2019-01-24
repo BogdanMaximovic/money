@@ -50,14 +50,6 @@ app.get('/spending', function(req, res) {
         }
     })
 })
-<<<<<<< HEAD
-// app.get('/categories', function(req, res) {
-//     res.render('partials/header')
-// })
-
-
-=======
->>>>>>> 36b3c482ca0604af0748cf631e17f173da37d968
 
 app.get('/spendingData', function(req, res) {
     data = res;
