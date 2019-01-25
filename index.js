@@ -31,6 +31,22 @@ app.use('/icons', express.static('icons'))
 app.get('/', function(req, res) {
     res.render('partials/header')
 })
+app.get('/edit', function(req, res) {
+    res.render('pages/edit')
+})
+
+/*app.get('/editdata', function(req, res) {
+    con.query('select transactions_id, transactions_amount, main_transid, main_date, main_comment, main_catid, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id', function(err, result) {
+
+        if (err) {
+            throw err;
+        } else {
+            obj = result;
+            console.log(obj)
+            res.json('pages/edit')
+        }
+    })
+});*/
 
 app.get('/spending', function(req, res) {
     let order = req.query.order[0].dir;
@@ -45,10 +61,19 @@ app.get('/spending', function(req, res) {
             console.log("======== REQUEST ========");
             console.log(req.query);
             console.log("======== END REQUEST ========");
+            console.log(req);
             res.json(data)
             console.log("======== END DATA ========");
         }
     })
+})
+/*
+app.get('/input', function(req, res) {  //Tamara,u radu
+    res.render('pages/input')
+})
+*/
+app.get('/categories', function(req, res) {
+    res.render('partials/header')
 })
 
 app.get('/spendingData', function(req, res) {
@@ -81,6 +106,31 @@ app.get('/inc', function(req, res) {
         }
     })
 })
+
+//u radu
+//Tamara
+/*
+app.post('/input',function(req,res){ 
+    console.log(req.body);
+
+     var newInput= {    //format datuma nije isti kao u tabeli u bazi
+         date: req.body.date, //da li treba da pisu isti nazivi kao kolone u tabeli
+         category: req.body.category,
+         amount: req.body.amount,
+         comment: req.body.comment
+        }
+//Tamara
+    con.query('INSERT into ijs_money_tracker_g1.main SET ?',newInput,function(err,res){
+    if(err){
+        throw err;
+    }
+        else{
+        console.log(res);
+    }
+        })
+   res.send(JSON.stringify(req.body));
+})
+*/
 
 app.get('/adding', function(req, res) {
     data = res;
