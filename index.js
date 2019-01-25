@@ -179,6 +179,53 @@ app.get('/btninc', function(req, res) {
 })
 
 
+
+// --start--
+app.get('/expense', function(req, res) {
+    var obj = {};
+
+    con.query("SELECT categories_name, transactions_amount FROM categories JOIN transactions ON categories_id = transactions_id WHERE categories_inc_exp = '0' ", function(err, result) {
+        if (err) {
+            throw err;
+        } else {
+            obj = { print: result };
+            console.log(obj);
+            
+        }
+    });
+    con.query("SELECT sum(transactions_amount) AS transactions_expense FROM categories JOIN transactions ON categories_id = transactions_id WHERE categories_inc_exp = '0' ", function(err, result) {
+        if (err) {
+            throw err;
+        } else {
+            //obj = { print: result }
+            obj.print2 = result;
+            console.log(obj);
+            
+        }
+    });
+    con.query("SELECT sum(transactions_amount) AS transactions_income FROM categories JOIN transactions ON categories_id = transactions_id WHERE categories_inc_exp = '1' ", function(err, result) {
+        if (err) {
+            throw err;
+        } else {
+            //obj = { print: result }
+            obj.print3 = result;
+            console.log(obj);
+        }
+    });
+    con.query("SELECT (SELECT sum(transactions_amount) FROM categories JOIN transactions ON categories_id = transactions_id WHERE categories_inc_exp = '1') - (SELECT sum(transactions_amount) FROM categories JOIN transactions ON categories_id = transactions_id WHERE categories_inc_exp = '0') AS diference", function(err, result) {
+        if (err) {
+            throw err;
+        } else {
+            //obj = { print: result }
+            obj.print4 = result;
+            console.log(obj);
+            res.render('pages/speding', obj);
+        }
+    });
+});
+// --end--
+
+
 // SERVER PORT //
 app.listen(4200, function() {
     console.log("Server start...")
