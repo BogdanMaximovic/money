@@ -33,16 +33,18 @@ app.get('/', function(req, res) {
 })
 
 app.get('/edit', function(req, res) {
+
     con.query('select transactions_id, transactions_amount, main_transid, main_date, main_comment, main_catid, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id', function(err, result) {
         if (err) {
             throw err;
         } else {
             obj = result;
-            //console.log(obj)
+            console.log(obj)
             res.render('pages/edit', obj)
+
         }
     })
-})
+});
 
 app.get('/spending', function(req, res) {
     let order = req.query.order[0].dir;
