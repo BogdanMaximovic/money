@@ -31,22 +31,18 @@ app.use('/icons', express.static('icons'))
 app.get('/', function(req, res) {
     res.render('partials/header')
 })
+
 app.get('/edit', function(req, res) {
-    res.render('pages/edit')
-})
-
-/*app.get('/editdata', function(req, res) {
     con.query('select transactions_id, transactions_amount, main_transid, main_date, main_comment, main_catid, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id', function(err, result) {
-
         if (err) {
             throw err;
         } else {
             obj = result;
-            console.log(obj)
-            res.json('pages/edit')
+            //console.log(obj)
+            res.render('pages/edit', obj)
         }
     })
-});*/
+})
 
 app.get('/spending', function(req, res) {
     let order = req.query.order[0].dir;
@@ -133,6 +129,9 @@ app.post('/input',function(req,res){
 */
 
 app.get('/adding', function(req, res) {
+    console.log("======== REQUEST START ========");
+    console.log(req.connection)
+    console.log("======== REQUEST END========");
     data = res;
     res.render('pages/adding', data)
 })
@@ -180,7 +179,7 @@ app.get('/btninc', function(req, res) {
 
 
 
-// --start--
+// --start-- predrag
 app.get('/expense', function(req, res) {
     var obj = {};
 
