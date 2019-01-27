@@ -32,10 +32,14 @@ app.get('/', function(req, res) {
     res.render('partials/header')
 })
 app.get('/edit', function(req, res) {
+<<<<<<< HEAD
     res.render('pages/edit')
 })
 
 /*app.get('/editdata', function(req, res) {
+=======
+
+>>>>>>> af4a81c525041d7f065278b2cf9a405542419c5a
     con.query('select transactions_id, transactions_amount, main_transid, main_date, main_comment, main_catid, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id', function(err, result) {
 
         if (err) {
@@ -43,10 +47,18 @@ app.get('/edit', function(req, res) {
         } else {
             obj = result;
             console.log(obj)
+<<<<<<< HEAD
             res.json('pages/edit')
         }
     })
 });*/
+=======
+            res.render('pages/edit', obj)
+
+        }
+    })
+});
+>>>>>>> af4a81c525041d7f065278b2cf9a405542419c5a
 
 app.get('/spending', function(req, res) {
     let order = req.query.order[0].dir;

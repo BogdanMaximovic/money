@@ -1,7 +1,75 @@
 <% include ../partials/header %>
 
-<div class="row">
-	<p class="text-warning">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores ad, omnis totam iusto quia? Excepturi itaque quaerat quia unde delectus rem error, dignissimos, in iusto dolores vero quos corrupti at.</p>
-</div>
-<% include ../partials/footer %>
 
+ <div class="text-center text-light">
+    <h1>Edit</h1>
+</div>
+<form action="" method="" class="p-3">
+    <div class="row">
+        <div class="col-md-4 text-center">
+            <a href="transactions" class="btn btn-primary btn-lg nav-link text-light">All</a>
+        </div>
+        <div class="col-md-4 text-center">
+            <a href="btnexp" class="btn btn-danger btn-lg nav-link text-light">Expense</a>
+        </div>
+        <div class="col-md-4 text-center">
+            <a href="btninc" class="btn btn-success btn-lg nav-link text-light">Income</a>
+        </div>
+    </div>
+</form>
+<div class="table-wrapper-scroll-y divdt p-3">
+    <table id="tabledata" class="table table-striped txttbl p-3" cellspacing="0">
+        <thead class="font-weight-normal">
+            <tr class="text-primary">
+                <th>
+                    Category
+                </th>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Amount
+                </th>
+                <th>
+                    Comment
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <% obj.forEach(function(name){ %>
+            <tr>
+                <td>
+                    <%=name.transactions_id %>
+                    <%= name.categories_name %>
+                </td>
+                <td>
+                    <%= name.main_date%>
+                </td>
+                <td>
+                    <%= name.transactions_amount %>
+                </td>
+                <td>
+                    <%= name. main_comment %>
+                </td>
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
+
+<<<<<<< HEAD
+=======
+<script>
+    $(document).ready(function() {
+    const table = $('#tabledata');
+     
+    $('#tabledata tbody').on('click', 'tr', function (e) {
+        let data = table.row(this).data();
+        alert(data);
+    } );
+} );
+    </script>
+
+
+<% include ../partials/footer %>
+>>>>>>> af4a81c525041d7f065278b2cf9a405542419c5a
