@@ -1,10 +1,64 @@
 <% include ../partials/header %>
 
+<script>
+    $(document).ready(function() {
+        $("table td").click(function() {
+            $('#myModal').modal('show')
+            let dataFromClick = this.innerText
+            $('.modal-body').text(`Old value: ${dataFromClick}`)
+        }); 
+            $('#save').on('click', function(event) {
+                let newValue = $('#name').val();
+                console.log(newValue);
 
- <div class="text-center text-light">
+                 $.ajax({
+                        type: 'GET',
+                        url: 'http://localhost:4200/edit/new',
+                        contentType: 'application/json',
+                        dataType: 'json',
+                        data: JSON.stringify({"newValue": newValue }),
+                        processData: false,
+                        contentType: 'application/json',
+                        success: function (data) {
+                            alert(data);
+                        }
+                    });
+                 window.location.href="http://localhost:4200/edit/new";
+
+            });
+    });
+</script>
+
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Editing Data</h5>
+        <button class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body"></div>
+      <div class="modal-text">
+          <form action="/edit" method="GET">
+              <div class="form-group m-1">
+                <label for="name">New value</label>
+                <input class="form-control" type="text" id="name" placeholder="Enter new value">
+            </div>
+          </form>
+      </div>
+      <div class="modal-footer m-auto">
+        <button class="btn btn-success" data-dismiss="modal" id="save">Save</button>
+        <button class="btn btn-secondary" data-dismiss="modal" id="close">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="text-center text-light">
     <h1>Edit</h1>
 </div>
-<form action="" method="" class="p-3">
+<!-- <form action="" method="" class="p-3">
     <div class="row">
         <div class="col-md-4 text-center">
             <a href="transactions" class="btn btn-primary btn-lg nav-link text-light">All</a>
@@ -16,7 +70,7 @@
             <a href="btninc" class="btn btn-success btn-lg nav-link text-light">Income</a>
         </div>
     </div>
-</form>
+</form> -->
 <div class="table-wrapper-scroll-y divdt p-3">
     <table id="tabledata" class="table table-striped txttbl p-3" cellspacing="0">
         <thead class="font-weight-normal">
@@ -39,7 +93,6 @@
             <% obj.forEach(function(name){ %>
             <tr>
                 <td>
-                    <%=name.transactions_id %>
                     <%= name.categories_name %>
                 </td>
                 <td>
@@ -49,27 +102,12 @@
                     <%= name.transactions_amount %>
                 </td>
                 <td>
-                    <%= name. main_comment %>
+                    <%= name.main_comment %>
                 </td>
             </tr>
             <% }) %>
         </tbody>
     </table>
-</div>
-
-<<<<<<< HEAD
-=======
-<script>
-    $(document).ready(function() {
-    const table = $('#tabledata');
-     
-    $('#tabledata tbody').on('click', 'tr', function (e) {
-        let data = table.row(this).data();
-        alert(data);
-    } );
-} );
-    </script>
-
+</div> 
 
 <% include ../partials/footer %>
->>>>>>> af4a81c525041d7f065278b2cf9a405542419c5a

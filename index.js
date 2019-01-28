@@ -14,7 +14,6 @@ const con = mysql.createConnection({
     multipleStatements: true
 });
 
-global.db = con;
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'))
@@ -31,14 +30,14 @@ app.use('/icons', express.static('icons'))
 app.get('/', function(req, res) {
     res.render('partials/header')
 })
+<<<<<<< HEAD
 app.get('/edit', function(req, res) {
     res.render('pages/edit');
 })
-
-/*app.get('/editdata', function(req, res) {
 =======
+>>>>>>> da8deaae103daaa8430e9a2ec9b801597cd561ba
 
->>>>>>> af4a81c525041d7f065278b2cf9a405542419c5a
+app.get('/edit', function(req, res) {
     con.query('select transactions_id, transactions_amount, main_transid, main_date, main_comment, main_catid, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id', function(err, result) {
 
         if (err) {
@@ -46,11 +45,28 @@ app.get('/edit', function(req, res) {
         } else {
             obj = result;
             console.log(obj)
+<<<<<<< HEAD
 //<<<<<<< HEAD
             res.json('pages/edit')
         }
     })
 });*/
+=======
+            res.render('pages/edit', obj)
+
+        }
+    })
+})
+
+app.get('/edit/new', function(req, res) {
+    console.log("======== RES ========");
+    console.log(res);
+    console.log("======== END RES ========");
+
+    res.json('pages/edit/new')
+})
+
+>>>>>>> da8deaae103daaa8430e9a2ec9b801597cd561ba
 
 app.get('/spending', function(req, res) {
     let order = req.query.order[0].dir;
@@ -71,11 +87,7 @@ app.get('/spending', function(req, res) {
         }
     })
 })
-/*
-app.get('/input', function(req, res) {  //Tamara,u radu
-    res.render('pages/input')
-})
-*/
+    
 app.get('/categories', function(req, res) {
     res.render('partials/header')
 })
