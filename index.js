@@ -32,8 +32,7 @@ app.get('/', function(req, res) {
     res.render('partials/header')
 })
 app.get('/edit', function(req, res) {
-<<<<<<< HEAD
-    res.render('pages/edit')
+    res.render('pages/edit');
 })
 
 /*app.get('/editdata', function(req, res) {
@@ -47,18 +46,11 @@ app.get('/edit', function(req, res) {
         } else {
             obj = result;
             console.log(obj)
-<<<<<<< HEAD
+//<<<<<<< HEAD
             res.json('pages/edit')
         }
     })
 });*/
-=======
-            res.render('pages/edit', obj)
-
-        }
-    })
-});
->>>>>>> af4a81c525041d7f065278b2cf9a405542419c5a
 
 app.get('/spending', function(req, res) {
     let order = req.query.order[0].dir;
