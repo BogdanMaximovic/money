@@ -2,6 +2,8 @@
 
 --- OBAVEZNO PROCITATI I ODRADITI ---
 
+--- U izradi ---
+
 preko npm-a treba da instalirate sledece:
 
 - express
