@@ -9,21 +9,19 @@
         }); 
             $('#save').on('click', function(event) {
                 let newValue = $('#name').val();
-                console.log(newValue);
-
+                alert(newValue);
                  $.ajax({
+                        url: 'http://localhost:4200/edit',
                         type: 'GET',
-                        url: 'http://localhost:4200/edit/new',
                         contentType: 'application/json',
                         dataType: 'json',
-                        data: JSON.stringify({"newValue": newValue }),
+                        data: JSON.stringify({'vrednost':newValue}),
                         processData: false,
                         contentType: 'application/json',
                         success: function (data) {
-                            alert(data);
+                            alert(`ovo je data${data}`);
                         }
                     });
-                 window.location.href="http://localhost:4200/edit/new";
 
             });
     });
