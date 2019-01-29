@@ -47,10 +47,10 @@ app.get('/edit', function(req, res) {
 
 app.get('/edit/new', function(req, res) {
     console.log("======== RES ========");
-    console.log(res);
+    console.log(req.query);
     console.log("======== END RES ========");
 
-    res.json('pages/edit/new')
+    res.render('pages/edit')
 })
 
 
@@ -96,6 +96,21 @@ app.get('/exp', function(req, res) {
         }
     })
 })
+
+app.get('/new', function(req, res) {
+    let sql = "SELECT categories_icons_id,categories_name,categories_id,icons FROM ijs_money_tracker_g1.categories JOIN ijs_money_tracker_g1.icons ON categories.categories_icons_id = icons.icons_id";
+    con.query(sql, function(err, result) {
+        console.log(result);
+        if (err) {
+            throw err;
+        } else {
+            obj = { print: result }
+            console.log(obj)
+            res.render('pages/new', obj)
+        }
+    })
+})
+
 app.get('/inc', function(req, res) {
     let sql = "SELECT categories_icons_id,categories_name,categories_id,icons FROM ijs_money_tracker_g1.categories JOIN ijs_money_tracker_g1.icons ON categories.categories_icons_id = icons.icons_id WHERE categories_inc_exp = '1'";
     con.query(sql, function(err, result) {
