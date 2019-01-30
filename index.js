@@ -18,7 +18,6 @@ const con = mysql.createConnection({
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'))
 
-//app.use(express.bodyParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -27,6 +26,7 @@ app.use(express.static(path.join(__dirname, '/public/')))
 app.use('/assets', express.static('assets'))
 app.use('/icons', express.static('icons'))
 
+/*===== BOGDAN =====*/
 
 app.get('/', function(req, res) {
     res.render('partials/header')
@@ -34,19 +34,11 @@ app.get('/', function(req, res) {
 
 app.get('/edit', function(req, res) {
     con.query('select transactions_id, transactions_amount, main_transid, main_date, main_comment, main_catid, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id', function(err, result) {
-            console.log("======== REQUEST ========");
-            console.log(req.query);
-            console.log("======== END REQUEST ========");
-            console.log("======== RES ========");
-            console.log(res);
-            console.log("======== END RES ========");
         if (err) {
             throw err;
         } else {
             obj = result;
-            //console.log(obj)
             res.render('pages/edit', obj)
-
         }
     })
 })
@@ -61,12 +53,7 @@ app.get('/spending', function(req, res) {
             throw err;
         } else {
             data = result;
-            console.log("======== REQUEST ========");
-            console.log(req.query);
-            console.log("======== END REQUEST ========");
-            console.log(req);
             res.json(data)
-            console.log("======== END DATA ========");
         }
     })
 })
@@ -83,12 +70,22 @@ app.get('/spendingData', function(req, res) {
 app.get('/exp', function(req, res) {
     let sql = "SELECT categories_icons_id,categories_name,categories_id,icons FROM ijs_money_tracker_g1.categories JOIN ijs_money_tracker_g1.icons ON categories.categories_icons_id = icons.icons_id WHERE categories_inc_exp = '0'";
     con.query(sql, function(err, result) {
-        console.log(result);
         if (err) {
             throw err;
         } else {
             obj = { print: result }
-            console.log(obj)
+            res.render('pages/categories', obj)
+        }
+    })
+})
+
+app.get('/inc', function(req, res) {
+    let sql = "SELECT categories_icons_id,categories_name,categories_id,icons FROM ijs_money_tracker_g1.categories JOIN ijs_money_tracker_g1.icons ON categories.categories_icons_id = icons.icons_id WHERE categories_inc_exp = '1'";
+    con.query(sql, function(err, result) {
+        if (err) {
+            throw err;
+        } else {
+            obj = { print: result }
             res.render('pages/categories', obj)
         }
     })
@@ -96,33 +93,21 @@ app.get('/exp', function(req, res) {
 
 app.get('/new', function(req, res) {
     let sql = "SELECT * FROM ijs_money_tracker_g1.icons";
-        
-        // console.log("======== RES ========");
-        // console.log(res);
-        // console.log("======== END RES ========");
     con.query(sql, function(err, result) {
-        console.log(result);
         if (err) {
             throw err;
         } else {
-            console.log("======== REQUEST ========");
-        console.log(req);
-        console.log("======== END REQUEST ========");
             obj = { print: result }
-            console.log(obj)
             res.render('pages/new', obj)
         }
     })
 })
 
 app.post('/addingNew', function(req, res){
-        console.log("======== REQUEST ========");
-        console.log(req.body);
-        console.log("======== END REQUEST ========");
-        let category = req.body.category;
-        let radioBTN = req.body.radioBtn;
-        let iconID = req.body.iconID;
-        let color = req.body.color;
+    let category = req.body.category;
+    let radioBTN = req.body.radioBtn;
+    let iconID = req.body.iconID;
+    let color = req.body.color;
     let sql = "INSERT INTO `ijs_money_tracker_g1`.`categories` (`categories_name`, `categories_inc_exp`, `categories_icons_id`, `color`) VALUES ('"+category+"', '"+radioBTN+"', '"+iconID+"', '"+color+"')";
     con.query(sql, function(err, result) {
         if (err) {
@@ -134,21 +119,10 @@ app.post('/addingNew', function(req, res){
     })
 })
 
-app.get('/inc', function(req, res) {
-    let sql = "SELECT categories_icons_id,categories_name,categories_id,icons FROM ijs_money_tracker_g1.categories JOIN ijs_money_tracker_g1.icons ON categories.categories_icons_id = icons.icons_id WHERE categories_inc_exp = '1'";
-    con.query(sql, function(err, result) {
-        if (err) {
-            throw err;
-        } else {
-            console.log(result)
-            obj = { print: result }
-            res.render('pages/categories', obj)
-        }
-    })
-})
+/*===== BOGDAN =====*/
 
-//u radu
-//Tamara
+
+/*===== TAMARA =====*/
 /*
 app.post('/input',function(req,res){ 
     console.log(req.body);
@@ -177,7 +151,7 @@ app.get('/adding', function(req, res) {
     res.render('pages/adding', data)
 })
 
-//jovana transactions
+/*===== jovana transactions =====*/
 
 app.get('/transactions', function(req, res) {
 
