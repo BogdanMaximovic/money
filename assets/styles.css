@@ -182,3 +182,11 @@ body {
 .txttbl{
     font-size: 1.2rem;
 }
+/* Predrag */
+table {
+    width: 20%;
+    margin: 0 auto;
+}
+th, td {
+    height: 5vh;
+}

@@ -14,7 +14,6 @@ const con = mysql.createConnection({
     multipleStatements: true
 });
 
-global.db = con;
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'))
@@ -31,22 +30,34 @@ app.use('/icons', express.static('icons'))
 app.get('/', function(req, res) {
     res.render('partials/header')
 })
+
 app.get('/edit', function(req, res) {
-    res.render('pages/edit')
-})
-
-/*app.get('/editdata', function(req, res) {
     con.query('select transactions_id, transactions_amount, main_transid, main_date, main_comment, main_catid, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id', function(err, result) {
-
+        console.log("======== REQUEST ========");
+            console.log(req.query);
+            console.log("======== END REQUEST ========");
+            console.log("======== RES ========");
+            console.log(res);
+            console.log("======== END RES ========");
         if (err) {
             throw err;
         } else {
             obj = result;
-            console.log(obj)
-            res.json('pages/edit')
+            //console.log(obj)
+            res.render('pages/edit', obj)
+
         }
     })
-});*/
+})
+
+app.get('/edit/new', function(req, res) {
+    console.log("======== RES ========");
+    console.log(req.query);
+    console.log("======== END RES ========");
+
+    res.render('pages/edit')
+})
+
 
 app.get('/spending', function(req, res) {
     let order = req.query.order[0].dir;
@@ -67,11 +78,7 @@ app.get('/spending', function(req, res) {
         }
     })
 })
-/*
-app.get('/input', function(req, res) {  //Tamara,u radu
-    res.render('pages/input')
-})
-*/
+    
 app.get('/categories', function(req, res) {
     res.render('partials/header')
 })
@@ -94,6 +101,21 @@ app.get('/exp', function(req, res) {
         }
     })
 })
+
+app.get('/new', function(req, res) {
+    let sql = "SELECT categories_icons_id,categories_name,categories_id,icons FROM ijs_money_tracker_g1.categories JOIN ijs_money_tracker_g1.icons ON categories.categories_icons_id = icons.icons_id";
+    con.query(sql, function(err, result) {
+        console.log(result);
+        if (err) {
+            throw err;
+        } else {
+            obj = { print: result }
+            console.log(obj)
+            res.render('pages/new', obj)
+        }
+    })
+})
+
 app.get('/inc', function(req, res) {
     let sql = "SELECT categories_icons_id,categories_name,categories_id,icons FROM ijs_money_tracker_g1.categories JOIN ijs_money_tracker_g1.icons ON categories.categories_icons_id = icons.icons_id WHERE categories_inc_exp = '1'";
     con.query(sql, function(err, result) {
@@ -189,7 +211,7 @@ app.get('/delete', (req,res)=>{
     })
 })
 
-// --start--
+// --Predrag--
 app.get('/expense', function(req, res) {
     var obj = {};
 
@@ -228,11 +250,19 @@ app.get('/expense', function(req, res) {
             //obj = { print: result }
             obj.print4 = result;
             console.log(obj);
+        }
+    });
+    con.query("SELECT categories_name, transactions_amount FROM categories JOIN transactions ON categories_id = transactions_id WHERE categories_inc_exp = '1' ", function(err, result) {
+        if (err) {
+            throw err;
+        } else {
+            obj.print5 = result;
+            console.log(obj);
             res.render('pages/speding', obj);
         }
     });
 });
-// --end--
+// --Predrag end--
 
 // SERVER PORT //
 app.listen(4200, function() {
