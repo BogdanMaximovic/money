@@ -3,34 +3,32 @@
 <script>
   $(document).ready(function() {
     $('#addingNew').modal('show') 
-
+    var iconID = null;
     $('.aLink').on('click', function(event) {
       event.preventDefault();
-      const iconID = $(this).find('.iconImgId').attr('data-id');
+      iconID = $(this).find('.iconImgId').attr('data-id');
       alert(iconID)       
     });
 
-    $('#icons').hide();
+    /*$('#icons').hide();
       $('.showIcon').on('click', function(event) {
         event.preventDefault()
         $('#icons').show();
-      });
+      });*/
 
       $('#save').click(function(e){
           e.preventDefault();
           var category = $('#name').val();
           var radioBtn = $('input[name=radio]:checked').val();
           var color = $('#color').val();
-          $('.aLink').on('click', function(event) {
-            event.preventDefault();
-            var iconID = $(this).find('.iconImgId').attr('data-id');       
-          });
 
           var data = {};
           data.category = category;
           data.radioBtn = radioBtn;
           data.iconID = iconID;
           data.color = color;
+
+          console.log(category,radioBtn,iconID,color)
 
           $.ajax({
             type: 'post',
@@ -69,12 +67,12 @@
                        <label for="name">Pick color</label>
                        <input class="form-control" type="color" name="favcolor" id="color" value="">
                    </div>
-                    <button class="btn-success m-1 p-1 showIcon">Set Icon</button>
-                    <div id="icons" class="form-group m-1 p-1">
-                        <% print.forEach(function(name){ %>
-                        <a class="nav-link text-light d-inline aLink"><img src="<%= name.icons %>" class="d-inline p-1 text-left iconImgId" data-id="<%= name.icons_id %>"></a>
-                        <% }) %>
-                    </div>
+                  <div id="icons" class="form-group m-1 p-1">
+                    <div class="modal-body">Select icon for category</div>
+                      <% print.forEach(function(name){ %>
+                      <a class="nav-link text-light d-inline aLink"><img src="<%= name.icons %>" class="d-inline p-1 text-left iconImgId" data-id="<%= name.icons_id %>"></a>
+                      <% }) %>
+                  </div>
                 </form>
             </div>
             <div class="modal-footer m-auto">
