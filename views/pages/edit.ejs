@@ -1,31 +1,30 @@
 <% include ../partials/header %>
 
-<script>
+<!-- <script>
     $(document).ready(function() {
-        $("table td").click(function() {
+        $("table tr").click(function() {
             $('#myModal').modal('show')
             let dataFromClick = this.innerText
             $('.modal-body').text(`Old value: ${dataFromClick}`)
         }); 
             $('#save').on('click', function(event) {
-                let newValue = $('#name').val();
-                alert(newValue);
+
+            
+                var data = {};
                  $.ajax({
-                        url: 'http://localhost:4200/edit',
-                        type: 'GET',
-                        contentType: 'application/json',
-                        dataType: 'json',
-                        data: JSON.stringify({'vrednost':newValue}),
-                        processData: false,
-                        contentType: 'application/json',
-                        success: function (data) {
-                            alert(`ovo je data${data}`);
-                        }
-                    });
+                    type: 'post',
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    url: 'http://localhost:4200/addingNew',
+                    success: function(data) {
+                      console.log('success');
+                      console.log(JSON.stringify(data));
+                      }
+                });
 
             });
     });
-</script>
+</script> -->
 
 <div class="modal" id="myModal">
   <div class="modal-dialog">
