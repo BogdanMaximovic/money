@@ -18,6 +18,7 @@ const con = mysql.createConnection({
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'))
 
+//app.use(express.bodyParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -33,7 +34,7 @@ app.get('/', function(req, res) {
 
 app.get('/edit', function(req, res) {
     con.query('select transactions_id, transactions_amount, main_transid, main_date, main_comment, main_catid, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id', function(err, result) {
-        console.log("======== REQUEST ========");
+            console.log("======== REQUEST ========");
             console.log(req.query);
             console.log("======== END REQUEST ========");
             console.log("======== RES ========");
@@ -49,15 +50,6 @@ app.get('/edit', function(req, res) {
         }
     })
 })
-
-app.get('/edit/new', function(req, res) {
-    console.log("======== RES ========");
-    console.log(req.query);
-    console.log("======== END RES ========");
-
-    res.render('pages/edit')
-})
-
 
 app.get('/spending', function(req, res) {
     let order = req.query.order[0].dir;
@@ -103,15 +95,41 @@ app.get('/exp', function(req, res) {
 })
 
 app.get('/new', function(req, res) {
-    let sql = "SELECT categories_icons_id,categories_name,categories_id,icons FROM ijs_money_tracker_g1.categories JOIN ijs_money_tracker_g1.icons ON categories.categories_icons_id = icons.icons_id";
+    let sql = "SELECT * FROM ijs_money_tracker_g1.icons";
+        
+        // console.log("======== RES ========");
+        // console.log(res);
+        // console.log("======== END RES ========");
     con.query(sql, function(err, result) {
         console.log(result);
         if (err) {
             throw err;
         } else {
+            console.log("======== REQUEST ========");
+        console.log(req);
+        console.log("======== END REQUEST ========");
             obj = { print: result }
             console.log(obj)
             res.render('pages/new', obj)
+        }
+    })
+})
+
+app.post('/addingNew', function(req, res){
+        console.log("======== REQUEST ========");
+        console.log(req.body);
+        console.log("======== END REQUEST ========");
+        let category = req.body.category;
+        let radioBTN = req.body.radioBtn;
+        let iconID = req.body.iconID;
+        let color = req.body.color;
+    let sql = "INSERT INTO `ijs_money_tracker_g1`.`categories` (`categories_name`, `categories_inc_exp`, `categories_icons_id`, `color`) VALUES ('"+category+"', '"+radioBTN+"', '"+iconID+"', '"+color+"')";
+    con.query(sql, function(err, result) {
+        if (err) {
+            throw err;
+        } else {
+            var obj = {};
+            res.json(req.body);
         }
     })
 })
