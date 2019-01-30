@@ -8,6 +8,7 @@
       event.preventDefault();
       iconID = $(this).find('.iconImgId').attr('data-id');       
     });
+    $('#success').hide();
 
       $('#save').click(function(e){
           e.preventDefault();
@@ -33,9 +34,15 @@
               console.log(JSON.stringify(data));
               }
             });
+          $('#success').show();
         })
 });
 </script>
+<div class="row text-center m-5" id="success">
+  <div class="col m-auto">
+    <p class="display-4 text-success">Category successfully saved</p>
+  </div>
+</div>
 <!-- MODAL -->
 <div class="modal fade" id="addingNew">
     <div class="modal-dialog">
