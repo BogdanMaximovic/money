@@ -140,6 +140,7 @@ app.get('/adding', function(req, res) {
 //jovana transactions
 
 app.get('/transactions', function(req, res) {
+  
 
     con.query('select transactions_id, transactions_amount, main_transid, main_date, main_comment, main_catid, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id', function(err, result) {
 
@@ -167,7 +168,7 @@ app.get('/btnexp', function(req, res) {
 })
 
 app.get('/btninc', function(req, res) {
-    con.query("select transactions_id, transactions_amount, main_transid, main_date, main_comment, main_catid, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id WHERE categories_inc_exp = '1'", function(err, result) {
+    con.query("select transactions_id, transactions_amount, main_transid, main_date, main_comment, main_catid, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id WHERE categories_inc_exp = '1'",function(err, result) {
         if (err) {
             throw err;
         } else {
@@ -178,7 +179,15 @@ app.get('/btninc', function(req, res) {
     })
 })
 
-
+app.get('/delete', (req,res)=>{
+    con.query('DELETE FROM main WHERE main_transid =? ', [req.params.id],(err, rows, fields)=>{
+        if(!err){
+            res.send(rows)
+        }else{
+            console.log(err)
+        }
+    })
+})
 
 // --start--
 app.get('/expense', function(req, res) {
@@ -224,7 +233,6 @@ app.get('/expense', function(req, res) {
     });
 });
 // --end--
-
 
 // SERVER PORT //
 app.listen(4200, function() {

@@ -1,4 +1,6 @@
 <% include ../partials/header %>
+
+
 <script>
     $(document).ready(function() {
     $('#tabledata').DataTable();
@@ -38,6 +40,9 @@
                 <th>
                     Comment
                 </th>
+                <th>
+
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -56,7 +61,7 @@
                     <%= name. main_comment %>
                 </td>
                 <td>
-                       <button>Delete</button>
+                      <a href="delete">delete</a>
                 </td>
             </tr>
             
