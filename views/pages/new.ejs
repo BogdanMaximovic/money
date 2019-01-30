@@ -1,56 +1,87 @@
 <% include ../partials/header %>
 <% include ../pages/button %>
-
 <script>
-	$(document).ready(function() {
-            $('#addingNew').modal('show')	            
-   
+  $(document).ready(function() {
+    $('#addingNew').modal('show') 
 
-		$('#icons').hide();
-        $('.showIcon').on('click', function(event) {
-        	event.preventDefault()
-        	$('#icons').show();
-        });
+    $('.aLink').on('click', function(event) {
+      event.preventDefault();
+      const iconID = $(this).find('.iconImgId').attr('data-id');
+      alert(iconID)       
+    });
+
+    $('#icons').hide();
+      $('.showIcon').on('click', function(event) {
+        event.preventDefault()
+        $('#icons').show();
+      });
+
+      $('#save').click(function(e){
+          e.preventDefault();
+          var category = $('#name').val();
+          var radioBtn = $('input[name=radio]:checked').val();
+          var color = $('#color').val();
+          $('.aLink').on('click', function(event) {
+            event.preventDefault();
+            var iconID = $(this).find('.iconImgId').attr('data-id');       
+          });
+
+          var data = {};
+          data.category = category;
+          data.radioBtn = radioBtn;
+          data.iconID = iconID;
+          data.color = color;
+
+          $.ajax({
+            type: 'post',
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            url: 'http://localhost:4200/addingNew',
+            success: function(data) {
+              console.log('success');
+              console.log(JSON.stringify(data));
+              }
+            });
+        })
 });
 </script>
-
 <!-- MODAL -->
 <div class="modal fade" id="addingNew">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Adding new category</h5>
-        <button class="close" data-dismiss="modal">&times;</button>
-      </div>
-      <div class="modal-body">You can add whatever you like</div>
-      <div class="modal-text">
-          <form action="/addingNew" method="GET">
-              <div class="form-group m-1 p-1">
-                <label for="name">Category name</label>
-                <input class="form-control" type="text" id="name" placeholder="Enter new category">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Adding new category</h5>
+                <button class="close" data-dismiss="modal">&times;</button>
             </div>
-            <div class="form-group m-1 p-1">
-                <label for="name" class="d-block">Expense or Income</label>
-                <input class="" type="radio" id="exp" name="Income" value="">Income
-                <input class="" type="radio" id="inc" name="Expense" value="">Expense
+            <div class="modal-body">You can add whatever you like</div>
+            <div class="modal-text">
+                <form action="/addingNew" method="POST">
+                    <div class="form-group m-1 p-1">
+                        <label for="name">Category name</label>
+                        <input class="form-control" type="text" id="name" placeholder="Enter new category">
+                    </div>
+                    <div class="form-group m-1 p-1">
+                        <label for="radio" class="d-block">Expense or Income</label>
+                        <input class="" type="radio" id="exp" name="radio" value="0">Income
+                        <input class="" type="radio" id="inc" name="radio" value="1">Expense
+                    </div>
+                   <div class="form-group m-1 p-1">
+                       <label for="name">Pick color</label>
+                       <input class="form-control" type="color" name="favcolor" id="color" value="">
+                   </div>
+                    <button class="btn-success m-1 p-1 showIcon">Set Icon</button>
+                    <div id="icons" class="form-group m-1 p-1">
+                        <% print.forEach(function(name){ %>
+                        <a class="nav-link text-light d-inline aLink"><img src="<%= name.icons %>" class="d-inline p-1 text-left iconImgId" data-id="<%= name.icons_id %>"></a>
+                        <% }) %>
+                    </div>
+                </form>
             </div>
-            <div class="form-group m-1 p-1">
-                <label for="name">Pick color</label>
-                <input class="form-control" type="color" name="favcolor" value="">
+            <div class="modal-footer m-auto">
+                <a class="btn btn-success text-light" data-dismiss="modal" id="save">Save</a>
+                <a class="btn btn-secondary text-light" data-dismiss="modal" id="close" href="/exp">Close</a>
             </div>
-        	<button class="btn-success m-1 p-1 showIcon">Set Icon</button>
-			<div id="icons" class="form-group m-1 p-1">
-				<% print.forEach(function(name){ %>
-				<a class="nav-link text-light d-inline" id="aLink"><img src="<%= name.icons %>" id="icon_id" class="d-inline p-1 text-left"></a>
-				<% }) %>
-			</div>
-          </form>
-      </div>
-      <div class="modal-footer m-auto">
-        <a class="btn btn-success text-light" data-dismiss="modal" id="save">Save</a>
-        <a class="btn btn-secondary text-light" data-dismiss="modal" id="close" href="/exp">Close</a>
-      </div>
+        </div>
     </div>
-  </div>
 </div>
 <% include ../partials/footer %>
