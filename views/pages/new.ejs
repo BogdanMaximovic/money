@@ -1,36 +1,28 @@
 <% include ../partials/header %>
 <% include ../pages/button %>
 <script>
-  $(document).ready(function() {
+    $(document).ready(function() {
     $('#addingNew').modal('show') 
-
+    var iconID = null;
     $('.aLink').on('click', function(event) {
       event.preventDefault();
-      const iconID = $(this).find('.iconImgId').attr('data-id');
-      alert(iconID)       
+      iconID = $(this).find('.iconImgId').attr('data-id');       
     });
-
-    $('#icons').hide();
-      $('.showIcon').on('click', function(event) {
-        event.preventDefault()
-        $('#icons').show();
-      });
+    $('#success').hide();
 
       $('#save').click(function(e){
           e.preventDefault();
           var category = $('#name').val();
           var radioBtn = $('input[name=radio]:checked').val();
           var color = $('#color').val();
-          $('.aLink').on('click', function(event) {
-            event.preventDefault();
-            var iconID = $(this).find('.iconImgId').attr('data-id');       
-          });
 
           var data = {};
           data.category = category;
           data.radioBtn = radioBtn;
           data.iconID = iconID;
           data.color = color;
+
+          console.log(category,radioBtn,iconID,color)
 
           $.ajax({
             type: 'post',
@@ -42,9 +34,15 @@
               console.log(JSON.stringify(data));
               }
             });
+          $('#success').show();
         })
 });
 </script>
+<div class="row text-center m-5" id="success">
+  <div class="col m-auto">
+    <p class="display-4 text-success">Category successfully saved</p>
+  </div>
+</div>
 <!-- MODAL -->
 <div class="modal fade" id="addingNew">
     <div class="modal-dialog">
@@ -62,15 +60,15 @@
                     </div>
                     <div class="form-group m-1 p-1">
                         <label for="radio" class="d-block">Expense or Income</label>
-                        <input class="" type="radio" id="exp" name="radio" value="0">Income
-                        <input class="" type="radio" id="inc" name="radio" value="1">Expense
+                        <input class="" type="radio" id="exp" name="radio" value="0">Expense
+                        <input class="" type="radio" id="inc" name="radio" value="1">Income
                     </div>
-                   <div class="form-group m-1 p-1">
-                       <label for="name">Pick color</label>
-                       <input class="form-control" type="color" name="favcolor" id="color" value="">
-                   </div>
-                    <button class="btn-success m-1 p-1 showIcon">Set Icon</button>
+                    <div class="form-group m-1 p-1">
+                        <label for="name">Pick color</label>
+                        <input class="form-control" type="color" name="favcolor" id="color" value="">
+                    </div>
                     <div id="icons" class="form-group m-1 p-1">
+                        <div class="modal-body">Select icon for category</div>
                         <% print.forEach(function(name){ %>
                         <a class="nav-link text-light d-inline aLink"><img src="<%= name.icons %>" class="d-inline p-1 text-left iconImgId" data-id="<%= name.icons_id %>"></a>
                         <% }) %>
