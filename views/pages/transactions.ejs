@@ -6,9 +6,59 @@
     $(document).ready(function() {
     $('#tabledata').DataTable();
     } );
+
+    $(document).ready(function() {
+        $("table tr").click(function() {
+            $('#myModal').modal('show')
+          
+        }); 
+        $('#delete').click(function(e){
+          e.preventDefault();
+          
+          var id = $('#id').val();
+         
+          
+          var data = {};
+          data.id = id;
+          
+          $.ajax({
+            type: 'POST',
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            url: 'http://localhost:4200/transactions',
+            success: function(data) {
+              console.log('success');
+              console.log(JSON.stringify(data));
+              }
+            });
+        })
+    });
  
 </script>
 
+<div class="modal" id="myModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Delete this transation?</h5>
+              <button class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-text">
+                <form action="/delete" method="POST">
+                    <div class="form-group m-1 p-1">
+                            <label for="idid">Transaction ID</label>
+                            <input class="form-control" type="text" name="idid" id="id" value=" <% obj.forEach(function(id){ %> <%= id.main_transid %> <% }) %>">
+                        </div>
+                </form>
+                <button class="btn btn-success" data-dismiss="modal" id="delete">Delete</button>
+                <button class="btn btn-secondary" data-dismiss="modal" id="close">Close</button>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      
  <div class="text-center text-light">
     <h1>Transactions</h1>
 </div>

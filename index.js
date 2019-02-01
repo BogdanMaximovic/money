@@ -219,15 +219,21 @@ app.get('/btninc', function(req, res) {
     })
 })
 
-app.get('/delete', (req,res)=>{
-    con.query('DELETE FROM main WHERE main_transid =? ', [req.params.id],(err, rows, fields)=>{
-        if(!err){
-            res.send(rows)
-        }else{
-            console.log(err)
-        }
-    })
+app.post('/delete', function(req, res){
+    
+    let id = req.body.id;
+    
+   let sql = "DELETE FROM main WHERE main_transid = '"+id+"'";
+    con.query(sql, function(err, result) {
+    if (err) {
+        throw err;
+    } else {
+        var obj = {};
+        res.json(req.body);
+    }
 })
+})
+
 
 // --Predrag--
 app.get('/expense', function(req, res) {
