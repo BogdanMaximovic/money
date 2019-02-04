@@ -43,6 +43,8 @@ app.get('/edit', function(req, res) {
     })
 })
 
+
+
 app.get('/spending', function(req, res) {
     let order = req.query.order[0].dir;
     let limitStart = req.query.length;

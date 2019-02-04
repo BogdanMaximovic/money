@@ -3,11 +3,8 @@
 
 <script>
  
-    // $(document).ready(function() {
-
-   
-
-    $(document).ready(function() {
+    
+     $(document).ready(function() {
         var myTable = $('#tabledata').DataTable();
        
         $("#tabledata tbody tr").click(function() {
@@ -56,9 +53,8 @@
             <div class="modal-text p-3">
                 <form action="/delete" method="POST">
                     <div class="form-group m-1 p-1">
-                            <label for="idid">Transaction ID</label>
-                            <!-- <input class="form-control" type="text" name="idid" id="id" value=" <% obj.forEach(function(id){ %> <%= id.main_transid %> <% }) %>"> -->
-                            <input class="form-control" type="number" name="idid" id="id" value="">
+                          <label for="idid">Transaction ID</label>
+                          <input class="form-control" type="number" name="idid" id="id" value="">
                         </div>
                 </form>
                 <button class="btn btn-success" data-dismiss="modal" id="delete">Delete</button>
