@@ -156,6 +156,7 @@ app.post('/addingNewInput', function(req, res){
 /*===== jovana transactions =====*/
 
 app.get('/transactions', function(req, res) {
+  
 
     con.query('select transactions_id, transactions_amount, main_transid, main_date, main_comment, main_catid, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id', function(err, result) {
 
@@ -183,7 +184,7 @@ app.get('/btnexp', function(req, res) {
 })
 
 app.get('/btninc', function(req, res) {
-    con.query("select transactions_id, transactions_amount, main_transid, main_date, main_comment, main_catid, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id WHERE categories_inc_exp = '1'", function(err, result) {
+    con.query("select transactions_id, transactions_amount, main_transid, main_date, main_comment, main_catid, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id WHERE categories_inc_exp = '1'",function(err, result) {
         if (err) {
             throw err;
         } else {
@@ -194,6 +195,20 @@ app.get('/btninc', function(req, res) {
     })
 })
 
+app.post('/delete', function(req, res){
+    
+    let id = req.body.id;
+    
+   let sql = "DELETE FROM main WHERE main_transid = '"+id+"'";
+    con.query(sql, function(err, result) {
+    if (err) {
+        throw err;
+    } else {
+        var obj = {};
+        res.json(req.body);
+    }
+})
+})
 
 
 // --Predrag--
@@ -248,7 +263,6 @@ app.get('/expense', function(req, res) {
     });
 });
 // --Predrag end--
-
 
 // SERVER PORT //
 app.listen(4200, function() {
