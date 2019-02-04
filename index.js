@@ -15,7 +15,6 @@ const con = mysql.createConnection({
     multipleStatements: true
 });
 
-
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'))
 
@@ -60,19 +59,27 @@ app.get('/edit/new', function(req, res) {
 
 // >>>>>>> ecdb6f2653451669f02c15f00acb846eccf37f23
 
+<<<<<<< HEAD
 //=======
 // >>>>>>> 5c3b1f08efdb73a6a36fe0772b74fbfbbbf17cc0
+=======
+// app.post('/editval', function(req, res){
+//     con.query("UPDATE main INNER JOIN categories ON main_catid = categories.categories_id SET main_cat = '"++"' ")
+// })
+
+>>>>>>> cb6c6e949a91c1b3d84b9bc083b3119fefc3361e
 app.get('/spending', function(req, res) {
-    let order = req.query.order[0].dir;
-    let limitStart = req.query.length;
-    let limitEnd = req.query.start;
-    let sql = "SELECT categories_name,transactions_amount FROM ijs_money_tracker_g1.categories JOIN ijs_money_tracker_g1.transactions ON categories_id = transactions_catid WHERE categories_inc_exp = '0' ORDER BY transactions_amount " + order + " LIMIT " + limitStart + " OFFSET " + limitEnd + " ";
+    let sql = "select transactions_amount, main_transid, main_date, main_comment, main_catid, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id";
     con.query(sql, function(err, result) {
         if (err) {
             throw err;
         } else {
             data = result;
+<<<<<<< HEAD
             res.json(data);
+=======
+            res.render('pages/index', data)
+>>>>>>> cb6c6e949a91c1b3d84b9bc083b3119fefc3361e
         }
     });
 });
@@ -81,11 +88,14 @@ app.get('/categories', function(req, res) {
     res.render('partials/header');
 });
 
+<<<<<<< HEAD
 app.get('/spendingData', function(req, res) {
     data = res;
     res.render('pages/index', data);
 });
 
+=======
+>>>>>>> cb6c6e949a91c1b3d84b9bc083b3119fefc3361e
 app.get('/exp', function(req, res) {
     let sql = "SELECT categories_icons_id,categories_name,categories_id,icons FROM ijs_money_tracker_g1.categories JOIN ijs_money_tracker_g1.icons ON categories.categories_icons_id = icons.icons_id WHERE categories_inc_exp = '0'";
     con.query(sql, function(err, result) {
@@ -138,41 +148,52 @@ app.post('/addingNew', function(req, res){
     });
 });
 
-/*===== BOGDAN =====*/
-
-
-/*===== TAMARA =====*/
-/*
-app.post('/input',function(req,res){ 
-    console.log(req.body);
-
-     var newInput= {    //format datuma nije isti kao u tabeli u bazi
-         date: req.body.date, //da li treba da pisu isti nazivi kao kolone u tabeli
-         category: req.body.category,
-         amount: req.body.amount,
-         comment: req.body.comment
-        }
-//Tamara
-    con.query('INSERT into ijs_money_tracker_g1.main SET ?',newInput,function(err,res){
-    if(err){
-        throw err;
-    }
-        else{
-        console.log(res);
-    }
-        })
-   res.send(JSON.stringify(req.body));
+app.get('/adding', function(req, res) {
+    data = res;
+    res.render('pages/adding', data)
 })
-*/
 
+app.get('/add', function(req, res) {
+    let sql = "SELECT categories_id,categories_name FROM ijs_money_tracker_g1.categories";
+    con.query(sql, function(err, result) {
+        if (err) {
+            throw err;
+        } else {
+            obj = { print: result }
+            res.render('pages/input', obj)
+        }
+    })
+})
+
+<<<<<<< HEAD
 app.get('/adding', function(req, res) {
     data = res;
     res.render('pages/adding', data);
 });
+=======
+app.post('/addingNewInput', function(req, res){
+    let selectedDate = req.body.selectedDate;
+    let category = req.body.category;
+    let number = req.body.number;
+    let message = req.body.message;
+    let sql = "BEGIN; INSERT INTO transactions (transactions_id,transactions_amount, transactions_catid) VALUES('0','"+number+"', '"+category+"');INSERT INTO main (main_date, main_comment, main_catid,main_transid) VALUES('"+selectedDate+"', '"+message+"','"+category+"',LAST_INSERT_ID()); COMMIT";
+    con.query(sql, function(err, result) {
+        if (err) {
+            throw err;
+        } else {
+            var obj = {};
+            res.json(req.body);
+        }
+    })
+})
+>>>>>>> cb6c6e949a91c1b3d84b9bc083b3119fefc3361e
+
+/*===== BOGDAN =====*/
 
 /*===== jovana transactions =====*/
 
 app.get('/transactions', function(req, res) {
+  
 
     con.query('select transactions_id, transactions_amount, main_transid, main_date, main_comment, main_catid, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id', function(err, result) {
 
@@ -200,7 +221,7 @@ app.get('/btnexp', function(req, res) {
 })
 
 app.get('/btninc', function(req, res) {
-    con.query("select transactions_id, transactions_amount, main_transid, main_date, main_comment, main_catid, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id WHERE categories_inc_exp = '1'", function(err, result) {
+    con.query("select transactions_id, transactions_amount, main_transid, main_date, main_comment, main_catid, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id WHERE categories_inc_exp = '1'",function(err, result) {
         if (err) {
             throw err;
         } else {
@@ -211,6 +232,20 @@ app.get('/btninc', function(req, res) {
     })
 })
 
+app.post('/delete', function(req, res){
+    
+    let id = req.body.id;
+    
+   let sql = "DELETE FROM main WHERE main_transid = '"+id+"'";
+    con.query(sql, function(err, result) {
+    if (err) {
+        throw err;
+    } else {
+        var obj = {};
+        res.json(req.body);
+    }
+})
+})
 
 
 // --Predrag--
@@ -265,7 +300,6 @@ app.get('/expense', function(req, res) {
     });
 });
 // --Predrag end--
-
 
 // SERVER PORT //
 app.listen(4200, function() {
