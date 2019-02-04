@@ -42,6 +42,10 @@ app.get('/edit', function(req, res) {
     })
 })
 
+// app.post('/editval', function(req, res){
+//     con.query("UPDATE main INNER JOIN categories ON main_catid = categories.categories_id SET main_cat = '"++"' ")
+// })
+
 app.get('/spending', function(req, res) {
     let sql = "select transactions_amount, main_transid, main_date, main_comment, main_catid, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id";
     con.query(sql, function(err, result) {
