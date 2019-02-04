@@ -43,27 +43,19 @@ app.get('/edit', function(req, res) {
 })
 
 app.get('/spending', function(req, res) {
-    let order = req.query.order[0].dir;
-    let limitStart = req.query.length;
-    let limitEnd = req.query.start;
-    let sql = "SELECT categories_name,transactions_amount FROM ijs_money_tracker_g1.categories JOIN ijs_money_tracker_g1.transactions ON categories_id = transactions_catid WHERE categories_inc_exp = '0' ORDER BY transactions_amount " + order + " LIMIT " + limitStart + " OFFSET " + limitEnd + " ";
+    let sql = "select transactions_amount, main_transid, main_date, main_comment, main_catid, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id";
     con.query(sql, function(err, result) {
         if (err) {
             throw err;
         } else {
             data = result;
-            res.json(data)
+            res.render('pages/index', data)
         }
     })
 })
     
 app.get('/categories', function(req, res) {
     res.render('partials/header')
-})
-
-app.get('/spendingData', function(req, res) {
-    data = res;
-    res.render('pages/index', data)
 })
 
 app.get('/exp', function(req, res) {
