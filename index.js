@@ -14,7 +14,6 @@ const con = mysql.createConnection({
     multipleStatements: true
 });
 
-
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'))
 
@@ -121,37 +120,40 @@ app.post('/addingNew', function(req, res){
     })
 })
 
-/*===== BOGDAN =====*/
-
-
-/*===== TAMARA =====*/
-/*
-app.post('/input',function(req,res){ 
-    console.log(req.body);
-
-     var newInput= {    //format datuma nije isti kao u tabeli u bazi
-         date: req.body.date, //da li treba da pisu isti nazivi kao kolone u tabeli
-         category: req.body.category,
-         amount: req.body.amount,
-         comment: req.body.comment
-        }
-//Tamara
-    con.query('INSERT into ijs_money_tracker_g1.main SET ?',newInput,function(err,res){
-    if(err){
-        throw err;
-    }
-        else{
-        console.log(res);
-    }
-        })
-   res.send(JSON.stringify(req.body));
-})
-*/
-
 app.get('/adding', function(req, res) {
     data = res;
     res.render('pages/adding', data)
 })
+
+app.get('/add', function(req, res) {
+    let sql = "SELECT categories_id,categories_name FROM ijs_money_tracker_g1.categories";
+    con.query(sql, function(err, result) {
+        if (err) {
+            throw err;
+        } else {
+            obj = { print: result }
+            res.render('pages/input', obj)
+        }
+    })
+})
+
+app.post('/addingNewInput', function(req, res){
+    let selectedDate = req.body.selectedDate;
+    let category = req.body.category;
+    let number = req.body.number;
+    let message = req.body.message;
+    let sql = "BEGIN; INSERT INTO transactions (transactions_id,transactions_amount, transactions_catid) VALUES('0','"+number+"', '"+category+"');INSERT INTO main (main_date, main_comment, main_catid,main_transid) VALUES('"+selectedDate+"', '"+message+"','"+category+"',LAST_INSERT_ID()); COMMIT";
+    con.query(sql, function(err, result) {
+        if (err) {
+            throw err;
+        } else {
+            var obj = {};
+            res.json(req.body);
+        }
+    })
+})
+
+/*===== BOGDAN =====*/
 
 /*===== jovana transactions =====*/
 

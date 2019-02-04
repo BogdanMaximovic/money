@@ -1,92 +1,74 @@
 <% include ../partials/header %>
-<% include ../pages/button %>
+<script>
+    $(document).ready(function() {
+        $('#show').hide();
+      $('#send').click(function(e){
+          e.preventDefault();
+          var selectedDate = $('#date').val();
+          var category = $("#category option:selected" ).val();
+          var number = $('#number').val();
+          var message = $('#message').val();
 
-<div class="container mt-3">
-     <form>
-         <div class="container">
-            <div class="row">
-                 <div class="col-md-6">
-                    <button type="button" class="" data-dismiss="alert">&times;</button> 
-                </div>
-                <div class="col-md-6">
-                    <div class="input-group-append">
-                        <button type="submit" class="btn btn-light text-dark ml-auto" value="Submit Button">Done</button>
-                    </div>
-                </div>
+          var data = {};
+          data.selectedDate = selectedDate;
+          data.category = category;
+          data.number = number;
+          data.message = message;
+
+          console.log(selectedDate,category,number,message)
+
+          $.ajax({
+            type: 'post',
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            url: 'http://localhost:4200/addingNewInput',
+            success: function(data) {
+              console.log('success');
+              console.log(JSON.stringify(data));
+              }
+            })
+          $('#show').show();
+            let delay = 1500; 
+            let url = 'http://localhost:4200/add';
+            setTimeout(function(){ window.location = url }, delay);
+        })
+});
+</script>
+<div class="row text-center m-5" id="show">
+  <div class="col m-auto">
+    <p class="display-3 text-info">New transaction successfully saved</p>
+  </div>
+</div>
+<div class="row">
+    <div class="col-12 text-center pt-5">
+        <h1 class="display-4 font-italic text-success">Adding new transaction</h1>
+    </div>
+    <div class="col-4 offset-4 p-5 text-light">
+        <form action="/newInput" method="POST">
+            <div class="form-group">
+                <label for="date">Select date</label>
+                <input class="form-control" type="date" id="date">
             </div>
-        </div>
-     </form>
-
-        <div class="container">
-                <div class="row" id="row">
-                    <div class="col-md-6">
-                        <h4>Transaction Detail</h4>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="input-group-append">
-                         <button type="button" class="btn btn-light text-dark ml-auto" data-toggle="modal" data-target="#myModal">
-                                <i class='fas fa-question-circle'></i>
-                         </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal" id="myModal"> 
-                        <div class="modal-dialog">
-                             <div class="modal-content">
-                              
-                                <!-- Modal Header -->
-                            <div class="modal-header">
-                                <h4 class="modal-title">Info</h4>
-                              <button type="button" class="close" data-dismiss="modal">&times;</button>
-                             </div>
-                                
-                                <!-- Modal body -->
-                             <div class="modal-body">
-                                  These  details are required to be entered:
-                                  Date:
-                                  Category:
-                                  Amount
-                             </div>
-                                
-                                <!-- Modal footer -->
-                            <div class="modal-footer">
-                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                            </div>
-                                
-                        </div>
-                     </div>
-                 </div>
-             </div>
-
-
-    <form class="row" method="POST"  action="/input/add"> //proveri
-        <div class="form-group col-12">
-                <label for="date" class="text-primary col-1 mr-1">Date</label>
-                <input class="form-control col-10 d-inline" type="date" id="date" value="">
-        </div>
-         <div class="form-group col-12">
-                <label for="category" class="text-primary col-1 mr-1">Category</label>
-                 <select class="form-control col-10 d-inline" id="category" placeholder="Not Selected">
-                    <!-- u radu -->
-                    <option>Shopping</option>
-                    <option>Gift</option>   
-                    <option>Fuel</option>
-                     
-                 </select>
-        </div>
-        <div class="form-group col-12">
-                <label for="amount" class="text-primary col-1 mr-1">Amount</label>
-                <input class="form-control col-10 d-inline" type="number" id="amount" value=""placeholder="Amount">
-        </div>
-        <div class="form-group col-12">
-                 <label for="comment" class="text-primary col-1 mr-1">Comment</label>
-                <input class="form-control col-10 d-inline" type="text" id="note" value="" placeholder="No Note Entered">
-        </div>
-    </form>
-
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select class="form-control" id="category">
+                    <% print.forEach(function(name){ %>
+                    <option value="<%= name.categories_id %>"><%= name.categories_name %></option>
+                    <% }) %>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="nubmer">Amount</label>
+                <input class="form-control" type="number" id="number">
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea class="form-control" id="message" rows="3"></textarea>
+            </div>
+            <button class="btn btn-primary btn-block mt-3" type="submit" id="send">Submit</button>
+        </form>
     </div>
 </div>
-
 
 
 <% include ../partials/footer %>
