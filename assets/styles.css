@@ -190,3 +190,14 @@ table {
 th, td {
     height: 5vh;
 }
+.success {
+    background-color: #28a745;
+}
+.danger {
+    background-color: #dc3545;
+}
+.chart1 {
+    width: 500px;
+    height: 500px;
+    margin: 1% auto;
+}
