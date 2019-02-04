@@ -190,3 +190,9 @@ table {
 th, td {
     height: 5vh;
 }
+#chartMy {
+    width: 50%;
+    height: 50vh;
+    margin: 0 auto;
+    padding: 5%;
+}

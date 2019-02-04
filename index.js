@@ -4,6 +4,7 @@ const path = require('path')
 const http = require('http');
 const mysql = require('mysql');
 const app = express();
+var Chart = require('chart.js');
 
 const con = mysql.createConnection({
     host: 'sqldemo.softmetrixgroup.com',
@@ -41,36 +42,26 @@ app.get('/edit', function(req, res) {
             throw err;
         } else {
             obj = result;
-<<<<<<< HEAD
-<<<<<<< HEAD
             console.log(obj)
-//<<<<<<< HEAD
             res.json('pages/edit')
         }
-    })
+    });
 });
-=======
-            //console.log(obj)
-=======
->>>>>>> 5c3b1f08efdb73a6a36fe0772b74fbfbbbf17cc0
-            res.render('pages/edit', obj)
-        }
-    })
-})
+        //    res.render('pages/edit', obj);
 
-<<<<<<< HEAD
+// <<<<<<< HEAD
 app.get('/edit/new', function(req, res) {
     console.log("======== RES ========");
     console.log(req.query);
     console.log("======== END RES ========");
 
-    res.render('pages/edit')
-})
+    res.render('pages/edit');
+});
 
->>>>>>> ecdb6f2653451669f02c15f00acb846eccf37f23
+// >>>>>>> ecdb6f2653451669f02c15f00acb846eccf37f23
 
-=======
->>>>>>> 5c3b1f08efdb73a6a36fe0772b74fbfbbbf17cc0
+//=======
+// >>>>>>> 5c3b1f08efdb73a6a36fe0772b74fbfbbbf17cc0
 app.get('/spending', function(req, res) {
     let order = req.query.order[0].dir;
     let limitStart = req.query.length;
@@ -81,19 +72,19 @@ app.get('/spending', function(req, res) {
             throw err;
         } else {
             data = result;
-            res.json(data)
+            res.json(data);
         }
-    })
-})
+    });
+});
     
 app.get('/categories', function(req, res) {
-    res.render('partials/header')
-})
+    res.render('partials/header');
+});
 
 app.get('/spendingData', function(req, res) {
     data = res;
-    res.render('pages/index', data)
-})
+    res.render('pages/index', data);
+});
 
 app.get('/exp', function(req, res) {
     let sql = "SELECT categories_icons_id,categories_name,categories_id,icons FROM ijs_money_tracker_g1.categories JOIN ijs_money_tracker_g1.icons ON categories.categories_icons_id = icons.icons_id WHERE categories_inc_exp = '0'";
@@ -102,10 +93,10 @@ app.get('/exp', function(req, res) {
             throw err;
         } else {
             obj = { print: result }
-            res.render('pages/categories', obj)
+            res.render('pages/categories', obj);
         }
-    })
-})
+    });
+});
 
 app.get('/inc', function(req, res) {
     let sql = "SELECT categories_icons_id,categories_name,categories_id,icons FROM ijs_money_tracker_g1.categories JOIN ijs_money_tracker_g1.icons ON categories.categories_icons_id = icons.icons_id WHERE categories_inc_exp = '1'";
@@ -116,8 +107,8 @@ app.get('/inc', function(req, res) {
             obj = { print: result }
             res.render('pages/categories', obj)
         }
-    })
-})
+    });
+});
 
 app.get('/new', function(req, res) {
     let sql = "SELECT * FROM ijs_money_tracker_g1.icons";
@@ -128,8 +119,8 @@ app.get('/new', function(req, res) {
             obj = { print: result }
             res.render('pages/new', obj)
         }
-    })
-})
+    });
+});
 
 app.post('/addingNew', function(req, res){
     let category = req.body.category;
@@ -144,8 +135,8 @@ app.post('/addingNew', function(req, res){
             var obj = {};
             res.json(req.body);
         }
-    })
-})
+    });
+});
 
 /*===== BOGDAN =====*/
 
@@ -176,8 +167,8 @@ app.post('/input',function(req,res){
 
 app.get('/adding', function(req, res) {
     data = res;
-    res.render('pages/adding', data)
-})
+    res.render('pages/adding', data);
+});
 
 /*===== jovana transactions =====*/
 
@@ -189,11 +180,11 @@ app.get('/transactions', function(req, res) {
             throw err;
         } else {
             obj = result;
-            console.log(obj)
-            res.render('pages/transactions', obj)
+            console.log(obj);
+            res.render('pages/transactions', obj);
 
         }
-    })
+    });
 });
 
 app.get('/btnexp', function(req, res) {
@@ -202,8 +193,8 @@ app.get('/btnexp', function(req, res) {
             throw err;
         } else {
             obj = result;
-            console.log(obj)
-            res.render('pages/transactions', obj)
+            console.log(obj);
+            res.render('pages/transactions', obj);
         }
     })
 })
@@ -214,8 +205,8 @@ app.get('/btninc', function(req, res) {
             throw err;
         } else {
             obj = result;
-            console.log(obj)
-            res.render('pages/transactions', obj)
+            console.log(obj);
+            res.render('pages/transactions', obj);
         }
     })
 })
@@ -278,5 +269,5 @@ app.get('/expense', function(req, res) {
 
 // SERVER PORT //
 app.listen(4200, function() {
-    console.log("Server start...")
-})
+    console.log("Server start...");
+});

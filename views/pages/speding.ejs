@@ -68,5 +68,39 @@
             </tr>
         </table>
     </div>
-</main>
-<% include ../partials/footer %>
+    <div class="d-flex" id="chartMy">
+        <canvas id="bar-chart"></canvas>
+    </div>
+    <script>
+        function loadDoc() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                myFunction(this);
+                }
+            };
+            xhttp.open("GET", "index.js", true);
+            xhttp.send();
+        }
+
+        new Chart(document.getElementById("bar-chart"), {
+        type: 'bar',
+        data: {
+        labels: ["Income", "Expense", "Diference"],
+        datasets: [
+            {
+            label: "Population (millions)",
+            backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f"],
+            data: [print3, print2, print4]
+            }
+        ]
+        },
+        options: {
+        legend: { display: false },
+        title: {
+            display: true,
+            text: 'Predicted world population (millions) in 2050'
+        }
+        }
+    });
+    </script>
