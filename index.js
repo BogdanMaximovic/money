@@ -42,6 +42,10 @@ app.get('/edit', function(req, res) {
     })
 })
 
+// app.post('/editval', function(req, res){
+//     con.query("UPDATE main INNER JOIN categories ON main_catid = categories.categories_id SET main_cat = '"++"' ")
+// })
+
 app.get('/spending', function(req, res) {
     let order = req.query.order[0].dir;
     let limitStart = req.query.length;
