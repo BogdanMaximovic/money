@@ -11,6 +11,7 @@
     $('#success').hide();
 
       $('#save').click(function(e){
+
           e.preventDefault();
           var category = $('#name').val();
           var radioBtn = $('input[name=radio]:checked').val();
@@ -53,7 +54,7 @@
             </div>
             <div class="modal-body">You can add whatever you like</div>
             <div class="modal-text">
-                <form action="/addingNew" method="POST">
+                <form action="/addingNew" method="POST" id="form">
                     <div class="form-group m-1 p-1">
                         <label for="name">Category name</label>
                         <input class="form-control" type="text" id="name" placeholder="Enter new category">
