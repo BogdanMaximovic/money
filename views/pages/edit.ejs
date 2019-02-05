@@ -8,37 +8,45 @@
             var rowData = myTable.row( this ).data(); 
            
             $('#myModal').modal('show')
-            let dataFromClick = this.innerText
-            $('.modal-body').text(`Old value: ${dataFromClick}`)
+            // let dataFromClick = this.innerText
+            // $('.modal-body').text(`Old value: ${dataFromClick}`)
 
              $('#id').val(`${rowData[0]}`) 
+             $("#nwct option:selected" ).text(`${rowData[1]}`); 
+             $('#nwdt').val(`${rowData[2]}`) 
+             $('#nwam').val(`${rowData[3]}`) 
+             $('#nwcm').val(`${rowData[4]}`) 
+
          
         }); 
             $('#save').on('click', function(event) {
               event.preventDefault();
-          
-               var ct = $('#nwct').val();
-               var dt = $('#nwdt').val();
-               var am = $('#nwam').val();
-               var cm = $('#nwcm').val();
+               
+               var id = $('#id').val();
+               var nwct = $('#nwct').val();
+               var nwdt = $('#nwdt').val();
+               var nwam = $('#nwam').val();
+               var nwcm = $('#nwcm').val();
 
                var data = {};
-               data.ct = ct;
-               data.dt = dt;
-               data.am = am;
-               data.cm = cm;
+               data.id = id;
+               data.nwct = nwct;
+               data.nwdt = nwdt;
+               data.nwam = nwam;
+               data.nwcm= nwcm;
 
 
                  $.ajax({
                     type: 'post',
                     data: JSON.stringify(data),
                     contentType: 'application/json',
-                    url: 'http://localhost:4200/addingNew',
+                    url: 'http://localhost:4200/editval',
                     success: function(data) {
                       console.log('success');
                       console.log(JSON.stringify(data));
                       }
                 });
+                window.location.href = "http://localhost:4200/edit"
 
             });
     });
@@ -53,23 +61,23 @@
       </div>
       <div class="modal-body"></div>
       <div class="modal-text">
-          <form action="/edit" method="post">
-            <div class="form-group m-1">
-                <label for="name">TRANSACTION ID</label>
-                <input class="form-control" type="text" id="id" value="">
-                <!-- <label for="name">Edit category</label>
-                <input class="form-control" type="text" id="nwct" placeholder="Enter new value"> -->
-                <select class="browser-default custom-select">
-                        <option selected></option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                      </select>
-                <label for="name">Edit date</label>
+          <form action="/editval" method="post">
+            <div class="form-group m-1 p-3">
+                <label for="id">TRANSACTION ID</label>
+                <input class="form-control" type="number" id="id" value="">
+                <label for="nwct">Edit category</label>
+                <select class="form-control browser-default custom-select" id="nwct">
+                        
+                     <% obj.forEach(function(name){ %>
+                        <option value="<%= name.categories_id %>"><%= name.categories_name %></option>
+                     <% }) %>
+                            
+                 </select>
+                <label for="nwdt">Edit date</label>
                 <input class="form-control" type="text" id="nwdt" placeholder="Enter new value">
-                <label for="name">Edit amount</label>
+                <label for="nwam">Edit amount</label>
                 <input class="form-control" type="text" id="nwam" placeholder="Enter new value">
-                <label for="name">Edit comment</label>
+                <label for="nwcm">Edit comment</label>
                 <input class="form-control" type="text" id="nwcm" placeholder="Enter new value">
 
             </div>

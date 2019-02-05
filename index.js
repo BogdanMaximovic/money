@@ -32,19 +32,36 @@ app.get('/', function(req, res) {
 })
 
 app.get('/edit', function(req, res) {
-    con.query('select transactions_id, transactions_amount, main_transid, main_date, main_comment, main_catid, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id', function(err, result) {
+
+    con.query('select transactions_id, transactions_amount, main_transid, main_date, main_comment, main_catid, categories_id, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id', function(err, result) {
         if (err) {
             throw err;
         } else {
-            obj = result;
+            obj = result; 
             res.render('pages/edit', obj)
         }
     })
 })
 
-// app.post('/editval', function(req, res){
-//     con.query("UPDATE main INNER JOIN categories ON main_catid = categories.categories_id SET main_cat = '"++"' ")
-// })
+ app.post('/editval', function(req, res){
+    
+    let nwct = req.body.nwct;
+    let nwdt = req.body.nwdt;
+    let nwam = req.body.nwam;
+    let nwcm = req.body.nwcm;
+    let id = req.body.id;
+    
+    let sql  = "UPDATE ijs_money_tracker_g1.main INNER JOIN categories ON main.main_catid = categories.categories_id INNER JOIN transactions ON main.main_transid=transactions.transactions_id SET main_catid = '"+nwct+"', main_date = '"+nwdt+"', transactions_amount= '"+nwam+"', main_comment='"+nwcm+"' WHERE main_transid = '"+id+"' "
+
+    con.query(sql, function(err, result) {
+        if (err) {
+            throw err;
+        } else {
+            var obj = {};
+            res.json(req.body);
+        }
+    })
+  })
 
 app.get('/spending', function(req, res) {
     let sql = "select transactions_amount, main_transid, main_date, main_comment, main_catid, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id";
