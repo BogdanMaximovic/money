@@ -37,47 +37,48 @@ $(document).ready(function() {
 
 }) // end
 // Predrag
-/*$(document).ready(function(){
+$(document).ready(function(){
     $.ajax({
-        url: 'http://localhost:4200/expense',
         type: 'GET',
-        success: function(expense){
-            
-        },
-        error: function(expense){
-            
-        }
-        
-        
-    });*/
+        data: JSON.stringify(data),
+        contentType: 'application/json',
+        url: 'http://localhost:4200/expense',
+        success: function(data) {
+        console.log('success');
+        console.log(JSON.stringify(data));
+          }
+    });
 
-var labels = [
-    "Income",
-    "Expense",
-    "Balanc"
-];
-var data = [
-    30,
-    50,
-    20
-];
-var pie = document.getElementById("myChart").getContext('2d');
-var myChart = new Chart(pie, {
-    type: 'bar',
-    data: {
-        labels: labels,
-        datasets: [
-            {
-                data: data,
-                borderColor: ['rgba(40, 167, 69, 1)', 'rgba(220, 53, 69, 1)', 'rgba(23, 162, 184, 1)'],
-                backgroundColor: ['rgba(40, 167, 69, 0.2)', 'rgba(220, 53, 69, 0.2)', 'rgba(23, 162, 184, 0.2)'],
+    var labels = [
+        "Income",
+        "Expense",
+        "Balanc"
+    ];
+    var data = [
+        30,
+        50,
+        20
+    ];
+    var pie = document.getElementById("myChart").getContext('2d');
+    var myChart = new Chart(pie, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    data: data,
+                    borderColor: ['rgba(40, 167, 69, 1)', 'rgba(220, 53, 69, 1)', 'rgba(23, 162, 184, 1)'],
+                    backgroundColor: ['rgba(40, 167, 69, 0.2)', 'rgba(220, 53, 69, 0.2)', 'rgba(23, 162, 184, 0.2)'],
+                }
+            ]
+        },
+        options: {
+            title: {
+                display: true,
+                text: "Chart of spading"
             }
-        ]
-    },
-    options: {
-        title: {
-            display: true,
-            text: "Chart of spading"
         }
-    }
-});
+    });
+    });
+
+
