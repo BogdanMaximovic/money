@@ -38,6 +38,14 @@ $(document).ready(function() {
 }) // end
 // Predrag
 $(document).ready(function(){
+    var income = req.params.transactions_income;
+    var expense = req.params.transactions_expense;
+    var diference = req.params.diference;
+    
+    var data = {};
+    data.income = income;
+    data.expense = expense;
+    data.diference = diference;
     $.ajax({
         type: 'GET',
         data: JSON.stringify(data),
@@ -54,13 +62,8 @@ $(document).ready(function(){
         "Expense",
         "Balanc"
     ];
-    var data = [
-        30,
-        50,
-        20
-    ];
-    var pie = document.getElementById("myChart").getContext('2d');
-    var myChart = new Chart(pie, {
+    var ctx = document.getElementById("myChart").getContext('2d');
+    var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: labels,
