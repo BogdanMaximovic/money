@@ -2,7 +2,12 @@
 
 <script>
     $(document).ready(function() {
-      var myTable = $('#tableedit').DataTable();
+      var myTable = $('#tableedit').DataTable({ "columnDefs": [
+            {
+                "targets": [ 0 ],
+                "visible": false
+                
+            }]});
         $("#tableedit tbody tr").click(function() {
             var row = myTable.row();
             var rowData = myTable.row( this ).data(); 

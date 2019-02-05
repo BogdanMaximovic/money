@@ -5,7 +5,12 @@
  
     
      $(document).ready(function() {
-        var myTable = $('#tabledata').DataTable();
+        var myTable = $('#tabledata').DataTable({ "columnDefs":[
+            {
+                "targets": [4],
+                "visible" : false
+            }
+        ]});
        
         $("#tabledata tbody tr").click(function() {
             
