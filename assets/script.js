@@ -37,7 +37,7 @@ $(document).ready(function() {
 
 }) // end
 // Predrag
-$(document).ready(function(){
+/*$(document).ready(function(){
     
     var data = {};
     $.ajax({
@@ -76,6 +76,6 @@ $(document).ready(function(){
             }
         }
     });
-    });
+    });*/
 
 
