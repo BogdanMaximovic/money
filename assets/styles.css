@@ -184,17 +184,30 @@ body {
 }
 /* Predrag */
 table {
-    width: 20%;
     margin: 0 auto;
 }
 th, td {
     height: 5vh;
 }
-.success {
-    background-color: #28a745;
+.income {
+    display: flex;
+    flex-direction: column;
 }
-.danger {
-    background-color: #dc3545;
+.expense {
+    display: flex;
+    flex-direction: column;
+}
+.income, table {
+    width: 40%;
+}
+.expense, table {
+    width: 40%;
+}
+#balancTable {
+    width: 20%;
+}
+#headlines1 {
+    margin: 0 auto;
 }
 .chart1 {
     width: 500px;

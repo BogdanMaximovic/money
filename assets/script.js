@@ -38,14 +38,8 @@ $(document).ready(function() {
 }) // end
 // Predrag
 $(document).ready(function(){
-    var income = req.params.transactions_income;
-    var expense = req.params.transactions_expense;
-    var diference = req.params.diference;
     
     var data = {};
-    data.income = income;
-    data.expense = expense;
-    data.diference = diference;
     $.ajax({
         type: 'GET',
         data: JSON.stringify(data),

@@ -211,55 +211,35 @@ app.post('/delete', function(req, res) {
 app.get('/expense', function(req, res) {
     var obj = {};
 
-<<<<<<< HEAD
-    con.query("SELECT categories_name, transactions_amount FROM categories JOIN transactions ON categories_id = transactions_catid WHERE categories_inc_exp = '0' ", function(err, result) {
-=======
     con.query("SELECT categories_name, transactions_amount FROM transactions JOIN categories ON transactions_catid = categories_id WHERE categories_inc_exp = '0' ", function(err, result) {
->>>>>>> 1adb11dcceed263b686bedf0ec1a978f8464900c
         if (err) {
             throw err;
         } else {
             obj = { print: result };
         }
     });
-<<<<<<< HEAD
-    con.query("SELECT sum(transactions_amount) AS transactions_expense FROM categories JOIN transactions ON categories_id = transactions_catid WHERE categories_inc_exp = '0' ", function(err, result) {
-=======
     con.query("SELECT sum(transactions_amount) AS transactions_expense FROM transactions JOIN categories ON transactions_catid = categories_id WHERE categories_inc_exp = '0'", function(err, result) {
->>>>>>> 1adb11dcceed263b686bedf0ec1a978f8464900c
         if (err) {
             throw err;
         } else {
             obj.print2 = result;
         }
     });
-<<<<<<< HEAD
-    con.query("SELECT sum(transactions_amount) AS transactions_income FROM categories JOIN transactions ON categories_id = transactions_catid WHERE categories_inc_exp = '1' ", function(err, result) {
-=======
     con.query("SELECT sum(transactions_amount) AS transactions_income FROM transactions JOIN categories ON transactions_catid = categories_id WHERE categories_inc_exp = '1'", function(err, result) {
->>>>>>> 1adb11dcceed263b686bedf0ec1a978f8464900c
         if (err) {
             throw err;
         } else {
             obj.print3 = result;
         }
     });
-<<<<<<< HEAD
-    con.query("SELECT (SELECT sum(transactions_amount) FROM categories JOIN transactions ON categories_id = transactions_catid WHERE categories_inc_exp = '1') - (SELECT sum(transactions_amount) FROM categories JOIN transactions ON categories_id = transactions_catid WHERE categories_inc_exp = '0') AS diference", function(err, result) {
-=======
     con.query("SELECT (SELECT sum(transactions_amount) FROM transactions JOIN categories ON transactions_catid = categories_id WHERE categories_inc_exp = '1') - (SELECT sum(transactions_amount) FROM transactions JOIN categories ON transactions_catid = categories_id WHERE categories_inc_exp = '0') AS diference", function(err, result) {
->>>>>>> 1adb11dcceed263b686bedf0ec1a978f8464900c
         if (err) {
             throw err;
         } else {
             obj.print4 = result;
         }
     });
-<<<<<<< HEAD
-    con.query("SELECT categories_name, transactions_amount FROM categories JOIN transactions ON categories_id = transactions_catid WHERE categories_inc_exp = '1' ", function(err, result) {
-=======
     con.query("SELECT categories_name, transactions_amount FROM transactions JOIN categories ON transactions_catid = categories_id WHERE categories_inc_exp = '1' ", function(err, result) {
->>>>>>> 1adb11dcceed263b686bedf0ec1a978f8464900c
         if (err) {
             throw err;
         } else {
