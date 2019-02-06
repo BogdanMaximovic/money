@@ -20,7 +20,7 @@
             $('#myModal').modal('show')
             
             $('#id').val(`${rowData[4]}`)
-             
+            
       }); 
         $('#delete').click(function(e){
           e.preventDefault();
@@ -105,7 +105,7 @@
                 <th>
                     ID
                 </th>
-            </tr>
+              </tr>
         </thead>
         <tbody>
             <% obj.forEach(function(name){ %>
@@ -124,11 +124,14 @@
                 </td>
                 <td>
                      <%=name.main_transid %>
-                </td>
-            </tr>
+                </td> 
+             </tr>
             
             <% }) %>
         </tbody>
     </table>
+    
 </div>
+ 
+<p class="badge badge-success pt-1 m-1"><strong>Note:</strong> Click on transaction to delete.</p>
 <% include ../partials/footer %>
