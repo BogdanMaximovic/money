@@ -231,7 +231,7 @@ app.post('/delete', function(req, res) {
 app.get('/expense', function(req, res) {
     var obj = {};
 
-    con.query("SELECT categories_name, transactions_amount FROM transactions JOIN categories ON transactions_catid = categories_id WHERE categories_inc_exp = '0' ", function(err, result) {
+    con.query("SELECT main_date,categories_name, transactions_amount FROM transactions LEFT JOIN categories ON transactions_catid = categories_id LEFT JOIN main ON main_transid = transactions_id WHERE categories_inc_exp = '0' ORDER BY main_date ", function(err, result) {
         if (err) {
             throw err;
         } else {
@@ -259,7 +259,7 @@ app.get('/expense', function(req, res) {
             obj.print4 = result;
         }
     });
-    con.query("SELECT categories_name, transactions_amount FROM transactions JOIN categories ON transactions_catid = categories_id WHERE categories_inc_exp = '1' ", function(err, result) {
+    con.query("SELECT main_date,categories_name, transactions_amount FROM transactions LEFT JOIN categories ON transactions_catid = categories_id LEFT JOIN main ON main_transid = transactions_id WHERE categories_inc_exp = '1' ORDER BY main_date ", function(err, result) {
         if (err) {
             throw err;
         } else {
