@@ -1,11 +1,11 @@
 <% include ../partials/header %>
-<main>
+<main><!-- 
     <ul class="pagination justify-content-around">
         <li class="page-item"><a class="page-link" href="#">&lt;</a></li>
         <li class="page-item"><a class="page-link" href="#">&gt;</a></li> 
-    </ul>
-    <div class="d-flex wraper justify-content-center"> 
-        <div class="expense">
+    </ul> -->
+    <div class="d-flex wraper justify-content-center mb-5"> 
+        <div class="expense m-2">
             <div class="d-flex justify-content-center">
                 <h3 class="nav bg-danger rounded mt-1 p-2 text-white">List of Expenses</h3>
             </div>
@@ -13,13 +13,13 @@
                 <table class="bg-danger rounded mt-1">
                     <% print.forEach(function(name){ %>
                     <tr class="text-white">
-                        <td class="col-4">
+                        <td class="col-4 py-1">
                             <%= name.main_date %>
                         </td>
-                        <td class="col-4">
+                        <td class="col-4 py-1">
                             <%= name.categories_name %>
                         </td>
-                        <td class="col-4">
+                        <td class="col-4 py-1">
                             <%= name.transactions_amount %>
                         </td>
                     </tr>
@@ -37,7 +37,7 @@
                 </table>
             </div>
         </div>
-        <div class="income">
+        <div class="income m-2">
             <div class="d-flex justify-content-center">
                 <h3 class="nav bg-success rounded mt-1 p-2 text-white">List of Incomes</h3>
             </div>
@@ -45,13 +45,13 @@
                 <table class="bg-success rounded mt-1"> 
                     <% print5.forEach(function(name){ %>
                     <tr class="text-white">
-                        <td class="col-4">
+                        <td class="col-4 py-1">
                             <%= name.main_date %>
                         </td>
-                        <td class="col-4">
+                        <td class="col-4 py-1">
                             <%= name.categories_name %>
                         </td>
-                        <td class="col-4">
+                        <td class="col-4 py-1"> 
                             <%= name.transactions_amount %>
                         </td>
                     </tr>
@@ -71,7 +71,7 @@
         </div>
     </div>
     <div class="d-flex justify-content-center">
-        <table class="bg-primary rounded mt-1" id="balancTable">
+        <table class="bg-primary rounded mt-1 balancTable">
             <tr class="text-white">
                 <th class="col-sm-6">Balanc: </th>
                         <% print4.forEach(function(name){ %>
@@ -82,4 +82,5 @@
     </div>
 </div>
 </main>
-<script src="/assets/script.js"></script>
+
+<% include ../partials/footer %>

@@ -1,1 +1,0 @@
-UPDATE `ijs_money_tracker_g1`.`categories` SET `categories_name` = 'Stiling', `categories_icons_id` = '12' WHERE (`categories_id` = '57');

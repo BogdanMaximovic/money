@@ -199,16 +199,10 @@ th, td {
     flex-direction: column;
     text-align: center;
 }
-.income, table {
-    width: 50%;
+.balancTable {
+    width: 42%;
 }
-.expense, table {
-    width: 50%;
-}
-#balancTable {
-    width: 40%;
-}
-@media screen and (max-width: 575px) {
+@media screen and (max-width: 722px) {
     .wraper {
      flex-direction: column;
     }
@@ -218,4 +212,4 @@ th, td {
     .expense {
         margin: 0 auto;
     }
-  }
+}
