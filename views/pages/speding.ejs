@@ -5,38 +5,9 @@
         <li class="page-item"><a class="page-link" href="#">&gt;</a></li> 
     </ul>
     <div class="d-flex wraper justify-content-center"> 
-        <div class="income">
-            <div class="d-flex justify-content-center">
-                <h3 class="nav bg-success rounded mt-1 text-white">List of Incomes</h3>
-            </div>
-            <div class="d-flex justify-content-center">
-                <table class="bg-success rounded mt-1"> 
-                    <% print5.forEach(function(name){ %>
-                    <tr class="text-white">
-                        <td class="col-xl-6">
-                            <%= name.categories_name %>
-                        </td>
-                        <td class="col-xl-6">
-                            <%= name.transactions_amount %>
-                        </td>
-                    </tr>
-                    <% }) %>
-                </table>
-            </div>
-            <div class="d-flex justify-content-center">
-                <table class="bg-success rounded mt-1">
-                    <tr class="text-white">
-                        <th class="col-xl-6">Income total: </th>
-                            <% print3.forEach(function(name){ %>
-                        <th class="col-xl-6"><%= name.transactions_income %></th>
-                            <% }) %>
-                    </tr>
-                </table>
-            </div>
-        </div>
         <div class="expense">
             <div class="d-flex justify-content-center">
-                <h3 class="nav bg-danger rounded mt-1 text-white">List of Expenses</h3>
+                <h3 class="nav bg-danger rounded mt-1 p-2 text-white">List of Expenses</h3>
             </div>
             <div class="d-flex justify-content-center">
                 <table class="bg-danger rounded mt-1">
@@ -59,6 +30,35 @@
                                 <% print2.forEach(function(name){ %>
                         <th class="col-xl-6"><%= name.transactions_expense %></th>
                                 <% }) %>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="income">
+            <div class="d-flex justify-content-center">
+                <h3 class="nav bg-success rounded mt-1 p-2 text-white">List of Incomes</h3>
+            </div>
+            <div class="d-flex justify-content-center">
+                <table class="bg-success rounded mt-1"> 
+                    <% print5.forEach(function(name){ %>
+                    <tr class="text-white">
+                        <td class="col-xl-6">
+                            <%= name.categories_name %>
+                        </td>
+                        <td class="col-xl-6">
+                            <%= name.transactions_amount %>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </table>
+            </div>
+            <div class="d-flex justify-content-center">
+                <table class="bg-success rounded mt-1">
+                    <tr class="text-white">
+                        <th class="col-xl-6">Income total: </th>
+                            <% print3.forEach(function(name){ %>
+                        <th class="col-xl-6"><%= name.transactions_income %></th>
+                            <% }) %>
                     </tr>
                 </table>
             </div>

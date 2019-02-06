@@ -38,14 +38,12 @@
               }
             });
           $('#success').show();
+                let delay = 1500; 
+                let url = 'http://localhost:4200/add';
+                setTimeout(function(){ window.location = url }, delay);
         })
 });
 </script>
-<div class="row text-center m-5" id="success">
-  <div class="col m-auto">
-    <p class="display-4 text-success">Category successfully saved</p>
-  </div>
-</div>
 <!-- MODAL -->
 <div class="modal fade" id="addingNew">
     <div class="modal-dialog">
@@ -84,5 +82,10 @@
             </div>
         </div>
     </div>
+</div>
+<div class="row text-center m-5" id="success">
+  <div class="col m-auto">
+    <h1 class="badge badge-success display-4" id="show">Category added</h1>
+  </div>
 </div>
 <% include ../partials/footer %>
