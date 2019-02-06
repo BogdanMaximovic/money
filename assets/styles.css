@@ -36,6 +36,9 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+.iconBkg {
+    background-color: grey
+}
 
 /* --- button setings start --- */
 
@@ -183,10 +186,36 @@ body {
     font-size: 1.2rem;
 }
 /* Predrag */
-table {
-    width: 20%;
-    margin: 0 auto;
-}
 th, td {
     height: 5vh;
 }
+.income {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.expense {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.income, table {
+    width: 50%;
+}
+.expense, table {
+    width: 50%;
+}
+#balancTable {
+    width: 20%;
+}
+@media screen and (max-width: 575px) {
+    .wraper {
+     flex-direction: column;
+    }
+    .income {
+        margin: 0 auto;
+    }
+    .expense {
+        margin: 0 auto;
+    }
+  }

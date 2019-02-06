@@ -6,7 +6,9 @@
     var iconID = null;
     $('.aLink').on('click', function(event) {
       event.preventDefault();
-      iconID = $(this).find('.iconImgId').attr('data-id');       
+      iconID = $(this).find('.iconImgId').attr('data-id');  
+      icon = $(this).find('img')
+      icon.toggleClass('iconBkg')
     });
     $('#success').hide();
 
