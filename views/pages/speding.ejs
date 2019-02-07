@@ -26,7 +26,7 @@
             <tr class="text-white">
                 <th class="col-xl-6">Income total: </th>
                     <% print3.forEach(function(name){ %>
-                <th class="col-xl-6"><%= name.transactions_income %></th>
+                <th class="col-xl-6" id="<%= name.transactions_income %>"><%= name.transactions_income %></th>
                     <% }) %>
             </tr>
         </table>
@@ -53,7 +53,7 @@
             <tr class="text-white">
                 <th class="col-xl-6">Expense total: </th>
                         <% print2.forEach(function(name){ %>
-                <th class="col-xl-6"><%= name.transactions_expense %></th>
+                <th class="col-xl-6" id="<%= name.transactions_expense %>"><%= name.transactions_expense %></th>
                         <% }) %>
             </tr>
         </table>
@@ -63,50 +63,57 @@
             <tr class="text-white">
                 <th class="col-xl-6">Balanc: </th>
                         <% print4.forEach(function(name){ %>
-                <th class="col-xl-6"><%= name.diference %></th>
+                <th class="col-xl-6" id="<%= name.diference %>"><%= name.diference %></th>
                         <% }) %>
             </tr>
         </table>
     </div>
-<<<<<<< HEAD
     <div class="d-flex" id="chartMy">
         <canvas id="bar-chart"></canvas>
     </div>
     <script>
-        function loadDoc() {
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                myFunction(this);
-                }
-            };
-            xhttp.open("GET", "index.js", true);
-            xhttp.send();
-        }
+        $(document).ready(function() {
 
-        new Chart(document.getElementById("bar-chart"), {
-        type: 'bar',
-        data: {
-        labels: ["Income", "Expense", "Diference"],
-        datasets: [
-            {
-            label: "Population (millions)",
-            backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f"],
-            data: [print3, print2, print4]
-            }
-        ]
-        },
-        options: {
-        legend: { display: false },
-        title: {
-            display: true,
-            text: 'Predicted world population (millions) in 2050'
-        }
-        }
-    });
+            var income = $(this).data('');
+            var expense = $(this).data('');
+            var diference = $(this).data('');   
+            var data = {};
+            data.income = income;
+            data.expense = expense;
+            data.diference = diference;
+
+            $.ajax({
+                    type: 'GET',
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    url: 'http://localhost:4200/expense',
+                    success: function(data) {
+                      console.log('success');
+                      console.log(JSON.stringify(data));
+                      }
+                });
+
+            new Chart(document.getElementById("bar-chart"), {
+                type: 'bar',
+                data: {
+                labels: ["Income", "Expense", "Diference"],
+                datasets: [
+                    {
+                    label: "Population (millions)",
+                    backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f"],
+                    data: data
+                    }
+                ]
+                },
+                options: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: 'Chart of speding'
+                }
+                }
+            });
+        });
+
+        
     </script>
-=======
-</div>
-</main>
-<script src="/assets/script.js"></script>
->>>>>>> cb6c6e949a91c1b3d84b9bc083b3119fefc3361e
