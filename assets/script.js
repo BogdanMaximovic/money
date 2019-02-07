@@ -37,45 +37,41 @@ $(document).ready(function() {
 
 }) // end
 // Predrag
-/*$(document).ready(function(){
+$(document).ready(function () {
+    var SERVER_URL = "http://localhost:4200/expense";
+    $.get(SERVER_URL, function (record) {
     
-    var data = {};
-    $.ajax({
-        type: 'GET',
-        data: JSON.stringify(data),
-        contentType: 'application/json',
-        url: 'http://localhost:4200/expense',
-        success: function(data) {
-        console.log('success');
-        console.log(JSON.stringify(data));
-          }
+    if (record !== null) {
+    var name = record.map(function (rec) {
+    return rec.con.query("SELECT sum(transactions_amount) AS transactions_income FROM transactions JOIN categories ON transactions_catid = categories_id WHERE categories_inc_exp = '1'");
     });
-
-    var labels = [
-        "Income",
-        "Expense",
-        "Balanc"
-    ];
-    var ctx = document.getElementById("myChart").getContext('2d');
+    var value = record.map(function (rec) {
+    return rec.con.query("SELECT sum(transactions_amount) AS transactions_expense FROM transactions JOIN categories ON transactions_catid = categories_id WHERE categories_inc_exp = '0'");
+    });
+    
+    var ctx = document.getElementById("myChart");
     var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [
-                {
-                    data: data,
-                    borderColor: ['rgba(40, 167, 69, 1)', 'rgba(220, 53, 69, 1)', 'rgba(23, 162, 184, 1)'],
-                    backgroundColor: ['rgba(40, 167, 69, 0.2)', 'rgba(220, 53, 69, 0.2)', 'rgba(23, 162, 184, 0.2)'],
-                }
-            ]
-        },
-        options: {
-            title: {
-                display: true,
-                text: "Chart of spading"
-            }
-        }
+    type: 'line',
+    data: {
+    labels: name,
+    datasets: [{
+    label: 'Sample Data',
+    data: value
+    }]
+    },
+    options: {
+    scales: {
+    yAxes: [{
+    ticks: {
+    beginAtZero: true
+    }
+    }]
+    }
+    }
     });
-    });*/
+    
+    }
+    });
+    });
 
-
+    

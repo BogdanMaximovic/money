@@ -216,3 +216,8 @@ th, td {
         margin: 0 auto;
     }
   }
+  #divChart {
+      width: 20%;
+      height: 20vh;
+      margin: 0 auto;
+  }
