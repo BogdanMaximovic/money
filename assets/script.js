@@ -15,7 +15,7 @@ $(document).ready(function() {
         getDate.text(`${months[month]} ${year}`);
     })();
 
-    $('#myTable').DataTable({
+    /*$('#myTable').DataTable({
         processing: true,
         serverSide: true,
         paging: true,
@@ -33,9 +33,10 @@ $(document).ready(function() {
             { data: 'categories_name' },
             { data: 'transactions_amount' },
         ],
-    })
+    })*/
 
 }) // end
+
 // Predrag
 /*$(document).ready(function(){
     

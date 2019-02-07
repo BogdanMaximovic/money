@@ -1,7 +1,7 @@
 <% include ../partials/header %>
 <script>
     $(document).ready(function() {
-        $('#show').hide();
+      $('#show').hide();
       $('#send').click(function(e){
 
         e.preventDefault();
@@ -15,8 +15,6 @@
           data.category = category;
           data.number = number;
           data.message = message;
-
-          console.log(selectedDate,category,number,message)
 
           if (selectedDate !== '' && category !== '' && number !== '' && message !== '') {
               $.ajax({
@@ -41,9 +39,9 @@
 });
 </script>
 <div class="row text-center m-5" id="show">
-  <div class="col m-auto">
-    <h1 class="badge badge-success display-4" id="show">Category added</h1>
-  </div>
+    <div class="col m-auto">
+        <h1 class="badge badge-success display-4" id="show">Category added</h1>
+    </div>
 </div>
 <div class="row">
     <div class="col-12 text-center pt-5">
@@ -62,7 +60,9 @@
                 <label for="category">Category</label>
                 <select class="form-control" id="category">
                     <% print.forEach(function(name){ %>
-                    <option value="<%= name.categories_id %>"><%= name.categories_name %></option>
+                    <option value="<%= name.categories_id %>">
+                        <%= name.categories_name %>
+                    </option>
                     <% }) %>
                 </select>
             </div>
@@ -84,6 +84,4 @@
         </form>
     </div>
 </div>
-
-
 <% include ../partials/footer %>
