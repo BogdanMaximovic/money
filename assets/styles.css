@@ -36,6 +36,9 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+.iconBkg {
+    background-color: grey
+}
 
 /* --- button setings start --- */
 
@@ -196,16 +199,10 @@ th, td {
     flex-direction: column;
     text-align: center;
 }
-.income, table {
-    width: 50%;
+.balancTable {
+    width: 42%;
 }
-.expense, table {
-    width: 50%;
-}
-#balancTable {
-    width: 20%;
-}
-@media screen and (max-width: 575px) {
+@media screen and (max-width: 722px) {
     .wraper {
      flex-direction: column;
     }
@@ -215,9 +212,13 @@ th, td {
     .expense {
         margin: 0 auto;
     }
+<<<<<<< HEAD
   }
   #divChart {
       width: 20%;
       height: 20vh;
       margin: 0 auto;
   }
+=======
+}
+>>>>>>> f136af0b7768af1a6a0e0c0026f33b527a19f198
