@@ -2,16 +2,16 @@
 
 <script>
     $(document).ready(function() {
-        var myTable = $('#tabledata').DataTable({ "columnDefs":[
+        let myTable = $('#tabledata').DataTable({ "columnDefs":[
             {
                 "targets": [4],
                 "visible" : false
             }
         ]});
        
-        $("#tabledata tbody tr").click(function() {
-            var row = myTable.row();
-            var rowData = myTable.row( this ).data(); 
+        $(document).on("click", "#tabledata tbody tr", function() {
+            let row = myTable.row();
+            let rowData = myTable.row( this ).data(); 
             $('#myModal').modal('show')
             $('#id').val(`${rowData[4]}`)
             
