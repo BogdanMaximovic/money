@@ -39,6 +39,11 @@
             let url = 'http://localhost:4200/add';
             setTimeout(function(){ window.location = url }, delay);
         })
+      $('#close').click(function(event) {
+        let delay = 100; 
+        let url = 'http://localhost:4200/exp';
+        setTimeout(function(){ window.location = url }, delay);
+      })
 });
 </script>
 <!-- MODAL -->
@@ -75,7 +80,7 @@
             </div>
             <div class="modal-footer m-auto">
                 <a class="btn btn-success text-light" data-dismiss="modal" id="save">Save</a>
-                <a class="btn btn-secondary text-light" data-dismiss="modal" id="close" href="/exp">Close</a>
+                <a class="btn btn-secondary text-light" data-dismiss="modal" id="close">Close</a>
             </div>
         </div>
     </div>
