@@ -2,30 +2,27 @@
 <% include ../pages/button %>
 <script>
     $(document).ready(function() {
-    $('#addingNew').modal('show') 
-    var iconID = null;
-    $('.aLink').on('click', function(event) {
-      event.preventDefault();
-      iconID = $(this).find('.iconImgId').attr('data-id');  
-      icon = $(this).find('img')
-      icon.toggleClass('iconBkg')
-    });
-    $('#success').hide();
+      $('#addingNew').modal('show') 
+      var iconID = null;
+      $('.aLink').on('click', function(event) {
+        event.preventDefault();
+        iconID = $(this).find('.iconImgId').attr('data-id');  
+        icon = $(this).find('img')
+        icon.toggleClass('iconBkg')
+      });
+      $('#success').hide();
 
       $('#save').click(function(e){
-
           e.preventDefault();
-          var category = $('#name').val();
-          var radioBtn = $('input[name=radio]:checked').val();
-          var color = $('#color').val();
+          let category = $('#name').val();
+          let radioBtn = $('input[name=radio]:checked').val();
+          let color = $('#color').val();
 
-          var data = {};
+          let data = {};
           data.category = category;
           data.radioBtn = radioBtn;
           data.iconID = iconID;
           data.color = color;
-
-          console.log(category,radioBtn,iconID,color)
 
           $.ajax({
             type: 'post',
@@ -38,9 +35,9 @@
               }
             });
           $('#success').show();
-                let delay = 1500; 
-                let url = 'http://localhost:4200/add';
-                setTimeout(function(){ window.location = url }, delay);
+            let delay = 1500; 
+            let url = 'http://localhost:4200/add';
+            setTimeout(function(){ window.location = url }, delay);
         })
 });
 </script>
@@ -84,8 +81,8 @@
     </div>
 </div>
 <div class="row text-center m-5" id="success">
-  <div class="col m-auto">
-    <h1 class="badge badge-success display-4" id="show">Category added</h1>
-  </div>
+    <div class="col m-auto">
+        <h1 class="badge badge-success display-4" id="show">Category added</h1>
+    </div>
 </div>
 <% include ../partials/footer %>

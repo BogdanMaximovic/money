@@ -1,20 +1,17 @@
 <% include ../partials/header %>
-
 <script>
     $(document).ready(function() {
-      var myTable = $('#tableedit').DataTable({ "columnDefs": [
+      const myTable = $('#tableedit').DataTable({ "columnDefs": [
             {
                 "targets": [ 0 ],
                 "visible": false
                 
             }]});
         $("#tableedit tbody tr").click(function() {
-            var row = myTable.row();
-            var rowData = myTable.row( this ).data(); 
+            let row = myTable.row();
+            let rowData = myTable.row( this ).data(); 
            
             $('#myModal').modal('show')
-            // let dataFromClick = this.innerText
-            // $('.modal-body').text(`Old value: ${dataFromClick}`)
 
              $('#id').val(`${rowData[0]}`) 
              $("#nwct option:selected" ).text(`${rowData[1]}`); 
@@ -27,13 +24,13 @@
             $('#save').on('click', function(event) {
               event.preventDefault();
                
-               var id = $('#id').val();
-               var nwct = $('#nwct').val();
-               var nwdt = $('#nwdt').val();
-               var nwam = $('#nwam').val();
-               var nwcm = $('#nwcm').val();
+               let id = $('#id').val();
+               let nwct = $('#nwct').val();
+               let nwdt = $('#nwdt').val();
+               let nwam = $('#nwam').val();
+               let nwcm = $('#nwcm').val();
 
-               var data = {};
+               let data = {};
                data.id = id;
                data.nwct = nwct;
                data.nwdt = nwdt;
@@ -55,49 +52,44 @@
 
             });
     });
-</script> 
-
+</script>
 <div class="modal" id="myModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Editing Data</h5>
-        <button class="close" data-dismiss="modal">&times;</button>
-      </div>
-      <div class="modal-body"></div>
-      <div class="modal-text">
-          <form action="/editval" method="post">
-            <div class="form-group m-1 p-3">
-                <label for="id">TRANSACTION ID</label>
-                <input class="form-control" type="number" id="id" value="">
-                <label for="nwct">Edit category</label>
-                <select class="form-control browser-default custom-select" id="nwct">
-                        
-                     <% obj.forEach(function(name){ %>
-                        <option value="<%= name.categories_id %>"><%= name.categories_name %></option>
-                     <% }) %>
-                            
-                 </select>
-                <label for="nwdt">Edit date</label>
-                <input class="form-control" type="text" id="nwdt" placeholder="Enter new value">
-                <label for="nwam">Edit amount</label>
-                <input class="form-control" type="text" id="nwam" placeholder="Enter new value">
-                <label for="nwcm">Edit comment</label>
-                <input class="form-control" type="text" id="nwcm" placeholder="Enter new value">
-
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editing Data</h5>
+                <button class="close" data-dismiss="modal">&times;</button>
             </div>
-          </form>
-      </div>
-      <div class="modal-footer m-auto">
-        <button class="btn btn-success" data-dismiss="modal" id="save">Save</button>
-        <button class="btn btn-secondary" data-dismiss="modal" id="close">Close</button>
-      </div>
+            <div class="modal-body"></div>
+            <div class="modal-text">
+                <form action="/editval" method="post">
+                    <div class="form-group m-1 p-3">
+                        <label for="id">TRANSACTION ID</label>
+                        <input class="form-control" type="number" id="id" value="">
+                        <label for="nwct">Edit category</label>
+                        <select class="form-control browser-default custom-select" id="nwct">
+                            <% obj.forEach(function(name){ %>
+                            <option value="<%= name.categories_id %>">
+                                <%= name.categories_name %>
+                            </option>
+                            <% }) %>
+                        </select>
+                        <label for="nwdt">Edit date</label>
+                        <input class="form-control" type="text" id="nwdt" placeholder="Enter new value">
+                        <label for="nwam">Edit amount</label>
+                        <input class="form-control" type="text" id="nwam" placeholder="Enter new value">
+                        <label for="nwcm">Edit comment</label>
+                        <input class="form-control" type="text" id="nwcm" placeholder="Enter new value">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer m-auto">
+                <button class="btn btn-success" data-dismiss="modal" id="save">Save</button>
+                <button class="btn btn-secondary" data-dismiss="modal" id="close">Close</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
-
-
-
 <div class="text-center text-light">
     <h1>Edit</h1>
 </div>
@@ -144,7 +136,5 @@
             <% }) %>
         </tbody>
     </table>
-</div> 
-
-
+</div>
 <% include ../partials/footer %>
