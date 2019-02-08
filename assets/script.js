@@ -37,41 +37,6 @@ $(document).ready(function() {
 
 }) // end
 // Predrag
-$(document).ready(function () {
-    var SERVER_URL = "http://localhost:4200/expense";
-    $.get(SERVER_URL, function (record) {
-    
-    if (record !== null) {
-    var name = record.map(function (rec) {
-    return rec.con.query("SELECT sum(transactions_amount) AS transactions_income FROM transactions JOIN categories ON transactions_catid = categories_id WHERE categories_inc_exp = '1'");
-    });
-    var value = record.map(function (rec) {
-    return rec.con.query("SELECT sum(transactions_amount) AS transactions_expense FROM transactions JOIN categories ON transactions_catid = categories_id WHERE categories_inc_exp = '0'");
-    });
-    
-    var ctx = document.getElementById("myChart");
-    var myChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-    labels: name,
-    datasets: [{
-    label: 'Sample Data',
-    data: value
-    }]
-    },
-    options: {
-    scales: {
-    yAxes: [{
-    ticks: {
-    beginAtZero: true
-    }
-    }]
-    }
-    }
-    });
-    
-    }
-    });
-    });
+
 
     
