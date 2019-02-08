@@ -1,16 +1,17 @@
 <% include ../partials/header %>
+
 <script>
     $(document).ready(function() {
-        var myTable = $('#tabledata').DataTable({ "columnDefs":[
+        let myTable = $('#tabledata').DataTable({ "columnDefs":[
             {
                 "targets": [4],
                 "visible" : false
             }
         ]});
        
-        $("#tabledata tbody tr").click(function() {
-            var row = myTable.row();
-            var rowData = myTable.row( this ).data(); 
+        $(document).on("click", "#tabledata tbody tr", function() {
+            let row = myTable.row();
+            let rowData = myTable.row( this ).data(); 
             $('#myModal').modal('show')
             $('#id').val(`${rowData[4]}`)
             
@@ -34,21 +35,22 @@
             window.location.href = "http://localhost:4200/transactions";
         })
     });
- 
 </script>
+
 <div class="modal" id="myModal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Delete this transation?</h5>
+                <h5 class="modal-title">Delete</h5>
                 <button class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body"></div>
             <div class="modal-text p-3">
                 <form action="/delete" method="POST">
                     <div class="form-group m-1 p-1">
-                        <label for="idid">Transaction ID</label>
-                        <input class="form-control" type="number" name="idid" id="id" value="">
+                        <!-- <label for="idid">Transaction ID</label> -->
+                        <p>Are you sure to delete this transaction?</p>
+                        <input class="form-control" type="hidden" name="idid" id="id" value="">
                     </div>
                 </form>
                 <button class="btn btn-success" data-dismiss="modal" id="delete">Delete</button>
@@ -118,4 +120,6 @@
     </table>
 </div>
 <p class="badge badge-success pt-1 m-1"><strong>Note:</strong> Click on transaction to delete.</p>
+
+
 <% include ../partials/footer %>

@@ -7,7 +7,7 @@
                 "visible": false
                 
             }]});
-        $("#tableedit tbody tr").click(function() {
+        $(document).on("click", "#tableedit tbody tr",function() {
             let row = myTable.row();
             let rowData = myTable.row( this ).data(); 
            
@@ -137,4 +137,5 @@
         </tbody>
     </table>
 </div>
+<script src="../assets/edit.js"></script>
 <% include ../partials/footer %>

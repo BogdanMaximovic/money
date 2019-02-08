@@ -26,8 +26,7 @@ app.use(express.static(path.join(__dirname, '/public/')))
 app.use('/assets', express.static('assets'))
 app.use('/icons', express.static('icons'))
 
-/*===== BOGDAN =====*/
-
+/*===== BOGDAN START=====*/
 app.get('/spending', (req, res) => {
     let sql = `select transactions_amount, main_transid, main_date, main_comment, main_catid, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id`;
     con.query(sql, (err, result) => {
@@ -76,6 +75,31 @@ app.get('/new', (req, res) => {
         } else {
             obj = { print: result }
             res.render('pages/new', obj)
+        }
+    })
+})
+
+app.get('/delCat', (req, res) => {
+    let sql = `SELECT categories_id,categories_name FROM ijs_money_tracker_g1.categories`
+    con.query(sql, (err, result) => {
+        if (err) {
+            throw err;
+        } else {
+            obj = { print: result }
+            res.render('pages/delete', obj)
+        }
+    })
+})
+
+app.post('/delete', (req, res) => {
+    let id = req.body.id;
+    let sql = `delete from categories where categories_id = ${id}`;
+    con.query(sql, (err, result) => {
+        if (err) {
+            throw err;
+        } else {
+            var obj = {};
+            res.json(req.body);
         }
     })
 })
