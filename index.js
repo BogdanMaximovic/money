@@ -26,58 +26,7 @@ app.use(express.static(path.join(__dirname, '/public/')))
 app.use('/assets', express.static('assets'))
 app.use('/icons', express.static('icons'))
 
-/*===== BOGDAN =====*/
-
-app.get('/', function(req, res) {
-    res.render('partials/header')
-})
-
-// Jovana EDIT
-app.get('/edit', function(req, res) {
-
-    con.query('select transactions_id, transactions_amount, main_transid, main_date, main_comment, main_catid, categories_id, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id', function(err, result) {
-        if (err) {
-            throw err;
-        } else {
-            obj = result; 
-            res.render('pages/edit', obj)
-        }
-    })
-})
-
- app.post('/editval', function(req, res){
-    
-    let nwct = req.body.nwct;
-    let nwdt = req.body.nwdt;
-    let nwam = req.body.nwam;
-    let nwcm = req.body.nwcm;
-    let id = req.body.id;
-    
-    let sql  = "UPDATE ijs_money_tracker_g1.main INNER JOIN categories ON main.main_catid = categories.categories_id INNER JOIN transactions ON main.main_transid=transactions.transactions_id SET main_catid = '"+nwct+"', main_date = '"+nwdt+"', transactions_amount= '"+nwam+"', main_comment='"+nwcm+"' WHERE main_transid = '"+id+"' "
-
-    con.query(sql, function(err, result) {
-        if (err) {
-            throw err;
-        } else {
-            var obj = {};
-            res.json(req.body);
-        }
-    })
-  })
-
-  app.get('/chart', function(req, res) {
-      let  sql = "SELECT main_transid, main_catid, main_date, transaction_amount FROM ijs_money_tracker_g1.main INNER JOIN  main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id"
-    con.query(sql, function(err, rows, fields) {
-      if(err) throw err;
-      formatData(rows);
-      res.send(jsonArray);
-      console.log(jsonArray);
-      res.render('pages/transactions', {result: data})
-    });
-  });
-
-//  Jovana EDIT END
-
+/*===== BOGDAN START=====*/
 app.get('/spending', (req, res) => {
     let sql = `select transactions_amount, main_transid, main_date, main_comment, main_catid, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id`;
     con.query(sql, (err, result) => {
@@ -126,6 +75,31 @@ app.get('/new', (req, res) => {
         } else {
             obj = { print: result }
             res.render('pages/new', obj)
+        }
+    })
+})
+
+app.get('/delCat', (req, res) => {
+    let sql = `SELECT categories_id,categories_name FROM ijs_money_tracker_g1.categories`
+    con.query(sql, (err, result) => {
+        if (err) {
+            throw err;
+        } else {
+            obj = { print: result }
+            res.render('pages/delete', obj)
+        }
+    })
+})
+
+app.post('/delete', (req, res) => {
+    let id = req.body.id;
+    let sql = `delete from categories where categories_id = ${id}`;
+    con.query(sql, (err, result) => {
+        if (err) {
+            throw err;
+        } else {
+            var obj = {};
+            res.json(req.body);
         }
     })
 })
