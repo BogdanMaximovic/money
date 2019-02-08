@@ -1,10 +1,6 @@
 <% include ../partials/header %>
-
-
 <script>
- 
-    
-     $(document).ready(function() {
+    $(document).ready(function() {
         var myTable = $('#tabledata').DataTable({ "columnDefs":[
             {
                 "targets": [4],
@@ -13,21 +9,15 @@
         ]});
        
         $("#tabledata tbody tr").click(function() {
-            
             var row = myTable.row();
             var rowData = myTable.row( this ).data(); 
-            
             $('#myModal').modal('show')
-            
             $('#id').val(`${rowData[4]}`)
             
       }); 
         $('#delete').click(function(e){
           e.preventDefault();
-          
-           var id = $('#id').val();
-         
-          
+            var id = $('#id').val();
             var data = {};
             data.id = id;
           
@@ -46,31 +36,28 @@
     });
  
 </script>
-
 <div class="modal" id="myModal">
-        <div class="modal-dialog">
-          <div class="modal-content">
+    <div class="modal-dialog">
+        <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">Delete this transation?</h5>
-              <button class="close" data-dismiss="modal">&times;</button>
+                <h5 class="modal-title">Delete this transation?</h5>
+                <button class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body"></div>
             <div class="modal-text p-3">
                 <form action="/delete" method="POST">
                     <div class="form-group m-1 p-1">
-                          <label for="idid">Transaction ID</label>
-                          <input class="form-control" type="number" name="idid" id="id" value="">
-                        </div>
+                        <label for="idid">Transaction ID</label>
+                        <input class="form-control" type="number" name="idid" id="id" value="">
+                    </div>
                 </form>
                 <button class="btn btn-success" data-dismiss="modal" id="delete">Delete</button>
                 <button class="btn btn-secondary" data-dismiss="modal" id="close">Close</button>
             </div>
-            
-          </div>
         </div>
-      </div>
-      
- <div class="text-center text-light">
+    </div>
+</div>
+<div class="text-center text-light">
     <h1>Transactions</h1>
 </div>
 <form class="p-3">
@@ -105,7 +92,7 @@
                 <th>
                     ID
                 </th>
-              </tr>
+            </tr>
         </thead>
         <tbody>
             <% obj.forEach(function(name){ %>
@@ -123,15 +110,12 @@
                     <%= name.main_comment %>
                 </td>
                 <td>
-                     <%=name.main_transid %>
-                </td> 
-             </tr>
-            
+                    <%=name.main_transid %>
+                </td>
+            </tr>
             <% }) %>
         </tbody>
     </table>
-    
 </div>
- 
 <p class="badge badge-success pt-1 m-1"><strong>Note:</strong> Click on transaction to delete.</p>
 <% include ../partials/footer %>
