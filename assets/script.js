@@ -38,45 +38,58 @@ $(document).ready(function() {
 }) // end
 
 // Predrag
-/*$(document).ready(function(){
-    
-    var data = {};
-    $.ajax({
-        type: 'GET',
-        data: JSON.stringify(data),
-        contentType: 'application/json',
-        url: 'http://localhost:4200/expense',
-        success: function(data) {
-        console.log('success');
-        console.log(JSON.stringify(data));
-          }
-    });
-
-    var labels = [
-        "Income",
-        "Expense",
-        "Balanc"
-    ];
-    var ctx = document.getElementById("myChart").getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [
-                {
-                    data: data,
-                    borderColor: ['rgba(40, 167, 69, 1)', 'rgba(220, 53, 69, 1)', 'rgba(23, 162, 184, 1)'],
-                    backgroundColor: ['rgba(40, 167, 69, 0.2)', 'rgba(220, 53, 69, 0.2)', 'rgba(23, 162, 184, 0.2)'],
+$(document).ready(function () {
+    var SERVER_URL = "http://localhost:4200/chart";
+    $.get(SERVER_URL, function (record) {
+        if (record !== null) {
+            var name = record.map(function (rec) {
+                return rec.categories_name;
+            });
+            var value = record.map(function (rec) {
+                return rec.transactions_amount;
+            });
+            var colors = record.map(function (rec) {
+                return rec.color;
+            });
+            var ctx = document.getElementById("myChart");
+            var myChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: name,
+                    datasets: [{
+                        label: 'Sample Data',
+                        data: value,
+                        backgroundColor: colors,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    tooltips: {
+                        callbacks: {
+                            label: function(tooltipItem, data) {
+                                var allData = data.datasets[tooltipItem.datasetIndex].data;
+                                var tooltipLabel = data.labels[tooltipItem.index];
+                                var tooltipData = allData[tooltipItem.index];
+                                var total = 0;
+                                for (var i in allData) {
+                                    total += allData[i];
+                                }
+                                var tooltipPercentage = Math.round((tooltipData / total) * 100);
+                                return tooltipLabel + ': ' + tooltipData + ' (' + tooltipPercentage + '%)';
+                            }
+                        }
+                    }
+                    /*scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }*/
                 }
-            ]
-        },
-        options: {
-            title: {
-                display: true,
-                text: "Chart of spading"
-            }
+            });
         }
     });
-    });*/
+});
 
-
+// Predrag-end   

@@ -1,43 +1,4 @@
 <% include ../partials/header %>
-<script>
-    $(document).ready(function() {
-      $('#show').hide();
-      $('#send').click(function(e){
-
-        e.preventDefault();
-          var selectedDate = $('#date').val();
-          var category = $("#category option:selected" ).val();
-          var number = $('#number').val();
-          var message = $('#message').val();
-
-          var data = {};
-          data.selectedDate = selectedDate;
-          data.category = category;
-          data.number = number;
-          data.message = message;
-
-          if (selectedDate !== '' && category !== '' && number !== '' && message !== '') {
-              $.ajax({
-                type: 'post',
-                data: JSON.stringify(data),
-                contentType: 'application/json',
-                url: 'http://localhost:4200/addingNewInput',
-                success: function(data) {
-                  console.log('success');
-                  console.log(JSON.stringify(data));
-                  }
-                })
-              $('#show').show();
-                let delay = 1500; 
-                let url = 'http://localhost:4200/add';
-                setTimeout(function(){ window.location = url }, delay);
-          } else {
-            $('input').addClass('is-invalid')
-            $('#message').addClass('is-invalid')
-          }
-        })
-});
-</script>
 <div class="row text-center m-5" id="show">
     <div class="col m-auto">
         <h1 class="badge badge-success display-4" id="show">Category added</h1>
@@ -85,3 +46,4 @@
     </div>
 </div>
 <% include ../partials/footer %>
+<script src="../assets/input.js"></script>
