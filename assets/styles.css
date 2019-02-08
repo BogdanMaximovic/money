@@ -270,3 +270,8 @@ td {
         margin: 0 auto;
     }
 }
+#divChart {
+    position: relative;
+    width: 50%;
+    height: 50vh;
+}

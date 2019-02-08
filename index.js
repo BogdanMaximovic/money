@@ -284,6 +284,18 @@ app.get('/', (req, res) => {
         }
     });
 });
+
+let sql1 = `SELECT main_date,categories_name, color, transactions_amount FROM transactions LEFT JOIN categories ON transactions_catid = categories_id LEFT JOIN main ON main_transid = transactions_id WHERE categories_inc_exp = '0' ORDER BY main_date`;
+// Fetching data from database
+app.get('/chart', function(req, res) {
+    con.query(sql1, function (err, rows, fields) {
+        if (err) {
+            throw err;
+        }
+        return res.json(rows);
+    });
+    // connection.end();
+});
 /*===== Predrag =====*/
 
 /*===== SERVER PORT =====*/
