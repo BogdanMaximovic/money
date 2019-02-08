@@ -80,6 +80,31 @@ app.get('/new', (req, res) => {
     })
 })
 
+app.get('/delCat', (req, res) => {
+    let sql = `SELECT categories_id,categories_name FROM ijs_money_tracker_g1.categories`
+    con.query(sql, (err, result) => {
+        if (err) {
+            throw err;
+        } else {
+            obj = { print: result }
+            res.render('pages/delete', obj)
+        }
+    })
+})
+
+app.post('/delete', (req, res) => {
+    let id = req.body.id;
+    let sql = `delete from categories where categories_id = ${id}`;
+    con.query(sql, (err, result) => {
+        if (err) {
+            throw err;
+        } else {
+            var obj = {};
+            res.json(req.body);
+        }
+    })
+})
+
 app.post('/addingNew', (req, res) => {
     let category = req.body.category;
     let radioBTN = req.body.radioBtn;
