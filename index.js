@@ -64,6 +64,17 @@ app.get('/edit', function(req, res) {
     })
   })
 
+  app.get('/chart', function(req, res) {
+      let  sql = "SELECT main_transid, main_catid, main_date, transaction_amount FROM ijs_money_tracker_g1.main INNER JOIN  main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id"
+    con.query(sql, function(err, rows, fields) {
+      if(err) throw err;
+      formatData(rows);
+      res.send(jsonArray);
+      console.log(jsonArray);
+      res.render('pages/transactions', {result: data})
+    });
+  });
+
 //  Jovana EDIT END
 
 app.get('/spending', function(req, res) {
@@ -174,7 +185,7 @@ app.post('/addingNewInput', function(req, res) {
 app.get('/transactions', function(req, res) {
 
 
-    con.query('select transactions_id, transactions_amount, main_transid, main_date, main_comment, main_catid, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id', function(err, result) {
+    con.query('select transactions_id, transactions_amount, main_transid, main_date, main_comment, main_catid, categories_name +FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id', function(err, result) {
 
         if (err) {
             throw err;
