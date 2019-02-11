@@ -1,12 +1,12 @@
 $(() => {
-    const modal = $('#addingNew');
-    const msg = $('#success');
-    const btnSave = $('#save');
-    const BtnClose = $('#close');
-    const selectField = $("#id option:selected");
-    const url = 'http://localhost:4200/exp';
+    let modal = $('#addingNew');
+    let msg = $('#success');
+    let btnSave = $('#save');
+    let BtnClose = $('#close');
+    let selectField = $("#id option:selected");
+    let url = 'http://localhost:4200/exp';
 
-    function deliting(){
+    function delaying(){
       let delay = 500;
       setTimeout(() => { window.location = url }, delay);
     }
@@ -16,6 +16,7 @@ $(() => {
 
     btnSave.click((e) => {
         e.preventDefault();
+        msg.show();
         let id = selectField.val();
         let data = {};
         data.id = id;
@@ -29,10 +30,9 @@ $(() => {
             console.log(JSON.stringify(data));
             }
           });
-        msg.show();
-        deliting()
+        delaying()
       })
     BtnClose.click(() =>  {
-      deliting()
+      delaying()
     })
 });

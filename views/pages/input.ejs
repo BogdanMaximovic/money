@@ -6,19 +6,19 @@
 </div>
 <div class="row">
     <div class="col-12 text-center pt-5">
-        <h1 class="display-4 font-italic text-success">Adding new transaction</h1>
+        <h1 class="font-italic text-info">Adding...</h1>
     </div>
     <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 p-5 text-light">
         <form action="/newInput" method="POST" id="form">
             <div class="form-group">
-                <label for="date">Select date</label>
+                <label class="text-info" for="date">Select date</label>
                 <input class="form-control" type="date" id="date" name="date">
                 <div class="invalid-feedback">
                     Must select all fields
                 </div>
             </div>
             <div class="form-group">
-                <label for="category">Category</label>
+                <label class="text-info" for="category">Category</label>
                 <select class="form-control" id="category">
                     <% print.forEach(function(name){ %>
                     <option value="<%= name.categories_id %>">
@@ -28,20 +28,20 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="nubmer">Amount</label>
+                <label class="text-info" for="nubmer">Amount</label>
                 <input class="form-control" type="number" id="number" name="number">
                 <div class="invalid-feedback">
                     Must select all fields
                 </div>
             </div>
             <div class="form-group">
-                <label for="message">Message</label>
+                <label class="text-info" for="message">Message</label>
                 <textarea class="form-control" id="message" rows="3" name="sms"></textarea>
                 <div class="invalid-feedback">
                     Must select all fields
                 </div>
             </div>
-            <button class="btn btn-primary btn-block mt-3" type="submit" id="send">Submit</button>
+            <button class="btn btn-primary btn-block mt-3" type="submit" id="send">Add</button>
         </form>
     </div>
 </div>

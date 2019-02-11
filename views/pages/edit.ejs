@@ -1,58 +1,4 @@
 <% include ../partials/header %>
-<script>
-    $(document).ready(function() {
-      const myTable = $('#tableedit').DataTable({ "columnDefs": [
-            {
-                "targets": [ 0 ],
-                "visible": false
-                
-            }]});
-         $(document).on("click", "#tableedit tbody tr",function() {
-            let row = myTable.row();
-            let rowData = myTable.row( this ).data(); 
-           
-            $('#myModal').modal('show')
-
-             $('#id').val(`${rowData[0]}`) 
-             $("#nwct option:selected" ).text(`${rowData[1]}`); 
-             $('#nwdt').val(`${rowData[2]}`) 
-             $('#nwam').val(`${rowData[3]}`) 
-             $('#nwcm').val(`${rowData[4]}`) 
-
-         
-        }); 
-            $('#save').on('click', function(event) {
-              event.preventDefault();
-               
-               let id = $('#id').val();
-               let nwct = $('#nwct').val();
-               let nwdt = $('#nwdt').val();
-               let nwam = $('#nwam').val();
-               let nwcm = $('#nwcm').val();
-
-               let data = {};
-               data.id = id;
-               data.nwct = nwct;
-               data.nwdt = nwdt;
-               data.nwam = nwam;
-               data.nwcm= nwcm;
-
-
-                 $.ajax({
-                    type: 'post',
-                    data: JSON.stringify(data),
-                    contentType: 'application/json',
-                    url: 'http://localhost:4200/editval',
-                    success: function(data) {
-                      console.log('success');
-                      console.log(JSON.stringify(data));
-                      }
-                });
-                window.location.href = "http://localhost:4200/edit"
-
-            });
-    });
-</script>
 <div class="modal" id="myModal">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -137,4 +83,5 @@
         </tbody>
     </table>
 </div>
+<script src="../assets/js/edit.js"></script>
 <% include ../partials/footer %>

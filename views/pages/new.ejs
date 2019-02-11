@@ -1,57 +1,10 @@
 <% include ../partials/header %>
 <% include ../pages/button %>
-<script>
-    $(document).ready(function() {
-      $('#addingNew').modal('show') 
-      var iconID = null;
-      $('.aLink').on('click', function(event) {
-        event.preventDefault();
-        iconID = $(this).find('.iconImgId').attr('data-id');  
-        icon = $(this).find('img')
-        icon.toggleClass('iconBkg')
-      });
-      $('#success').hide();
-
-      $('#save').click(function(e){
-          e.preventDefault();
-          let category = $('#name').val();
-          let radioBtn = $('input[name=radio]:checked').val();
-          let color = $('#color').val();
-
-          let data = {};
-          data.category = category;
-          data.radioBtn = radioBtn;
-          data.iconID = iconID;
-          data.color = color;
-
-          $.ajax({
-            type: 'post',
-            data: JSON.stringify(data),
-            contentType: 'application/json',
-            url: 'http://localhost:4200/addingNew',
-            success: function(data) {
-              console.log('success');
-              console.log(JSON.stringify(data));
-              }
-            });
-          $('#success').show();
-            let delay = 1500; 
-            let url = 'http://localhost:4200/add';
-            setTimeout(function(){ window.location = url }, delay);
-        })
-      $('#close').click(function(event) {
-        let delay = 100; 
-        let url = 'http://localhost:4200/exp';
-        setTimeout(function(){ window.location = url }, delay);
-      })
-});
-</script>
-<!-- MODAL -->
 <div class="modal fade" id="addingNew">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Adding new category</h5>
+                <h6 class="modal-title">Adding new category</h6>
                 <button class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">You can add whatever you like</div>
@@ -90,4 +43,5 @@
         <h1 class="badge badge-success display-4" id="show">Category added</h1>
     </div>
 </div>
+<script src="../assets/js/new.js"></script>
 <% include ../partials/footer %>
