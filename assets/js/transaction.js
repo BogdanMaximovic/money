@@ -1,7 +1,5 @@
  $(() => {
-    let del = $('#delete');
-
-    let url = 'http://localhost:4200/transactions';
+    const url = 'http://localhost:4200/transactions';
 
     function delaying() {
         let delay = 500;
@@ -16,16 +14,16 @@
     ]});
    
     $(document).on("click", "#tabledata tbody tr", function () {
-        let row = myTable.row();
-        let rowData = myTable.row( this ).data(); 
+        var row = myTable.row();
+        var rowData = myTable.row( this ).data(); 
         $('#myModal').modal('show')
         $('#id').val(`${rowData[4]}`)
         
   }); 
-    del.click((e) =>{
+    $('#delete').click((e) =>{
         e.preventDefault();
-        let id = $('#id').val();
-        let data = {};
+        var id = $('#id').val();
+        var data = {};
         data.id = id;
       
       $.ajax({

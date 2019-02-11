@@ -1,6 +1,7 @@
 $(() => {
     let modal = $('#myModal')
     let btnSave = $('#save')
+    let textEdit = $('#editing')
     let url = 'http://localhost:4200/edit';
 
     function delaying() {
@@ -51,6 +52,7 @@ $(() => {
                 console.log(JSON.stringify(data));
             }
         });
+        textEdit.text('Editing success')
         delaying()
     });
 });

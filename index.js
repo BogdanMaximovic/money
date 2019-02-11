@@ -193,7 +193,7 @@ app.get('/btninc', (req, res) => {
     })
 })
 
-app.post('/delete', (req, res) => {
+app.post('/del', (req, res) => {
 
     let id = req.body.id;
     let sql = `DELETE FROM main WHERE main_transid = '${id}'`;

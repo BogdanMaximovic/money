@@ -37,47 +37,27 @@
     </div>
 </div>
 <div class="text-center text-light">
-    <h1>Edit</h1>
+    <h1 class="text-info pb-2" id="editing">Edit you transaction</h1>
 </div>
 <div class="table-wrapper-scroll-y divdt p-3">
     <table id="tableedit" class="table table-striped txttbl p-3" cellspacing="0">
         <thead class="font-weight-normal">
             <tr class="text-primary">
-                <th>
-                    ID
-                </th>
-                <th>
-                    Category
-                </th>
-                <th>
-                    Date
-                </th>
-                <th>
-                    Amount
-                </th>
-                <th>
-                    Comment
-                </th>
+                <th>ID</th>
+                <th>Category</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Comment</th>
             </tr>
         </thead>
         <tbody>
             <% obj.forEach(function(name){ %>
             <tr>
-                <td>
-                    <%=name.main_transid %>
-                </td>
-                <td>
-                    <%= name.categories_name %>
-                </td>
-                <td>
-                    <%= name.main_date%>
-                </td>
-                <td>
-                    <%= name.transactions_amount %>
-                </td>
-                <td>
-                    <%= name.main_comment %>
-                </td>
+                <td><%=name.main_transid %></td>
+                <td><%= name.categories_name %></td>
+                <td><%= name.main_date%></td>
+                <td><%= name.transactions_amount %></td>
+                <td><%= name.main_comment %></td>
             </tr>
             <% }) %>
         </tbody>

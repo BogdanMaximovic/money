@@ -2,7 +2,6 @@
 
  	let modal = $('#addingNew')
  	let findIconId = $('.aLink')
- 	let msg = $('#success')
  	let btnSave = $('#save')
  	let btnClose = $('#close')
 
@@ -12,7 +11,6 @@
     }
 
 	modal.modal('show')
-	msg.hide();
 	let iconID = null;
 
 	findIconId.on('click', function (event) {
@@ -24,7 +22,6 @@
 
 	btnSave.click((e) => {
 	  e.preventDefault();
-	  msg.show();
 
 	  let category = $('#name').val();
 	  let radioBtn = $('input[name=radio]:checked').val();
