@@ -296,6 +296,29 @@ app.get('/chart', function(req, res) {
     });
     // connection.end();
 });
+
+let sql2 = `SELECT main_date,categories_name, color, transactions_amount FROM transactions LEFT JOIN categories ON transactions_catid = categories_id LEFT JOIN main ON main_transid = transactions_id WHERE categories_inc_exp = '1' ORDER BY main_date`;
+// Fetching data from database
+app.get('/chart2', function(req, res) {
+    con.query(sql2, function (err, rows, fields) {
+        if (err) {
+            throw err;
+        }
+        return res.json(rows);
+    }); 
+    // connection.end();
+});
+
+let sql3 = `SELECT (SELECT sum(transactions_amount) AS transactions_income FROM transactions JOIN categories ON transactions_catid = categories_id WHERE categories_inc_exp = '1') AS income, (SELECT sum(transactions_amount) AS transactions_expense FROM transactions JOIN categories ON transactions_catid = categories_id WHERE categories_inc_exp = '0') AS expense, (SELECT sum(transactions_amount) FROM transactions JOIN categories ON transactions_catid = categories_id WHERE categories_inc_exp = '1') - (SELECT sum(transactions_amount) FROM transactions JOIN categories ON transactions_catid = categories_id WHERE categories_inc_exp = '0') AS diference`;
+app.get('/chart3', function(req, res) {
+    con.query(sql3, function (err, rows, fields) {
+        if (err) {
+            throw err;
+        } 
+        return res.json(rows);
+    });
+    // connection.end();
+});
 /*===== Predrag =====*/
 
 /*===== SERVER PORT =====*/
