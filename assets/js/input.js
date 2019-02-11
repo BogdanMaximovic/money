@@ -1,13 +1,22 @@
 $(() => {
-  const modal = $('#show');
-  const btnSubmit = $('#send');
-  const inputField = $('input')
-  const msg = $('#message')
+  let modal = $('#show');
+  let btnSubmit = $('#send');
+  let inputField = $('input')
+  let msg = $('#message')
+  let textMsg = $('#text');
+  let url = 'http://localhost:4200/add';
+
+  function delaying() {
+      let delay = 500;
+      setTimeout(() => { window.location = url }, delay);
+  }
+
 
   modal.hide();
 
   btnSubmit.click((e) => {
     e.preventDefault();
+    modal.show();
     let selectedDate = $('#date').val();
     let category = $("#category option:selected" ).val();
     let number = $('#number').val();
@@ -29,11 +38,10 @@ $(() => {
             console.log(JSON.stringify(data));
             }
           })
-        modal.show();
-          let delay = 1500; 
-          let url = 'http://localhost:4200/add';
-          setTimeout(function(){ window.location = url }, delay);
+        textMsg.text('Adding success')
+        delaying()
     } else {
+      textMsg.text('Something wrong')
       inputField.addClass('is-invalid');
       msg.addClass('is-invalid');
     }

@@ -1,58 +1,4 @@
 <% include ../partials/header %>
-<script>
-    $(document).ready(function() {
-      const myTable = $('#tableedit').DataTable({ "columnDefs": [
-            {
-                "targets": [ 0 ],
-                "visible": false
-                
-            }]});
-         $(document).on("click", "#tableedit tbody tr",function() {
-            let row = myTable.row();
-            let rowData = myTable.row( this ).data(); 
-           
-            $('#myModal').modal('show')
-
-             $('#id').val(`${rowData[0]}`) 
-             $("#nwct option:selected" ).text(`${rowData[1]}`); 
-             $('#nwdt').val(`${rowData[2]}`) 
-             $('#nwam').val(`${rowData[3]}`) 
-             $('#nwcm').val(`${rowData[4]}`) 
-
-         
-        }); 
-            $('#save').on('click', function(event) {
-              event.preventDefault();
-               
-               let id = $('#id').val();
-               let nwct = $('#nwct').val();
-               let nwdt = $('#nwdt').val();
-               let nwam = $('#nwam').val();
-               let nwcm = $('#nwcm').val();
-
-               let data = {};
-               data.id = id;
-               data.nwct = nwct;
-               data.nwdt = nwdt;
-               data.nwam = nwam;
-               data.nwcm= nwcm;
-
-
-                 $.ajax({
-                    type: 'post',
-                    data: JSON.stringify(data),
-                    contentType: 'application/json',
-                    url: 'http://localhost:4200/editval',
-                    success: function(data) {
-                      console.log('success');
-                      console.log(JSON.stringify(data));
-                      }
-                });
-                window.location.href = "http://localhost:4200/edit"
-
-            });
-    });
-</script>
 <div class="modal" id="myModal">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -91,50 +37,31 @@
     </div>
 </div>
 <div class="text-center text-light">
-    <h1>Edit</h1>
+    <h1 class="text-info pb-2" id="editing">Edit you transaction</h1>
 </div>
 <div class="table-wrapper-scroll-y divdt p-3">
     <table id="tableedit" class="table table-striped txttbl p-3" cellspacing="0">
         <thead class="font-weight-normal">
             <tr class="text-primary">
-                <th>
-                    ID
-                </th>
-                <th>
-                    Category
-                </th>
-                <th>
-                    Date
-                </th>
-                <th>
-                    Amount
-                </th>
-                <th>
-                    Comment
-                </th>
+                <th>ID</th>
+                <th>Category</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Comment</th>
             </tr>
         </thead>
         <tbody>
             <% obj.forEach(function(name){ %>
             <tr>
-                <td>
-                    <%=name.main_transid %>
-                </td>
-                <td>
-                    <%= name.categories_name %>
-                </td>
-                <td>
-                    <%= name.main_date%>
-                </td>
-                <td>
-                    <%= name.transactions_amount %>
-                </td>
-                <td>
-                    <%= name.main_comment %>
-                </td>
+                <td><%=name.main_transid %></td>
+                <td><%= name.categories_name %></td>
+                <td><%= name.main_date%></td>
+                <td><%= name.transactions_amount %></td>
+                <td><%= name.main_comment %></td>
             </tr>
             <% }) %>
         </tbody>
     </table>
 </div>
+<script src="../assets/js/edit.js"></script>
 <% include ../partials/footer %>

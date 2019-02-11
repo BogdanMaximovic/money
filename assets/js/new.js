@@ -1,16 +1,19 @@
  $(() => {
 
- 	const modal = $('#addingNew')
- 	const findIconId = $('.aLink')
- 	const msg = $('#success')
- 	const btnSave = $('#save')
- 	const btnClose = $('#close')
+ 	let modal = $('#addingNew')
+ 	let findIconId = $('.aLink')
+ 	let btnSave = $('#save')
+ 	let btnClose = $('#close')
+
+    function delaying(url) {
+        let delay = 500;
+        setTimeout(() => { window.location = url }, delay);
+    }
 
 	modal.modal('show')
-	msg.hide();
 	let iconID = null;
 
-	findIconId.on('click', (event) => {
+	findIconId.on('click', function (event) {
 		event.preventDefault();
 		iconID = $(this).find('.iconImgId').attr('data-id');  
 		icon = $(this).find('img')
@@ -19,6 +22,7 @@
 
 	btnSave.click((e) => {
 	  e.preventDefault();
+
 	  let category = $('#name').val();
 	  let radioBtn = $('input[name=radio]:checked').val();
 	  let color = $('#color').val();
@@ -37,15 +41,15 @@
 	    success: (data) => {
 	      console.log(JSON.stringify(data));
 	      }
-	    });
-	  msg.show();
-	    let delay = 1500; 
-	    let url = 'http://localhost:4200/add';
-	    setTimeout(() => { window.location = url }, delay);
+	    })
+
+	let url = 'http://localhost:4200/add';
+	delaying(url)
+
 	})
-	btnClose.click((event) => {
-	let delay = 100; 
-	let url = 'http://localhost:4200/exp';
-	setTimeout(() => { window.location = url }, delay);
+
+	btnClose.click((event) => { 
+		let url = 'http://localhost:4200/exp';
+		delaying(url)
 	})
-});
+})

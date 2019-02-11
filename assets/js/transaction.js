@@ -1,24 +1,29 @@
  $(() => {
-    let myTable = $('#tabledata')
+    const url = 'http://localhost:4200/transactions';
 
-    myTable.DataTable({ "columnDefs":[
+    function delaying() {
+        let delay = 500;
+        setTimeout(() => { window.location = url }, delay);
+    }
+
+    let myTable = $('#tabledata').DataTable({ "columnDefs":[
         {
             "targets": [4],
             "visible" : false
         }
     ]});
    
-    $(document).on("click", "#tabledata tbody tr", () => {
-        let row = myTable.row();
-        let rowData = myTable.row( this ).data(); 
+    $(document).on("click", "#tabledata tbody tr", function () {
+        var row = myTable.row();
+        var rowData = myTable.row( this ).data(); 
         $('#myModal').modal('show')
         $('#id').val(`${rowData[4]}`)
         
   }); 
     $('#delete').click((e) =>{
-      e.preventDefault();
-        let id = $('#id').val();
-        let data = {};
+        e.preventDefault();
+        var id = $('#id').val();
+        var data = {};
         data.id = id;
       
       $.ajax({
@@ -30,6 +35,6 @@
           console.log(JSON.stringify(data));
           }
         });
-        window.location.href = "http://localhost:4200/transactions";
+        delaying()
     })
 });
