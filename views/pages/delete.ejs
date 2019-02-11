@@ -1,41 +1,5 @@
 <% include ../partials/header %>
 <% include ../pages/button %>
-<script>
-    $(document).ready(function() {
-      $('#addingNew').modal('show') 
-      $('#success').hide();
-
-      $('#save').click(function(e){
-          e.preventDefault();
-          let id = $("#id option:selected").val();
-          let data = {};
-          data.id = id;
-
-          console.log(id)
-          
-          $.ajax({
-            type: 'post',
-            data: JSON.stringify(data),
-            contentType: 'application/json',
-            url: 'http://localhost:4200/delete',
-            success: function(data) {
-              console.log('success');
-              console.log(JSON.stringify(data));
-              }
-            });
-          $('#success').show();
-            let delay = 1500; 
-            let url = 'http://localhost:4200/exp';
-            setTimeout(function(){ window.location = url }, delay);
-        })
-      $('#close').click(function() {
-        let delay = 100; 
-        let url = 'http://localhost:4200/exp';
-        setTimeout(function(){ window.location = url }, delay);
-      })
-});
-</script>
-<!-- MODAL -->
 <div class="modal fade" id="addingNew">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -68,4 +32,5 @@
         <h1 class="badge badge-danger" id="show">Category eresed</h1>
     </div>
 </div>
+<script src="../assets/js/delete.js"></script>
 <% include ../partials/footer %>

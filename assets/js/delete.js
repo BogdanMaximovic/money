@@ -4,6 +4,12 @@ $(() => {
     const btnSave = $('#save');
     const BtnClose = $('#close');
     const selectField = $("#id option:selected");
+    const url = 'http://localhost:4200/exp';
+
+    function deliting(){
+      let delay = 500;
+      setTimeout(() => { window.location = url }, delay);
+    }
 
     modal.modal('show');
     msg.hide();
@@ -24,13 +30,9 @@ $(() => {
             }
           });
         msg.show();
-          let delay = 1500; 
-          let url = 'http://localhost:4200/exp';
-          setTimeout(() => { window.location = url }, delay);
+        deliting()
       })
     BtnClose.click(() =>  {
-      let delay = 100; 
-      let url = 'http://localhost:4200/exp';
-      setTimeout(() => { window.location = url }, delay);
+      deliting()
     })
 });
