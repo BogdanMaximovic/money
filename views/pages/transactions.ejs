@@ -1,4 +1,42 @@
 <% include ../partials/header %>
+
+<script>
+    $(document).ready(function() {
+        let myTable = $('#tabledata').DataTable({ "columnDefs":[
+            {
+                "targets": [4],
+                "visible" : false
+            }
+        ]});
+       
+        $(document).on("click", "#tabledata tbody tr", function() {
+            let row = myTable.row();
+            let rowData = myTable.row( this ).data(); 
+            $('#myModal').modal('show')
+            $('#id').val(`${rowData[4]}`)
+            
+      }); 
+        $('#delete').click(function(e){
+          e.preventDefault();
+            var id = $('#id').val();
+            var data = {};
+            data.id = id;
+          
+          $.ajax({
+            type: 'POST',
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            url: 'http://localhost:4200/delete',
+            success: function(data) {
+              console.log('success');
+              console.log(JSON.stringify(data));
+              }
+            });
+            window.location.href = "http://localhost:4200/transactions";
+        })
+    });
+</script>
+
 <div class="modal" id="myModal">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -82,5 +120,6 @@
     </table>
 </div>
 <p class="badge badge-success pt-1 m-1"><strong>Note:</strong> Click on transaction to delete.</p>
+
+
 <% include ../partials/footer %>
-<script src="../assets/transaction.js"></script>
