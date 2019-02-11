@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const path = require('path')
 const http = require('http');
 const mysql = require('mysql');
+const port = 4200; 
 const app = express();
 
 const con = mysql.createConnection({
@@ -26,23 +27,34 @@ app.use(express.static(path.join(__dirname, '/public/')))
 app.use('/assets', express.static('assets'))
 app.use('/icons', express.static('icons'))
 
-/*===== BOGDAN =====*/
+/*===== BOGDAN START=====*/
+app.get('/spending', (req, res) => {
+    let sql = `select transactions_amount, main_transid, main_date, main_comment, main_catid, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id`;
+    con.query(sql, (err, result) => {
+        if (err) {
+            throw err;
+        } else {
+            data = result;
+            res.render('pages/index', data)
+        }
+    })
+})
 
-app.get('/', function(req, res) {
+app.get('/categories', (req, res) => {
     res.render('partials/header')
 })
 app.get('/edit', function(req, res) {
     res.render('pages/edit');
 })
 
-app.get('/edit', function(req, res) {
-    con.query('select transactions_id, transactions_amount, main_transid, main_date, main_comment, main_catid, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id', function(err, result) {
+app.get('/exp', (req, res) => {
+    let sql = `SELECT categories_icons_id,categories_name,categories_id,icons FROM ijs_money_tracker_g1.categories JOIN ijs_money_tracker_g1.icons ON categories.categories_icons_id = icons.icons_id WHERE categories_inc_exp = '0'`;
+    con.query(sql, (err, result) => {
         if (err) {
             throw err;
         } else {
-            obj = result;
-            console.log(obj)
-            res.json('pages/edit')
+            obj = { print: result }
+            res.render('pages/categories', obj)
         }
     });
 });
@@ -57,61 +69,21 @@ app.get('/edit/new', function(req, res) {
     res.render('pages/edit');
 });
 
-// >>>>>>> ecdb6f2653451669f02c15f00acb846eccf37f23
-
-//=======
-// >>>>>>> 5c3b1f08efdb73a6a36fe0772b74fbfbbbf17cc0
-app.get('/spending', function(req, res) {
-    let order = req.query.order[0].dir;
-    let limitStart = req.query.length;
-    let limitEnd = req.query.start;
-    let sql = "SELECT categories_name,transactions_amount FROM ijs_money_tracker_g1.categories JOIN ijs_money_tracker_g1.transactions ON categories_id = transactions_catid WHERE categories_inc_exp = '0' ORDER BY transactions_amount " + order + " LIMIT " + limitStart + " OFFSET " + limitEnd + " ";
-    con.query(sql, function(err, result) {
-        if (err) {
-            throw err;
-        } else {
-            data = result;
-            res.json(data);
-        }
-    });
-});
-    
-app.get('/categories', function(req, res) {
-    res.render('partials/header');
-});
-
-app.get('/spendingData', function(req, res) {
-    data = res;
-    res.render('pages/index', data);
-});
-
-app.get('/exp', function(req, res) {
-    let sql = "SELECT categories_icons_id,categories_name,categories_id,icons FROM ijs_money_tracker_g1.categories JOIN ijs_money_tracker_g1.icons ON categories.categories_icons_id = icons.icons_id WHERE categories_inc_exp = '0'";
-    con.query(sql, function(err, result) {
-        if (err) {
-            throw err;
-        } else {
-            obj = { print: result }
-            res.render('pages/categories', obj);
-        }
-    });
-});
-
-app.get('/inc', function(req, res) {
-    let sql = "SELECT categories_icons_id,categories_name,categories_id,icons FROM ijs_money_tracker_g1.categories JOIN ijs_money_tracker_g1.icons ON categories.categories_icons_id = icons.icons_id WHERE categories_inc_exp = '1'";
-    con.query(sql, function(err, result) {
+app.get('/inc', (req, res) => {
+    let sql = `SELECT categories_icons_id,categories_name,categories_id,icons FROM ijs_money_tracker_g1.categories JOIN ijs_money_tracker_g1.icons ON categories.categories_icons_id = icons.icons_id WHERE categories_inc_exp = '1'`;
+    con.query(sql, (err, result) => {
         if (err) {
             throw err;
         } else {
             obj = { print: result }
             res.render('pages/categories', obj)
         }
-    });
-});
+    })
+})
 
-app.get('/new', function(req, res) {
-    let sql = "SELECT * FROM ijs_money_tracker_g1.icons";
-    con.query(sql, function(err, result) {
+app.get('/new', (req, res) => {
+    let sql = `SELECT * FROM ijs_money_tracker_g1.icons`;
+    con.query(sql, (err, result) => {
         if (err) {
             throw err;
         } else {
@@ -121,13 +93,22 @@ app.get('/new', function(req, res) {
     });
 });
 
-app.post('/addingNew', function(req, res){
-    let category = req.body.category;
-    let radioBTN = req.body.radioBtn;
-    let iconID = req.body.iconID;
-    let color = req.body.color;
-    let sql = "INSERT INTO `ijs_money_tracker_g1`.`categories` (`categories_name`, `categories_inc_exp`, `categories_icons_id`, `color`) VALUES ('"+category+"', '"+radioBTN+"', '"+iconID+"', '"+color+"')";
-    con.query(sql, function(err, result) {
+app.get('/delCat', (req, res) => {
+    let sql = `SELECT categories_id,categories_name FROM ijs_money_tracker_g1.categories`
+    con.query(sql, (err, result) => {
+        if (err) {
+            throw err;
+        } else {
+            obj = { print: result }
+            res.render('pages/delete', obj)
+        }
+    });
+});
+
+app.post('/delete', (req, res) => {
+    let id = req.body.id;
+    let sql = `delete from categories where categories_id = ${id}`;
+    con.query(sql, (err, result) => {
         if (err) {
             throw err;
         } else {
@@ -137,19 +118,51 @@ app.post('/addingNew', function(req, res){
     });
 });
 
-/*===== BOGDAN =====*/
+app.post('/addingNew', (req, res) => {
+    let category = req.body.category;
+    let radioBTN = req.body.radioBtn;
+    let iconID = req.body.iconID;
+    let color = req.body.color;
+    let sql = `INSERT INTO ijs_money_tracker_g1.categories (categories_name, categories_inc_exp, categories_icons_id, color) VALUES ('${category}','${radioBTN}','${iconID}','${color}')`;
+    con.query(sql, (err, result) => {
+        if (err) {
+            throw err;
+        } else {
+            var obj = {};
+            res.json(req.body);
+        }
+    });
+});
 
+app.get('/adding', (req, res) => {
+    data = res;
+    res.render('pages/adding', data)
+})
 
-/*===== TAMARA =====*/
-/*
-app.post('/input',function(req,res){ 
-    console.log(req.body);
+app.get('/add', (req, res) => {
+    let sql = `SELECT categories_id,categories_name FROM ijs_money_tracker_g1.categories`;
+    con.query(sql, (err, result) => {
+        if (err) {
+            throw err;
+        } else {
+            obj = { print: result }
+            res.render('pages/input', obj)
+        }
+    })
+})
 
-     var newInput= {    //format datuma nije isti kao u tabeli u bazi
-         date: req.body.date, //da li treba da pisu isti nazivi kao kolone u tabeli
-         category: req.body.category,
-         amount: req.body.amount,
-         comment: req.body.comment
+app.post('/addingNewInput', (req, res) => {
+    let selectedDate = req.body.selectedDate;
+    let category = req.body.category;
+    let number = req.body.number;
+    let message = req.body.message;
+    let sql = `BEGIN; INSERT INTO transactions (transactions_id,transactions_amount, transactions_catid) VALUES('0','${number}', '${category}');INSERT INTO main (main_date, main_comment, main_catid,main_transid) VALUES('${selectedDate}', '${message}','${category}',LAST_INSERT_ID()); COMMIT`;
+    con.query(sql, (err, result) => {
+        if (err) {
+            throw err;
+        } else {
+            var obj = {};
+            res.json(req.body);
         }
 //Tamara
     con.query('INSERT into ijs_money_tracker_g1.main SET ?',newInput,function(err,res){
@@ -162,111 +175,177 @@ app.post('/input',function(req,res){
         })
    res.send(JSON.stringify(req.body));
 })
-*/
 
-app.get('/adding', function(req, res) {
-    data = res;
-    res.render('pages/adding', data);
-});
 
-/*===== jovana transactions =====*/
+/*===== BOGDAN END=====*/
 
-app.get('/transactions', function(req, res) {
+/*===== jovana transactions START=====*/
 
-    con.query('select transactions_id, transactions_amount, main_transid, main_date, main_comment, main_catid, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id', function(err, result) {
-
+app.get('/transactions', (req, res) => {
+    let sql = `select transactions_id, transactions_amount, main_transid, main_date, main_comment, main_catid, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id`;
+    con.query(sql, (err, result) => {
         if (err) {
             throw err;
         } else {
             obj = result;
-            console.log(obj);
             res.render('pages/transactions', obj);
-
         }
     });
 });
 
-app.get('/btnexp', function(req, res) {
-    con.query("select transactions_id, transactions_amount, main_transid, main_date, main_comment, main_catid, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id WHERE categories_inc_exp = '0'", function(err, result) {
+app.get('/btnexp', (req, res) => {
+    let sql = `select transactions_id, transactions_amount, main_transid, main_date, main_comment, main_catid, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id WHERE categories_inc_exp = '0'`;
+    con.query(sql, (err, result) => {
         if (err) {
             throw err;
         } else {
             obj = result;
-            console.log(obj);
-            res.render('pages/transactions', obj);
+            res.render('pages/transactions', obj)
         }
     })
 })
 
-app.get('/btninc', function(req, res) {
-    con.query("select transactions_id, transactions_amount, main_transid, main_date, main_comment, main_catid, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id WHERE categories_inc_exp = '1'", function(err, result) {
+app.get('/btninc', (req, res) => {
+    let sql = `select transactions_id, transactions_amount, main_transid, main_date, main_comment, main_catid, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id WHERE categories_inc_exp = '1'`;
+    con.query(sql, (err, result) => {
         if (err) {
             throw err;
         } else {
             obj = result;
-            console.log(obj);
-            res.render('pages/transactions', obj);
+            res.render('pages/transactions', obj)
         }
     })
 })
 
+app.post('/del', (req, res) => {
 
+    let id = req.body.id;
+    let sql = `DELETE FROM main WHERE main_transid = '${id}'`;
+    con.query(sql, (err, result) => {
+        if (err) {
+            throw err;
+        } else {
+            var obj = {};
+            res.json(req.body);
+        }
+    })
+})
 
-// --Predrag--
-app.get('/expense', function(req, res) {
-    var obj = {};
+/*===== Jovana transactions END=====*/
+// Jovana EDIT
+app.get('/edit', (req, res) => {
+    let sql = `select transactions_id, transactions_amount, main_transid, main_date, main_comment, main_catid, categories_id, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id`;
+    con.query(sql, (err, result) => {
+        if (err) {
+            throw err;
+        } else {
+            obj = result; 
+            res.render('pages/edit', obj)
+        }
+    })
+})
 
-    con.query("SELECT categories_name, transactions_amount FROM categories JOIN transactions ON categories_id = transactions_id WHERE categories_inc_exp = '0' ", function(err, result) {
+ app.post('/editval', (req, res) => {
+    let nwct = req.body.nwct;
+    let nwdt = req.body.nwdt;
+    let nwam = req.body.nwam;
+    let nwcm = req.body.nwcm;
+    let id = req.body.id;
+    let sql  = `UPDATE ijs_money_tracker_g1.main INNER JOIN categories ON main.main_catid = categories.categories_id INNER JOIN transactions ON main.main_transid=transactions.transactions_id SET main_catid = '${nwct}', main_date = '${nwdt}', transactions_amount= '${nwam}', main_comment='${nwcm}' WHERE main_transid = '${id}'`;
+    con.query(sql, (err, result) => {
+        if (err) {
+            throw err;
+        } else {
+            var obj = {};
+            res.json(req.body);
+        }
+    })
+  })
+
+//  Jovana EDIT END
+/*===== Predrag START=====*/
+app.get('/', (req, res) => {
+    let obj = {};
+    let sql1 = `SELECT main_date,categories_name, transactions_amount FROM transactions LEFT JOIN categories ON transactions_catid = categories_id LEFT JOIN main ON main_transid = transactions_id WHERE categories_inc_exp = '0' ORDER BY main_date`;
+    con.query(sql1, (err, result) => {
         if (err) {
             throw err;
         } else {
             obj = { print: result };
-            console.log(obj);
-            
         }
     });
-    con.query("SELECT sum(transactions_amount) AS transactions_expense FROM categories JOIN transactions ON categories_id = transactions_id WHERE categories_inc_exp = '0' ", function(err, result) {
+    let sql2 = `SELECT sum(transactions_amount) AS transactions_expense FROM transactions JOIN categories ON transactions_catid = categories_id WHERE categories_inc_exp = '0'`;
+    con.query(sql2, (err, result) => {
         if (err) {
             throw err;
         } else {
-            //obj = { print: result }
             obj.print2 = result;
-            console.log(obj);
-            
         }
     });
-    con.query("SELECT sum(transactions_amount) AS transactions_income FROM categories JOIN transactions ON categories_id = transactions_id WHERE categories_inc_exp = '1' ", function(err, result) {
+    let sql3 = `SELECT sum(transactions_amount) AS transactions_income FROM transactions JOIN categories ON transactions_catid = categories_id WHERE categories_inc_exp = '1'`;
+    con.query(sql3, (err, result) => {
         if (err) {
             throw err;
         } else {
-            //obj = { print: result }
             obj.print3 = result;
-            console.log(obj);
         }
     });
-    con.query("SELECT (SELECT sum(transactions_amount) FROM categories JOIN transactions ON categories_id = transactions_id WHERE categories_inc_exp = '1') - (SELECT sum(transactions_amount) FROM categories JOIN transactions ON categories_id = transactions_id WHERE categories_inc_exp = '0') AS diference", function(err, result) {
+    let sql4 = `SELECT (SELECT sum(transactions_amount) FROM transactions JOIN categories ON transactions_catid = categories_id WHERE categories_inc_exp = '1') - (SELECT sum(transactions_amount) FROM transactions JOIN categories ON transactions_catid = categories_id WHERE categories_inc_exp = '0') AS diference`
+    con.query(sql4, (err, result) => {
         if (err) {
             throw err;
         } else {
-            //obj = { print: result }
             obj.print4 = result;
-            console.log(obj);
         }
     });
-    con.query("SELECT categories_name, transactions_amount FROM categories JOIN transactions ON categories_id = transactions_id WHERE categories_inc_exp = '1' ", function(err, result) {
+    let sql5 = `SELECT main_date,categories_name, transactions_amount FROM transactions LEFT JOIN categories ON transactions_catid = categories_id LEFT JOIN main ON main_transid = transactions_id WHERE categories_inc_exp = '1' ORDER BY main_date`;
+    con.query(sql5, (err, result) => {
         if (err) {
             throw err;
         } else {
             obj.print5 = result;
-            console.log(obj);
             res.render('pages/speding', obj);
         }
     });
 });
-// --Predrag end--
 
-
-// SERVER PORT //
-app.listen(4200, function() {
-    console.log("Server start...");
+let sql1 = `SELECT main_date,categories_name, color, transactions_amount FROM transactions LEFT JOIN categories ON transactions_catid = categories_id LEFT JOIN main ON main_transid = transactions_id WHERE categories_inc_exp = '0' ORDER BY main_date`;
+// Fetching data from database
+app.get('/chart', function(req, res) {
+    con.query(sql1, function (err, rows, fields) {
+        if (err) {
+            throw err;
+        }
+        return res.json(rows);
+    });
+    // connection.end();
 });
+
+let sql2 = `SELECT main_date,categories_name, color, transactions_amount FROM transactions LEFT JOIN categories ON transactions_catid = categories_id LEFT JOIN main ON main_transid = transactions_id WHERE categories_inc_exp = '1' ORDER BY main_date`;
+// Fetching data from database
+app.get('/chart2', function(req, res) {
+    con.query(sql2, function (err, rows, fields) {
+        if (err) {
+            throw err;
+        }
+        return res.json(rows);
+    }); 
+    // connection.end();
+});
+
+let sql3 = `SELECT (SELECT sum(transactions_amount) AS transactions_income FROM transactions JOIN categories ON transactions_catid = categories_id WHERE categories_inc_exp = '1') AS income, (SELECT sum(transactions_amount) AS transactions_expense FROM transactions JOIN categories ON transactions_catid = categories_id WHERE categories_inc_exp = '0') AS expense, (SELECT sum(transactions_amount) FROM transactions JOIN categories ON transactions_catid = categories_id WHERE categories_inc_exp = '1') - (SELECT sum(transactions_amount) FROM transactions JOIN categories ON transactions_catid = categories_id WHERE categories_inc_exp = '0') AS diference`;
+app.get('/chart3', function(req, res) {
+    con.query(sql3, function (err, rows, fields) {
+        if (err) {
+            throw err;
+        } 
+        return res.json(rows);
+    });
+    // connection.end();
+});
+/*===== Predrag =====*/
+
+/*===== SERVER PORT =====*/
+app.listen(`${port}`, () => {
+    console.log(`Server start at port ${port}`);
+})

@@ -1,0 +1,36 @@
+<% include ../partials/header %>
+<% include ../pages/button %>
+<div class="modal fade" id="addingNew">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Delete category</h4>
+                <button class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body h5">Are you sure??</div>
+            <div class="modal-text">
+                <form action="/addingNew" method="POST" id="form">
+                    <p class="text-danger text-center">Select category for deleting</p>
+                    <select class="nav rounded m-auto" id="id">
+                        <% print.forEach(function(name){ %>
+                        <option class="nav-item p-2 border-bottom text-danger" value="<%= name.categories_id %>">
+                            <%= name.categories_name %>
+                        </option>
+                        <% }) %>
+                    </select>
+                </form>
+            </div>
+            <div class="modal-footer m-auto">
+                <a class="btn btn-danger text-light" data-dismiss="modal" id="save">Delete</a>
+                <a class="btn btn-dark text-light" data-dismiss="modal" id="close">Close</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row text-center m-5" id="success">
+    <div class="col m-auto">
+        <h1 class="badge badge-danger" id="show">Category eresed</h1>
+    </div>
+</div>
+<script src="../assets/js/delete.js"></script>
+<% include ../partials/footer %>

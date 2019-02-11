@@ -1,119 +1,108 @@
 <% include ../partials/header %>
 <main>
+    <!-- 
     <ul class="pagination justify-content-around">
         <li class="page-item"><a class="page-link" href="#">&lt;</a></li>
-        <li class="page-item"><a class="page-link" href="#">&gt;</a></li>
-    </ul>
-    <div class="d-flex justify-content-around">
-        <h3 class="nav bg-success border border-success rounded mt-1 text-white">List of Incomes</h3>
-    </div>
-    <div class="d-flex">
-        <table class="bg-success rounded mt-1">
-            <% print5.forEach(function(name){ %>
-            <tr class="text-white">
-                <td class="col-xl-6">
-                    <%= name.categories_name %>
-                </td>
-                <td class="col-xl-6">
-                    <%= name.transactions_amount %>
-                </td>
-            </tr>
-            <% }) %>
-        </table>
-    </div>
-    <div class="d-flex">
-        <table class="bg-success rounded mt-1">
-            <tr class="text-white">
-                <th class="col-xl-6">Income total: </th>
-                    <% print3.forEach(function(name){ %>
-                <th class="col-xl-6" id="<%= name.transactions_income %>"><%= name.transactions_income %></th>
+        <li class="page-item"><a class="page-link" href="#">&gt;</a></li> 
+    </ul> -->
+    <div class="d-flex wraper justify-content-center mb-5">
+        <div class="expense m-2">
+            <div class="d-flex justify-content-center">
+                <h3 class="nav bg-danger rounded mt-1 p-2 text-white">List of Expenses</h3>
+            </div>
+            <div class="d-flex justify-content-center">
+                <table class="bg-danger rounded mt-1">
+                    <% print.forEach(function(name){ %>
+                    <tr class="text-white">
+                        <td class="col-4 py-1">
+                            <%= name.main_date %>
+                        </td>
+                        <td class="col-4 py-1">
+                            <%= name.categories_name %>
+                        </td>
+                        <td class="col-4 py-1">
+                            <%= name.transactions_amount %>
+                        </td>
+                    </tr>
                     <% }) %>
-            </tr>
-        </table>
-    </div>
-    <div class="d-flex justify-content-around">
-        <h3 class="nav bg-danger rounded mt-1 text-white">List of Expenses</h3>
-    </div>
-    <div class="d-flex">
-        <table class="bg-danger rounded mt-1">
-            <% print.forEach(function(name){ %>
-            <tr class="text-white">
-                <td class="col-xl-6">
-                    <%= name.categories_name %>
-                </td>
-                <td class="col-xl-6">
-                    <%= name.transactions_amount %>
-                </td>
-            </tr>
-            <% }) %>
-        </table>
-    </div>
-    <div class="d-flex">
-        <table class="bg-danger rounded mt-1">
-            <tr class="text-white">
-                <th class="col-xl-6">Expense total: </th>
+                </table>
+            </div>
+            <div class="d-flex justify-content-center">
+                <table class="bg-danger rounded mt-1">
+                    <tr class="text-white">
+                        <th class="col-6">Expense total: </th>
                         <% print2.forEach(function(name){ %>
-                <th class="col-xl-6" id="<%= name.transactions_expense %>"><%= name.transactions_expense %></th>
+                        <th class="col-6">
+                            <%= name.transactions_expense %>
+                        </th>
                         <% }) %>
-            </tr>
-        </table>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="income m-2">
+            <div class="d-flex justify-content-center">
+                <h3 class="nav bg-success rounded mt-1 p-2 text-white">List of Incomes</h3>
+            </div>
+            <div class="d-flex justify-content-center">
+                <table class="bg-success rounded mt-1">
+                    <% print5.forEach(function(name){ %>
+                    <tr class="text-white">
+                        <td class="col-4 py-1">
+                            <%= name.main_date %>
+                        </td>
+                        <td class="col-4 py-1">
+                            <%= name.categories_name %>
+                        </td>
+                        <td class="col-4 py-1">
+                            <%= name.transactions_amount %>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </table>
+            </div>
+            <div class="d-flex justify-content-center">
+                <table class="bg-success rounded mt-1">
+                    <tr class="text-white">
+                        <th class="col-6">Income total: </th>
+                        <% print3.forEach(function(name){ %>
+                        <th class="col-6">
+                            <%= name.transactions_income %>
+                        </th>
+                        <% }) %>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
-    <div class="d-flex">
-        <table class="bg-primary rounded mt-1">
+    <div class="d-flex justify-content-center">
+        <table class="bg-primary rounded mt-1 balancTable">
             <tr class="text-white">
-                <th class="col-xl-6">Balanc: </th>
-                        <% print4.forEach(function(name){ %>
-                <th class="col-xl-6" id="<%= name.diference %>"><%= name.diference %></th>
-                        <% }) %>
+                <th class="col-sm-6">Balanc: </th>
+                <% print4.forEach(function(name){ %>
+                <th class="col-sm-6">
+                    <%= name.diference %>
+                </th>
+                <% }) %>
             </tr>
         </table>
     </div>
-    <div class="d-flex" id="chartMy">
-        <canvas id="bar-chart"></canvas>
-    </div>
-    <script>
-        $(document).ready(function() {
-
-            var income = $(this).data('');
-            var expense = $(this).data('');
-            var diference = $(this).data('');   
-            var data = {};
-            data.income = income;
-            data.expense = expense;
-            data.diference = diference;
-
-            $.ajax({
-                    type: 'GET',
-                    data: JSON.stringify(data),
-                    contentType: 'application/json',
-                    url: 'http://localhost:4200/expense',
-                    success: function(data) {
-                      console.log('success');
-                      console.log(JSON.stringify(data));
-                      }
-                });
-
-            new Chart(document.getElementById("bar-chart"), {
-                type: 'bar',
-                data: {
-                labels: ["Income", "Expense", "Diference"],
-                datasets: [
-                    {
-                    label: "Population (millions)",
-                    backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f"],
-                    data: data
-                    }
-                ]
-                },
-                options: {
-                legend: { display: false },
-                title: {
-                    display: true,
-                    text: 'Chart of speding'
-                }
-                }
-            });
-        });
-
-        
-    </script>
+    <article id="chart" class="d-flex pt-5">
+        <div class="pt-5" id="divChart">
+            <h4 class="text-center text-danger py-2 font-weight-bold">Expenses</h4>
+            <canvas id="myChart" class="col-12"></canvas>
+        </div>
+        <div class="pt-5" id="divChart">
+            <h4 class="text-center text-success py-2 font-weight-bold">Income</h4>
+            <canvas id="myChart2" class="col-12"></canvas>
+        </div>
+    </article>
+    <article id="chart2" class="d-flex pt-5">
+        <div class="pt-5" id="divChart2">
+            <h4 class="text-center text-info py-2 font-weight-bold">Overall transactions</h4>
+            <canvas id="myChart3" class="col-12"></canvas>
+        </div>
+    </article>
+</main>
+<script src="/assets/js/chart.js"></script>
+<% include ../partials/footer %>
