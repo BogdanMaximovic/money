@@ -19,7 +19,7 @@ $(document).ready(function () {
                 data: {
                     labels: name,
                     datasets: [{
-                        label: 'Sample Data',
+                        label: 'Chart pie of expense',
                         data: value,
                         backgroundColor: colors,
                         borderColor: '#fff'
@@ -41,13 +41,6 @@ $(document).ready(function () {
                             }
                         }
                     }
-                    /*scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }*/
                 }
             });
         }
@@ -73,7 +66,7 @@ $(document).ready(function () {
                 data: {
                     labels: name,
                     datasets: [{
-                        label: 'Sample Data',
+                        label: 'Chart pie of income',
                         data: value,
                         backgroundColor: colors,
                         borderColor: '#fff'
@@ -95,13 +88,6 @@ $(document).ready(function () {
                             }
                         }
                     }
-                    /*scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }*/
                 }
             });
         }
@@ -112,14 +98,14 @@ $(document).ready(function () {
     var SERVER_URL = "http://localhost:4200/chart3";
     $.get(SERVER_URL, function (record) {
         if (record !== null) {
-           var income = record.map(function (rec) {
+           var value = record.map(function (rec) {
                 return rec.income;
             });
-            var expense = record.map(function (rec) {
+            var value2 = record.map(function (rec) {
                 return rec.expense;
             });
-            var diference = record.map(function (rec) {
-                return rec.diference;
+            var value3 = record.map(function (rec) {
+                return rec.balanc;
             });
             var ctx = document.getElementById("myChart3");
             var myChart = new Chart(ctx, {
@@ -127,18 +113,24 @@ $(document).ready(function () {
                 data: {
                     labels: ['Income', 'Expense', 'Balanc'],
                     datasets: [{
+<<<<<<< HEAD
                         label: 'Sample Data',
                         data: income,
+=======
+                        label: 'Chart bar of balanc',
+                        data: [parseInt(value), parseInt(value2), parseInt(value3)],
+>>>>>>> 069826448ebbd4e744f06e4539912cf17da6642d
                         backgroundColor: ['#28a745', '#dc3545', '#17a2b8'],
-                        borderColor: '#fff'
+                        borderColor: ['#28a745', '#dc3545', '#17a2b8']
                     }]
                 },
                 options: {
                     scales: {
+                        xAxes: [{
+                            stacked: true
+                        }],
                         yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
+                            stacked: true
                         }]
                     }
                 }
