@@ -176,11 +176,7 @@ app.post('/addingNewInput', (req, res) => {
     }
         })
    res.send(JSON.stringify(req.body));
-<<<<<<< HEAD
-})*/
-=======
 })})
->>>>>>> dd5eb3321829a12d417e420da1354209642d6b15
 
 
 /*===== BOGDAN END=====*/
