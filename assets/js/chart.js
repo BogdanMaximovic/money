@@ -121,7 +121,6 @@ $(document).ready(function () {
             var diference = record.map(function (rec) {
                 return rec.diference;
             });
-            //var charData = [191600, 218911, -27311];
             var ctx = document.getElementById("myChart3");
             var myChart = new Chart(ctx, {
                 type: 'bar',
@@ -129,7 +128,7 @@ $(document).ready(function () {
                     labels: ['Income', 'Expense', 'Balanc'],
                     datasets: [{
                         label: 'Sample Data',
-                        data: diference,
+                        data: income,
                         backgroundColor: ['#28a745', '#dc3545', '#17a2b8'],
                         borderColor: '#fff'
                     }]

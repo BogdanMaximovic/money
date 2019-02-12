@@ -17,15 +17,15 @@ const con = mysql.createConnection({
 
 
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'views'))
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.static(path.join(__dirname, '/public/')));
+app.use(express.static(path.join(__dirname, '/public/')))
 
-app.use('/assets', express.static('assets'));
-app.use('/icons', express.static('icons'));
+app.use('/assets', express.static('assets'))
+app.use('/icons', express.static('icons'))
 
 /*===== BOGDAN START=====*/
 app.get('/spending', (req, res) => {
@@ -35,13 +35,13 @@ app.get('/spending', (req, res) => {
             throw err;
         } else {
             data = result;
-            res.render('pages/index', data);
+            res.render('pages/index', data)
         }
     })
 })
 
 app.get('/categories', (req, res) => {
-    res.render('partials/header');
+    res.render('partials/header')
 })
 app.get('/edit', function(req, res) {
     res.render('pages/edit');
@@ -54,7 +54,7 @@ app.get('/exp', (req, res) => {
             throw err;
         } else {
             obj = { print: result }
-            res.render('pages/categories', obj);
+            res.render('pages/categories', obj)
         }
     });
 });
@@ -76,10 +76,10 @@ app.get('/inc', (req, res) => {
             throw err;
         } else {
             obj = { print: result }
-            res.render('pages/categories', obj);
+            res.render('pages/categories', obj)
         }
-    });
-});
+    })
+})
 
 app.get('/new', (req, res) => {
     let sql = `SELECT * FROM ijs_money_tracker_g1.icons`;
@@ -88,7 +88,7 @@ app.get('/new', (req, res) => {
             throw err;
         } else {
             obj = { print: result }
-            res.render('pages/new', obj);
+            res.render('pages/new', obj)
         }
     });
 });
@@ -100,7 +100,7 @@ app.get('/delCat', (req, res) => {
             throw err;
         } else {
             obj = { print: result }
-            res.render('pages/delete', obj);
+            res.render('pages/delete', obj)
         }
     });
 });
@@ -136,7 +136,7 @@ app.post('/addingNew', (req, res) => {
 
 app.get('/adding', (req, res) => {
     data = res;
-    res.render('pages/adding', data);
+    res.render('pages/adding', data)
 })
 
 app.get('/add', (req, res) => {
@@ -146,10 +146,10 @@ app.get('/add', (req, res) => {
             throw err;
         } else {
             obj = { print: result }
-            res.render('pages/input', obj);
+            res.render('pages/input', obj)
         }
-    });
-});
+    })
+})
 
 app.post('/addingNewInput', (req, res) => {
     let selectedDate = req.body.selectedDate;
@@ -164,17 +164,22 @@ app.post('/addingNewInput', (req, res) => {
             var obj = {};
             res.json(req.body);
         }
+    })
+})
 //Tamara
-    con.query('INSERT into ijs_money_tracker_g1.main SET ?',newInput,function(err,res){
+/*con.query('INSERT into ijs_money_tracker_g1.main SET ?',newInput,function(err,res){
     if(err){
         throw err;
     }
         else{
         console.log(res);
     }
-        })
+        
    res.send(JSON.stringify(req.body));
-})
+})*/
+
+   
+
 
 
 /*===== BOGDAN END=====*/
@@ -200,10 +205,10 @@ app.get('/btnexp', (req, res) => {
             throw err;
         } else {
             obj = result;
-            res.render('pages/transactions', obj);
+            res.render('pages/transactions', obj)
         }
-    });
-});
+    })
+})
 
 app.get('/btninc', (req, res) => {
     let sql = `select transactions_id, transactions_amount, main_transid, main_date, main_comment, main_catid, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id WHERE categories_inc_exp = '1'`;
@@ -212,10 +217,10 @@ app.get('/btninc', (req, res) => {
             throw err;
         } else {
             obj = result;
-            res.render('pages/transactions', obj);
+            res.render('pages/transactions', obj)
         }
-    });
-});
+    })
+})
 
 app.post('/del', (req, res) => {
 
@@ -228,8 +233,8 @@ app.post('/del', (req, res) => {
             var obj = {};
             res.json(req.body);
         }
-    });
-});
+    })
+})
 
 /*===== Jovana transactions END=====*/
 // Jovana EDIT
@@ -240,10 +245,10 @@ app.get('/edit', (req, res) => {
             throw err;
         } else {
             obj = result; 
-            res.render('pages/edit', obj);
+            res.render('pages/edit', obj)
         }
-    });
-});
+    })
+})
 
  app.post('/editval', (req, res) => {
     let nwct = req.body.nwct;
@@ -259,8 +264,8 @@ app.get('/edit', (req, res) => {
             var obj = {};
             res.json(req.body);
         }
-    });
-  });
+    })
+  })
 
 //  Jovana EDIT END
 /*===== Predrag START=====*/
@@ -333,7 +338,7 @@ app.get('/chart2', function(req, res) {
     // connection.end();
 });
 
-let sql3 = `SELECT (SELECT sum(transactions_amount) AS transactions_income FROM transactions JOIN categories ON transactions_catid = categories_id WHERE categories_inc_exp = '1') AS income, (SELECT sum(transactions_amount) AS transactions_expense FROM transactions JOIN categories ON transactions_catid = categories_id WHERE categories_inc_exp = '0') AS expense, (SELECT sum(transactions_amount) FROM transactions JOIN categories ON transactions_catid = categories_id WHERE categories_inc_exp = '1') - (SELECT sum(transactions_amount) FROM transactions JOIN categories ON transactions_catid = categories_id WHERE categories_inc_exp = '0') AS diference`;
+let sql3 = `SELECT (SELECT sum(transactions_amount) AS transactions_income FROM transactions JOIN categories ON transactions_catid = categories_id WHERE categories_inc_exp = '1') AS income, (SELECT sum(transactions_amount) AS transactions_expense FROM transactions JOIN categories ON transactions_catid = categories_id WHERE categories_inc_exp = '0') AS expense, (SELECT (income - expense)) AS diference`;
 app.get('/chart3', function(req, res) {
     con.query(sql3, function (err, rows, fields) {
         if (err) {
