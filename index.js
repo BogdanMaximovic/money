@@ -174,7 +174,7 @@ app.post('/addingNewInput', (req, res) => {
     }
         })
    res.send(JSON.stringify(req.body));
-})
+})})
 
 
 /*===== BOGDAN END=====*/
