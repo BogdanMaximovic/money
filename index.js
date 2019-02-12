@@ -15,6 +15,7 @@ const con = mysql.createConnection({
     multipleStatements: true
 });
 
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'))
 
@@ -42,6 +43,9 @@ app.get('/spending', (req, res) => {
 app.get('/categories', (req, res) => {
     res.render('partials/header')
 })
+app.get('/edit', function(req, res) {
+    res.render('pages/edit');
+})
 
 app.get('/exp', (req, res) => {
     let sql = `SELECT categories_icons_id,categories_name,categories_id,icons FROM ijs_money_tracker_g1.categories JOIN ijs_money_tracker_g1.icons ON categories.categories_icons_id = icons.icons_id WHERE categories_inc_exp = '0'`;
@@ -52,8 +56,18 @@ app.get('/exp', (req, res) => {
             obj = { print: result }
             res.render('pages/categories', obj)
         }
-    })
-})
+    });
+});
+        //    res.render('pages/edit', obj);
+
+// <<<<<<< HEAD
+app.get('/edit/new', function(req, res) {
+    console.log("======== RES ========");
+    console.log(req.query);
+    console.log("======== END RES ========");
+
+    res.render('pages/edit');
+});
 
 app.get('/inc', (req, res) => {
     let sql = `SELECT categories_icons_id,categories_name,categories_id,icons FROM ijs_money_tracker_g1.categories JOIN ijs_money_tracker_g1.icons ON categories.categories_icons_id = icons.icons_id WHERE categories_inc_exp = '1'`;
@@ -76,8 +90,8 @@ app.get('/new', (req, res) => {
             obj = { print: result }
             res.render('pages/new', obj)
         }
-    })
-})
+    });
+});
 
 app.get('/delCat', (req, res) => {
     let sql = `SELECT categories_id,categories_name FROM ijs_money_tracker_g1.categories`
@@ -88,8 +102,8 @@ app.get('/delCat', (req, res) => {
             obj = { print: result }
             res.render('pages/delete', obj)
         }
-    })
-})
+    });
+});
 
 app.post('/delete', (req, res) => {
     let id = req.body.id;
@@ -101,8 +115,8 @@ app.post('/delete', (req, res) => {
             var obj = {};
             res.json(req.body);
         }
-    })
-})
+    });
+});
 
 app.post('/addingNew', (req, res) => {
     let category = req.body.category;
@@ -117,8 +131,8 @@ app.post('/addingNew', (req, res) => {
             var obj = {};
             res.json(req.body);
         }
-    })
-})
+    });
+});
 
 app.get('/adding', (req, res) => {
     data = res;
@@ -150,8 +164,18 @@ app.post('/addingNewInput', (req, res) => {
             var obj = {};
             res.json(req.body);
         }
-    })
+//Tamara
+    con.query('INSERT into ijs_money_tracker_g1.main SET ?',newInput,function(err,res){
+    if(err){
+        throw err;
+    }
+        else{
+        console.log(res);
+    }
+        })
+   res.send(JSON.stringify(req.body));
 })
+
 
 /*===== BOGDAN END=====*/
 
@@ -164,9 +188,9 @@ app.get('/transactions', (req, res) => {
             throw err;
         } else {
             obj = result;
-            res.render('pages/transactions', obj)
+            res.render('pages/transactions', obj);
         }
-    })
+    });
 });
 
 app.get('/btnexp', (req, res) => {
@@ -292,6 +316,29 @@ app.get('/chart', function(req, res) {
         if (err) {
             throw err;
         }
+        return res.json(rows);
+    });
+    // connection.end();
+});
+
+let sql2 = `SELECT main_date,categories_name, color, transactions_amount FROM transactions LEFT JOIN categories ON transactions_catid = categories_id LEFT JOIN main ON main_transid = transactions_id WHERE categories_inc_exp = '1' ORDER BY main_date`;
+// Fetching data from database
+app.get('/chart2', function(req, res) {
+    con.query(sql2, function (err, rows, fields) {
+        if (err) {
+            throw err;
+        }
+        return res.json(rows);
+    }); 
+    // connection.end();
+});
+
+let sql3 = `SELECT (SELECT sum(transactions_amount) AS transactions_income FROM transactions JOIN categories ON transactions_catid = categories_id WHERE categories_inc_exp = '1') AS income, (SELECT sum(transactions_amount) AS transactions_expense FROM transactions JOIN categories ON transactions_catid = categories_id WHERE categories_inc_exp = '0') AS expense, (SELECT sum(transactions_amount) FROM transactions JOIN categories ON transactions_catid = categories_id WHERE categories_inc_exp = '1') - (SELECT sum(transactions_amount) FROM transactions JOIN categories ON transactions_catid = categories_id WHERE categories_inc_exp = '0') AS diference`;
+app.get('/chart3', function(req, res) {
+    con.query(sql3, function (err, rows, fields) {
+        if (err) {
+            throw err;
+        } 
         return res.json(rows);
     });
     // connection.end();
