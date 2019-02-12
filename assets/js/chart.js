@@ -113,13 +113,8 @@ $(document).ready(function () {
                 data: {
                     labels: ['Income', 'Expense', 'Balanc'],
                     datasets: [{
-<<<<<<< HEAD
-                        label: 'Sample Data',
-                        data: income,
-=======
                         label: 'Chart bar of balanc',
                         data: [parseInt(value), parseInt(value2), parseInt(value3)],
->>>>>>> 069826448ebbd4e744f06e4539912cf17da6642d
                         backgroundColor: ['#28a745', '#dc3545', '#17a2b8'],
                         borderColor: ['#28a745', '#dc3545', '#17a2b8']
                     }]

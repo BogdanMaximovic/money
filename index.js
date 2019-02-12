@@ -167,11 +167,7 @@ app.post('/addingNewInput', (req, res) => {
     })
 })
 //Tamara
-<<<<<<< HEAD
-/*con.query('INSERT into ijs_money_tracker_g1.main SET ?',newInput,function(err,res){
-=======
     /*con.query('INSERT into ijs_money_tracker_g1.main SET ?',newInput,function(err,res){
->>>>>>> 069826448ebbd4e744f06e4539912cf17da6642d
     if(err){
         throw err;
     }
@@ -180,14 +176,7 @@ app.post('/addingNewInput', (req, res) => {
     }
         
    res.send(JSON.stringify(req.body));
-<<<<<<< HEAD
-})*/
-
-   
-
-=======
 })})
->>>>>>> 069826448ebbd4e744f06e4539912cf17da6642d
 
 
 /*===== BOGDAN END=====*/
@@ -346,12 +335,8 @@ app.get('/chart2', function(req, res) {
     // connection.end();
 });
 
-<<<<<<< HEAD
-let sql3 = `SELECT (SELECT sum(transactions_amount) AS transactions_income FROM transactions JOIN categories ON transactions_catid = categories_id WHERE categories_inc_exp = '1') AS income, (SELECT sum(transactions_amount) AS transactions_expense FROM transactions JOIN categories ON transactions_catid = categories_id WHERE categories_inc_exp = '0') AS expense, (SELECT (income - expense)) AS diference`;
-=======
 let sql3 = `SELECT (SELECT sum(transactions_amount) AS transactions_income FROM transactions JOIN categories ON transactions_catid = categories_id WHERE categories_inc_exp = '1') AS income, (SELECT sum(transactions_amount) AS transactions_expense FROM transactions JOIN categories ON transactions_catid = categories_id WHERE categories_inc_exp = '0') AS expense, (SELECT income - expense) AS balanc`;
 // Fetching data from database
->>>>>>> 069826448ebbd4e744f06e4539912cf17da6642d
 app.get('/chart3', function(req, res) {
     con.query(sql3, function (err, rows, fields) {
         if (err) {
