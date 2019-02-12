@@ -30,7 +30,7 @@
         type: 'POST',
         data: JSON.stringify(data),
         contentType: 'application/json',
-        url: 'http://localhost:4200/delete',
+        url: 'http://localhost:4200/del',
         success: (data) => {
           console.log(JSON.stringify(data));
           }
