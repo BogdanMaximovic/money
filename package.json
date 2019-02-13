@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/BogdanMaximovic/money#readme",
   "dependencies": {
+    "@amcharts/amcharts4": "^4.1.5",
+    "@amcharts/amcharts4-geodata": "^4.1.1",
     "body-parser": "^1.18.3",
     "chart.js": "^2.7.3",
     "ejs": "^2.6.1",
