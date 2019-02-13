@@ -10,8 +10,8 @@
             <div class="modal-text">
                 <form action="/editval" method="post">
                     <div class="form-group m-1 p-3">
-                        <label for="id">TRANSACTION ID</label>
-                        <input class="form-control" type="number" id="id" value="">
+                        
+                        <input class="form-control" type="hidden" id="id" value="">
                         <label for="nwct">Edit category</label>
                         <select class="form-control browser-default custom-select" id="nwct">
                             <% obj.forEach(function(name){ %>
@@ -37,7 +37,7 @@
     </div>
 </div>
 <div class="text-center text-light">
-    <h1 class="text-info pb-2" id="editing">Edit you transaction</h1>
+    <h1 class="text-info pb-2" id="editing">Edit your transaction</h1>
 </div>
 <div class="table-wrapper-scroll-y divdt p-3">
     <table id="tableedit" class="table table-striped txttbl p-3" cellspacing="0">

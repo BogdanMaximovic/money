@@ -25,7 +25,7 @@
                 <th>Amount</th>
                 <th>Comment</th>
                 <th>ID</th>
-            </tr>
+                </tr>
         </thead>
         <tbody>
             <% obj.forEach(function(name){ %>
@@ -35,8 +35,9 @@
                 <td><%= name.transactions_amount %></td>
                 <td><%= name.main_comment %></td>
                 <td><%=name.main_transid %></td>
-            </tr>
+                </tr>
             <% }) %>
+
         </tbody>
     </table>
 </div>
