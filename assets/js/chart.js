@@ -93,7 +93,7 @@ $(document).ready(function () {
         }
     });
 });
-
+// Chart of overall transactions
 $(document).ready(function () {
     var SERVER_URL = "http://localhost:4200/chart3";
     $.get(SERVER_URL, function (record) {
@@ -117,6 +117,46 @@ $(document).ready(function () {
                         data: [parseInt(value), parseInt(value2), parseInt(value3)],
                         backgroundColor: ['#28a745', '#dc3545', '#17a2b8'],
                         borderColor: ['#28a745', '#dc3545', '#17a2b8']
+                    }]
+                },
+                options: {
+                    scales: {
+                        xAxes: [{
+                            stacked: true
+                        }],
+                        yAxes: [{
+                            stacked: true
+                        }]
+                    }
+                }
+            });
+        }
+    });
+});
+// Chart of incomes and expenses
+$(document).ready(function () {
+    var SERVER_URL = "http://localhost:4200/chart4";
+    $.get(SERVER_URL, function (record) {
+        if (record !== null) {
+            var name = record.map(function (rec) {
+                return rec.categories_name;
+            });
+            var value = record.map(function (rec) {
+                return rec.transactions_amount;
+            });
+            var colors = record.map(function (rec) {
+                return rec.color;
+            });
+            var ctx = document.getElementById("myChart4");
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: name,
+                    datasets: [{
+                        label: 'Chart bar of balanc',
+                        data: value,
+                        backgroundColor: colors,
+                        borderColor: colors
                     }]
                 },
                 options: {

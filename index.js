@@ -5,6 +5,7 @@ const http = require('http');
 const mysql = require('mysql');
 const port = 4200; 
 const app = express();
+const Highcharts = require('highcharts');
 
 const con = mysql.createConnection({
     host: 'sqldemo.softmetrixgroup.com',
@@ -313,6 +314,18 @@ let sql3 = `SELECT (SELECT sum(transactions_amount) AS transactions_income FROM 
 // Fetching data from database
 app.get('/chart3', function(req, res) {
     con.query(sql3, function (err, rows, fields) {
+        if (err) {
+            throw err;
+        } 
+        return res.json(rows);
+    });
+    // connection.end();
+});
+
+let sql4 = `SELECT main_date,categories_name, color, transactions_amount FROM transactions LEFT JOIN categories ON transactions_catid = categories_id LEFT JOIN main ON main_transid = transactions_id ORDER BY main_date DESC LIMIT 10`;
+// Fetching data from database
+app.get('/chart4', function(req, res) {
+    con.query(sql4, function (err, rows, fields) {
         if (err) {
             throw err;
         } 
