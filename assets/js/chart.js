@@ -14,7 +14,7 @@ $(document).ready(function () {
                 return rec.color;
             });
             var ctx = document.getElementById("myChart");
-            var myChart = new Chart(ctx, {
+            var myChart = AmCharts.makeChart(ctx, {
                 type: 'pie',
                 data: {
                     labels: name,
