@@ -1,6 +1,7 @@
 // Predrag
 // Chart for expense pie
 $(document).ready(function () {
+<<<<<<< HEAD
     var SERVER_URL = "http://localhost:4200/chart";
     $.get(SERVER_URL, function (record) {
         if (record !== null) {
@@ -45,6 +46,21 @@ $(document).ready(function () {
             });
         }
     });
+=======
+    am4core.useTheme(am4themes_animated);
+    // Themes end
+
+    var chart = am4core.create("myChart", am4charts.PieChart3D);
+    // Set up data source
+    chart.dataSource.url = "http://localhost:4200/chart";
+    chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+
+    chart.legend = new am4charts.Legend();
+
+    var series = chart.series.push(new am4charts.PieSeries3D());
+    series.dataFields.value = "transactions_amount";
+    series.dataFields.category = "categories_name";
+>>>>>>> bc1d01bbec1d21951293761efb6ecf07c3ecfae6
 });
 // Chart for income pie
 $(document).ready(function () {
