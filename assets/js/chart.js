@@ -1,50 +1,19 @@
 // Predrag
 // Chart for expense pie
 $(document).ready(function () {
-    var SERVER_URL = "http://localhost:4200/chart";
-    $.get(SERVER_URL, function (record) {
-        if (record !== null) {
-            var name = record.map(function (rec) {
-                return rec.categories_name;
-            });
-            var value = record.map(function (rec) {
-                return rec.transactions_amount;
-            });
-            var colors = record.map(function (rec) {
-                return rec.color;
-            });
-            var ctx = document.getElementById("myChart");
-            var myChart = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: name,
-                    datasets: [{
-                        label: 'Chart pie of expense',
-                        data: value,
-                        backgroundColor: colors,
-                        borderColor: '#fff'
-                    }]
-                },
-                options: {
-                    tooltips: {
-                        callbacks: {
-                            label: function(tooltipItem, data) {
-                                var allData = data.datasets[tooltipItem.datasetIndex].data;
-                                var tooltipLabel = data.labels[tooltipItem.index];
-                                var tooltipData = allData[tooltipItem.index];
-                                var total = 0;
-                                for (var i in allData) {
-                                    total += allData[i];
-                                }
-                                var tooltipPercentage = Math.round((tooltipData / total) * 100);
-                                return tooltipLabel + ': ' + tooltipData + ' (' + tooltipPercentage + '%)';
-                            }
-                        }
-                    }
-                }
-            });
-        }
-    });
+    am4core.useTheme(am4themes_animated);
+    // Themes end
+
+    var chart = am4core.create("myChart", am4charts.PieChart3D);
+    // Set up data source
+    chart.dataSource.url = "http://localhost:4200/chart";
+    chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+
+    chart.legend = new am4charts.Legend();
+
+    var series = chart.series.push(new am4charts.PieSeries3D());
+    series.dataFields.value = "transactions_amount";
+    series.dataFields.category = "categories_name";
 });
 // Chart for income pie
 $(document).ready(function () {
