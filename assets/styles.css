@@ -196,3 +196,6 @@ th, td {
     margin: 0 auto;
     padding: 5%;
 }
+#divChart2 {
+    height: 50vh;
+}
