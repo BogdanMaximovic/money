@@ -5,7 +5,6 @@ const http = require('http');
 const mysql = require('mysql');
 const port = 4200; 
 const app = express();
-const Highcharts = require('highcharts');
 
 const con = mysql.createConnection({
     host: 'sqldemo.softmetrixgroup.com',
@@ -153,6 +152,7 @@ app.post('/addingNewInput', (req, res) => {
         }
     })
 })
+
 
 /*===== BOGDAN END=====*/
 

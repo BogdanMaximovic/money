@@ -184,7 +184,7 @@ body {
 }
 /* Predrag */
 table {
-    width: 20%;
+    width: 50%;
     margin: 0 auto;
 }
 th, td {
@@ -195,4 +195,7 @@ th, td {
     height: 50vh;
     margin: 0 auto;
     padding: 5%;
+}
+#divChart2 {
+    height: 50vh;
 }
