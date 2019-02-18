@@ -98,7 +98,6 @@ app.post('/delete', (req, res) => {
         if (err) {
             throw err;
         } else {
-            var obj = {};
             res.json(req.body);
         }
     })
@@ -114,7 +113,6 @@ app.post('/addingNew', (req, res) => {
         if (err) {
             throw err;
         } else {
-            var obj = {};
             res.json(req.body);
         }
     })
@@ -147,13 +145,10 @@ app.post('/addingNewInput', (req, res) => {
         if (err) {
             throw err;
         } else {
-            var obj = {};
             res.json(req.body);
         }
     })
 })
-
-
 /*===== BOGDAN END=====*/
 
 /*===== jovana transactions START=====*/
@@ -197,12 +192,11 @@ app.get('/btninc', (req, res) => {
 app.post('/del', (req, res) => {
 
     let id = req.body.id;
-    let sql = `DELETE FROM main WHERE main_transid = '${id}'`;
+    let sql = `DELETE FROM ijs_money_tracker_g1.transactions WHERE (transactions_id = ${id})`;
     con.query(sql, (err, result) => {
         if (err) {
             throw err;
         } else {
-            var obj = {};
             res.json(req.body);
         }
     })
@@ -233,7 +227,6 @@ app.get('/edit', (req, res) => {
         if (err) {
             throw err;
         } else {
-            var obj = {};
             res.json(req.body);
         }
     })

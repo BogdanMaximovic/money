@@ -1,10 +1,5 @@
 <% include ../partials/header %>
 <main>
-    <!-- 
-    <ul class="pagination justify-content-around">
-        <li class="page-item"><a class="page-link" href="#">&lt;</a></li>
-        <li class="page-item"><a class="page-link" href="#">&gt;</a></li> 
-    </ul> -->
     <div class="d-flex wraper justify-content-center mb-5">
         <div class="expense m-2">
             <div class="d-flex justify-content-center">
@@ -12,7 +7,7 @@
             </div>
             <div class="d-flex justify-content-center">
                 <table class="bg-danger rounded mt-1 table-xl">
-                    <% print.forEach(function(name){ %>
+                    <% print.forEach((name) => { %>
                     <tr class="text-white">
                         <td class="col-4 py-1">
                             <%= name.main_date %>
@@ -31,7 +26,7 @@
                 <table class="bg-danger rounded mt-1 table-xl">
                     <tr class="text-white">
                         <th class="col-6 py-1">Expense total: </th>
-                        <% print2.forEach(function(name){ %>
+                        <% print2.forEach((name) => { %>
                         <th class="col-6 py-1">
                             <%= name.transactions_expense %>
                         </th>
@@ -46,7 +41,7 @@
             </div>
             <div class="d-flex justify-content-center">
                 <table class="bg-success rounded mt-1">
-                    <% print5.forEach(function(name){ %>
+                    <% print5.forEach((name) => { %>
                     <tr class="text-white">
                         <td class="col-4 py-1">
                             <%= name.main_date %>
@@ -65,7 +60,7 @@
                 <table class="bg-success rounded mt-1">
                     <tr class="text-white">
                         <th class="col-6 py-1">Income total: </th>
-                        <% print3.forEach(function(name){ %>
+                        <% print3.forEach((name) => { %>
                         <th class="col-6 py-1">
                             <%= name.transactions_income %>
                         </th>
@@ -79,7 +74,7 @@
         <table class="bg-primary rounded mt-1 balancTable">
             <tr class="text-white">
                 <th class="col-sm-6 p-2">Balanc: </th>
-                <% print4.forEach(function(name){ %>
+                <% print4.forEach((name) => { %>
                 <th class="col-sm-6 p-2">
                     <%= name.diference %>
                 </th>

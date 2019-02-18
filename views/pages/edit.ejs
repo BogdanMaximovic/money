@@ -4,17 +4,15 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Editing Data</h5>
-                <button class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body"></div>
             <div class="modal-text">
                 <form action="/editval" method="post">
                     <div class="form-group m-1 p-3">
-                        
                         <input class="form-control" type="hidden" id="id" value="">
                         <label for="nwct">Edit category</label>
                         <select class="form-control browser-default custom-select" id="nwct">
-                            <% obj.forEach(function(name){ %>
+                            <% obj.forEach((name) => { %>
                             <option value="<%= name.categories_id %>">
                                 <%= name.categories_name %>
                             </option>
@@ -37,7 +35,7 @@
     </div>
 </div>
 <div class="text-center text-light">
-    <h1 class="text-info pb-2" id="editing">Edit your transaction</h1>
+    <h1 class="text-info pb-4" id="editing">Edit your transaction</h1>
 </div>
 <div class="table-wrapper-scroll-y divdt p-3">
     <table id="tableedit" class="table table-striped txttbl p-3" cellspacing="0">
@@ -51,7 +49,7 @@
             </tr>
         </thead>
         <tbody>
-            <% obj.forEach(function(name){ %>
+            <% obj.forEach((name) => { %>
             <tr>
                 <td><%=name.main_transid %></td>
                 <td><%= name.categories_name %></td>
@@ -64,4 +62,3 @@
     </table>
 </div>
 <script src="../assets/js/edit.js"></script>
-<% include ../partials/footer %>

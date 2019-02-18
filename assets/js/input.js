@@ -7,10 +7,9 @@ $(() => {
   let url = 'http://localhost:4200/add';
 
   function delaying() {
-      let delay = 500;
+      let delay = 300;
       setTimeout(() => { window.location = url }, delay);
   }
-
 
   modal.hide();
 

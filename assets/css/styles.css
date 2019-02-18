@@ -55,9 +55,16 @@ body {
          transform: translate(-50%, -50%);
 }
 
-.iconBkg {
-    background-color: grey
-}
+.iconBkg {background-color: grey}
+
+/* --- Remove placeholder --- */
+input:focus::-webkit-input-placeholder{color: transparent;}
+input:focus::-moz-placeholder{color: transparent;}
+input:focus:-moz-placeholder{color: transparent;}
+textarea:focus::-webkit-input-placeholder { color:transparent; }
+textarea:focus:-moz-placeholder { color:transparent; } 
+textarea:focus::-moz-placeholder { color:transparent; } 
+textarea:focus:-ms-input-placeholder { color:transparent;}
 
 /* --- button setings start --- */
 
@@ -65,7 +72,7 @@ body {
 .btn:link,
 .btn:visited {
     text-decoration: none;
-    padding: 1.5rem 4rem;
+    padding: 1.5rem 2.5rem;
     display: inline-block;
     border-radius: 20rem;
     -webkit-transition: all .2s;
@@ -73,7 +80,7 @@ body {
     -moz-transition: all .2s;
     transition: all .2s;
     position: relative;
-    font-size: 1.6rem;
+    font-size: 1.3rem;
     border: none;
     cursor: pointer;
 }
@@ -160,8 +167,8 @@ body {
     display: inline-block;
     text-decoration: none;
     border-bottom: 1px solid #55c57a;
-    padding: .5rem;
-    font-size: 1.6rem;
+    padding: .5rem 1.5rem;
+    font-size: 1.5rem;
     -webkit-transition: all .2s;
     -o-transition: all .2s;
     -moz-transition: all .2s;
@@ -195,14 +202,14 @@ body {
 /* jovana */
 .table-wrapper-scroll-y {
     display: block;
-    max-height: 50vh;
+    max-height: 80vh;
     overflow-y: auto;
     -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 
 .divdt {
     background-color: lightgreen;
-    font-size: 1.7rem;
+    font-size: 1.2rem;
 }
 
 .txttbl {
