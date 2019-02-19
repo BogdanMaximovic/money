@@ -166,18 +166,6 @@ app.post('/addingNewInput', (req, res) => {
         }
     })
 })
-//Tamara
-    /*con.query('INSERT into ijs_money_tracker_g1.main SET ?',newInput,function(err,res){
-    if(err){
-        throw err;
-    }
-        else{
-        console.log(res);
-    }
-        
-   res.send(JSON.stringify(req.body));
-})})
-
 
 /*===== BOGDAN END=====*/
 
