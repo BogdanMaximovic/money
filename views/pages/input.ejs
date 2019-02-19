@@ -15,7 +15,7 @@
             <div class="form-group">
                 <label class="text-info" for="category">Category</label>
                 <select class="form-control" id="category">
-                    <% print.forEach(function(name){ %>
+                    <% print.forEach((name) => { %>
                     <option value="<%= name.categories_id %>">
                         <%= name.categories_name %>
                     </option>
@@ -24,14 +24,14 @@
             </div>
             <div class="form-group">
                 <label class="text-info" for="nubmer">Amount</label>
-                <input class="form-control" type="number" id="number" name="number">
+                <input class="form-control" type="number" id="number" name="number" placeholder="Outcome">
                 <div class="invalid-feedback">
                     Must select all fields
                 </div>
             </div>
             <div class="form-group">
                 <label class="text-info" for="message">Message</label>
-                <textarea class="form-control" id="message" rows="3" name="sms"></textarea>
+                <textarea class="form-control" id="message" rows="3" name="sms" placeholder="Max 300 character"></textarea>
                 <div class="invalid-feedback">
                     Must select all fields
                 </div>
@@ -41,4 +41,3 @@
     </div>
 </div>
 <script src="../assets/js/input.js"></script>
-<% include ../partials/footer %>

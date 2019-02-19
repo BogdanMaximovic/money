@@ -6,7 +6,7 @@
  	let btnClose = $('#close')
 
     function delaying(url) {
-        let delay = 500;
+        let delay = 300;
         setTimeout(() => { window.location = url }, delay);
     }
 
