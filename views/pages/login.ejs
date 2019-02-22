@@ -1,0 +1,26 @@
+<% include ../partials/header %>
+<div class="col-12 my-5 py-3">
+    <h1 class="text-info text-center my-5 py-3">Welcome to Money Tracker App</h1>
+</div>
+<article class="row my-5">
+    <aside class="col-md-4 col-sm-12 m-auto text-light" id="InfoBkg">
+        <h5 class="p-2">Money Tracker app</h5>
+        <p class="p-1">Money tracker app serves to track cash flow. The app displays the current cash balance, transaction view, and category. To use the application you must <a href="/registration" class="text-warning nounderline">register</a>. All transactions and categories can be deleted and changed. Do not let them know where you spend money. Spend smart be smart!</p>
+    </aside>
+    <aside class="col-md-6 offset-md-1 col-sm-12 m-auto" id="loginBkg">
+    <h3 class="text-success text-center py-2">Log In</h3>
+        <form action="/log" method="POST" id="login">
+            <div class="form-group text-success">
+                <label for="username">Username</label>
+                <input class="form-control" type="text" id="username" placeholder="Username">
+            </div>
+            <div class="form-group text-success">
+                <label for="password">Password</label>
+                <input class="form-control" type="password" id="password" placeholder="Password">
+            </div>
+            <span class="text-light text-center">No account?<a href="/registration" class="text-warning nounderline"> Register here.</a></span>
+            <button class="btn btn-success btn-block my-2" type="submit" id="log">Login</button>
+        </form>
+    </aside>
+</article>
+<script src="../assets/js/login.js"></script>
