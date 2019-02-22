@@ -27,21 +27,34 @@ app.use('/assets', express.static('assets'))
 app.use('/icons', express.static('icons'))
 
 /*===== BOGDAN START=====*/
-app.get('/spending', (req, res) => {
-    let sql = `select transactions_amount, main_transid, main_date, main_comment, main_catid, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id`;
-    con.query(sql, (err, result) => {
-        if (err) {
-            throw err;
-        } else {
-            data = result;
-            res.render('pages/index', data)
-        }
-    })
-})
 
 app.get('/categories', (req, res) => {
     res.render('partials/header')
 })
+
+/*app.get('/login', (req, res) => {
+    res.render('pages/login')
+})
+
+app.post('/log', (req,res) => {
+    var username = req.body.username;
+    var password = req.body.password;
+    let sql = `SELECT * FROM ijs_money_tracker_g1.users`;
+    con.query(sql, (err, result) => {
+        for (var i = 0; i < result.length; i++) {
+            var db_username = result[i].users_username
+            var db_password = result[i].users_password
+        } 
+        if (username == db_username || password == db_password) {
+            res.json(req.body);
+            console.log('yes')
+        } else {
+            console.log('no')
+        }
+    })
+})*/
+
+
 
 app.get('/exp', (req, res) => {
     let sql = `SELECT categories_icons_id,categories_name,categories_id,icons FROM ijs_money_tracker_g1.categories JOIN ijs_money_tracker_g1.icons ON categories.categories_icons_id = icons.icons_id WHERE categories_inc_exp = '0'`;

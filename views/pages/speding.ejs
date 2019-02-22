@@ -1,4 +1,5 @@
 <% include ../partials/header %>
+<% include ../partials/navbar %>
 <main>
     <div class="d-flex wraper justify-content-center mb-5">
         <div class="expense m-2">
@@ -6,16 +7,16 @@
                 <h3 class="nav bg-danger rounded mt-1 p-2 text-white">List of Expenses</h3>
             </div>
             <div class="d-flex justify-content-center">
-                <table class="bg-danger rounded mt-1 table-xl">
+                <table class="bg-danger rounded mt-1">
                     <% print.forEach((name) => { %>
-                    <tr class="text-white">
-                        <td class="col-4 py-1">
+                    <tr class="text-white row p-2">
+                        <td class="col-5 py-1">
                             <%= name.main_date %>
                         </td>
                         <td class="col-4 py-1">
                             <%= name.categories_name %>
                         </td>
-                        <td class="col-4 py-1">
+                        <td class="col-1 py-1">
                             <%= name.transactions_amount %>
                         </td>
                     </tr>
@@ -42,14 +43,14 @@
             <div class="d-flex justify-content-center">
                 <table class="bg-success rounded mt-1">
                     <% print5.forEach((name) => { %>
-                    <tr class="text-white">
+                    <tr class="text-white row p-2">
                         <td class="col-4 py-1">
                             <%= name.main_date %>
                         </td>
-                        <td class="col-4 py-1">
+                        <td class="col-5 py-1">
                             <%= name.categories_name %>
                         </td>
-                        <td class="col-4 py-1">
+                        <td class="col-3 py-1">
                             <%= name.transactions_amount %>
                         </td>
                     </tr>
