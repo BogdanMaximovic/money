@@ -215,7 +215,18 @@ textarea:focus:-ms-input-placeholder { color:transparent;}
 .txttbl {
     font-size: 1.2rem;
 }
+ 
+.wrong{
+    color: red;
+}
 
+.ok{
+    color: green;
+}
+.divreg{
+    background-image: linear-gradient(to right, #093028, #237A57);
+    border-radius: 2rem;
+}
 /* Predrag */
 
 .income {

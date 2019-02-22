@@ -201,8 +201,45 @@ app.post('/del', (req, res) => {
         }
     })
 })
-
 /*===== Jovana transactions END=====*/
+//Jovana REGISTRATION //
+// app.get('/registration', (req, res) => {
+//     res.render('pages/registration')
+// })
+
+// app.get('/check', (req, res) =>{
+//     let username=req.body.username;
+//     let span1 = req.body.span;
+//     sql = 'SELECT users_username FROM  ijs_money_tracker_g1.users'
+//     con.query(sql,(err,result)=> {
+//         if (err) {
+//             throw err;
+//         } else {
+//             res.render('pages/registration');
+//         }
+//     })
+// })
+
+// app.post('/register', (req, res)=>{
+    
+//     let name = req.body.name;
+//     let lastname=req.body.lastname;
+//     let username=req.body.username;
+//     let email = req.body.email;
+//     let pass = req.body.pass;
+//   let sql = `INSERT INTO ijs_money_tracker_g1.users (users_name, users_lastname, users_username, users_email, users_password) VALUES ('${name}','${lastname}','${username}','${email}', '${pass}')`
+//     con.query(sql,(err, result)=> {
+//         if(err){
+//             throw err;
+//         } else{
+            
+//             res.json(req.body);
+//         }
+//     })
+  
+// })
+// JOVANA REGISTARTION END // 
+
 // Jovana EDIT
 app.get('/edit', (req, res) => {
     let sql = `select transactions_id, transactions_amount, main_transid, main_date, main_comment, main_catid, categories_id, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id`;

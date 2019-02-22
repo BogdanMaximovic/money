@@ -1,0 +1,47 @@
+<% include ../partials/header %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<article class="row">
+    <h1 class="text-light text-center col-12">Registration</h1>
+    <form action="/register" method="POST" class="col-md-6 col-sm-10 m-auto">
+        <div class="form-group text-light divreg p-3 m-3 ">
+            <div class="form-group">
+            <label for="name"> First Name</label>
+            <input class="form-control" type="text" id="name" placeholder="Enter your first name">
+            </div> 
+            <div class="form-group">
+            <label for="lastname"> Last Name</label>
+            <input class="form-control" type="text" id="lastname" placeholder="Enter your last name">
+            </div> 
+            <div class="form-group">
+            <label for="name">Username</label>
+            <input class="form-control" type="text" id="username" placeholder="Enter specific username"> 
+            <span id="message3"></span> 
+            <button id="btnch">proveri</button>
+            </div> 
+            <div class="form-group">
+            <label for="email">Email address</label>
+            <input class="form-control form-control-lg" type="email" id="email" placeholder="Enter your email">
+            </div> 
+            <div class="form-group">
+            <label for="password">Password</label>
+            <input class="form-control" type="password" id="password" placeholder="Password">
+            </div> 
+            <div class="form-group">
+            <label for="password">Confirm password</label>
+            <input class="form-control" type="password" id="con-password" placeholder="Confirm password">
+            </div> 
+            
+            <span id='message'></span>
+            <span id='message1' class="d-block"></span>
+            
+            <button  id="btnreg" class="btn btn-success p-3 m-auto btn-block">Register</button>
+            
+            <p class="text-center">You already have account? <a class="text-success" href="http://localhost:4200/login">Login</a></p>
+           
+        </form>
+</article>
+
+
+  <script src="../assets/js/registration.js" ></script>
+
+  <% include ../partials/footer %>
