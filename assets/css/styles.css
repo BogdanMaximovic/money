@@ -2,19 +2,17 @@
     margin: 0;
     padding: 0;
 }
-
 html,
 body {
     font-size: 67.5%;
     font-family: inherit;
     font-family: 'Coming Soon', cursive;
     font-size: 1rem;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.7)), to(rgba(0, 0, 0, 0.7))), url(https://i.pinimg.com/originals/06/2b/7f/062b7fb9cfd2a6351f4e0850c1e1ed50.jpg);
-    background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(https://i.pinimg.com/originals/06/2b/7f/062b7fb9cfd2a6351f4e0850c1e1ed50.jpg);
-    background-image: -moz-linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(https://i.pinimg.com/originals/06/2b/7f/062b7fb9cfd2a6351f4e0850c1e1ed50.jpg);
-    background-image: -o-linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(https://i.pinimg.com/originals/06/2b/7f/062b7fb9cfd2a6351f4e0850c1e1ed50.jpg);
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(https://i.pinimg.com/originals/06/2b/7f/062b7fb9cfd2a6351f4e0850c1e1ed50.jpg);
-    background-repeat: no-repeat;
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.7)), to(rgba(0, 0, 0, 0.7))), url(../bkg/back.png) no-repeat center center fixed;
+    background: -webkit-linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../bkg/back.png) no-repeat center center fixed;
+    background: -moz-linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../bkg/back.png) no-repeat center center fixed;
+    background: -o-linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../bkg/back.png) no-repeat center center fixed;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../bkg/back.png) no-repeat center center fixed;
     -o-background-size: cover;
        background-size: cover;
 }
@@ -22,26 +20,19 @@ body {
     html {
       font-size: 65%; 
     } 
-  }
-
-.letter {
-    letter-spacing: .3rem;
 }
 
 .coloring-text {
-    background-image: -webkit-gradient(linear, left top, right top, from(#3f51b5), to(#83d8ff));
-    background-image: -webkit-linear-gradient(left, #3f51b5, #83d8ff);
-    background-image: -moz-linear-gradient(left, #3f51b5, #83d8ff);
-    background-image: -o-linear-gradient(left, #3f51b5, #83d8ff);
-    background-image: linear-gradient(to right, #3f51b5, #83d8ff);
+    background-image: -webkit-gradient(linear, left top, right top, from(#3f51b5), to(#d0ddf2));
+    background-image: -webkit-linear-gradient(left, #3f51b5, #d0ddf2);
+    background-image: -moz-linear-gradient(left, #3f51b5, #d0ddf2);
+    background-image: -o-linear-gradient(left, #3f51b5, #d0ddf2);
+    background-image: linear-gradient(to right, #3f51b5, #d0ddf2);
     -webkit-background-clip: text;
     color: transparent;
-    letter-spacing: 1px;
+    letter-spacing: .3rem;
     word-spacing: .5rem;
-}
-
-.center {
-    text-align: center;
+    font-weight: bold;
 }
 
 .center-screen {
@@ -55,9 +46,29 @@ body {
          transform: translate(-50%, -50%);
 }
 
-.iconBkg {
-    background-color: grey
+.iconBkg {background-color: grey}
+
+#loginBkg,#InfoBkg {
+    background-image: -webkit-gradient(linear, left top, right top, from(#093028), to(#237A57));
+    background-image: -webkit-linear-gradient(left, #093028, #237A57);
+    background-image: -moz-linear-gradient(left, #093028, #237A57);
+    background-image: -o-linear-gradient(left, #093028, #237A57);
+    background-image: linear-gradient(to right, #093028, #237A57);
+    border-radius: 2rem;
 }
+
+.nounderline{
+    text-decoration: none !important;   
+}
+
+/* --- Remove placeholder --- */
+input:focus::-webkit-input-placeholder{color: transparent;}
+input:focus::-moz-placeholder{color: transparent;}
+input:focus:-moz-placeholder{color: transparent;}
+textarea:focus::-webkit-input-placeholder { color:transparent; }
+textarea:focus:-moz-placeholder { color:transparent; } 
+textarea:focus::-moz-placeholder { color:transparent; } 
+textarea:focus:-ms-input-placeholder { color:transparent;}
 
 /* --- button setings start --- */
 
@@ -65,7 +76,7 @@ body {
 .btn:link,
 .btn:visited {
     text-decoration: none;
-    padding: 1.5rem 4rem;
+    padding: 1.5rem 2.5rem;
     display: inline-block;
     border-radius: 20rem;
     -webkit-transition: all .2s;
@@ -73,7 +84,7 @@ body {
     -moz-transition: all .2s;
     transition: all .2s;
     position: relative;
-    font-size: 1.6rem;
+    font-size: 1.3rem;
     border: none;
     cursor: pointer;
 }
@@ -160,8 +171,8 @@ body {
     display: inline-block;
     text-decoration: none;
     border-bottom: 1px solid #55c57a;
-    padding: .5rem;
-    font-size: 1.6rem;
+    padding: .5rem 1.5rem;
+    font-size: 1.5rem;
     -webkit-transition: all .2s;
     -o-transition: all .2s;
     -moz-transition: all .2s;
@@ -195,20 +206,31 @@ body {
 /* jovana */
 .table-wrapper-scroll-y {
     display: block;
-    max-height: 50vh;
+    max-height: 80vh;
     overflow-y: auto;
     -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 
 .divdt {
     background-color: lightgreen;
-    font-size: 1.7rem;
+    font-size: 1.2rem;
 }
 
 .txttbl {
     font-size: 1.2rem;
 }
+ 
+.wrong{
+    color: red;
+}
 
+.ok{
+    color: green;
+}
+.divreg{
+    background-image: linear-gradient(to right, #093028, #237A57);
+    border-radius: 2rem;
+}
 /* Predrag */
 
 .income {

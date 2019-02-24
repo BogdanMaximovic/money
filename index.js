@@ -15,7 +15,6 @@ const con = mysql.createConnection({
     multipleStatements: true
 });
 
-
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'))
 
@@ -28,24 +27,34 @@ app.use('/assets', express.static('assets'))
 app.use('/icons', express.static('icons'))
 
 /*===== BOGDAN START=====*/
-app.get('/spending', (req, res) => {
-    let sql = `select transactions_amount, main_transid, main_date, main_comment, main_catid, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id`;
-    con.query(sql, (err, result) => {
-        if (err) {
-            throw err;
-        } else {
-            data = result;
-            res.render('pages/index', data)
-        }
-    })
-})
 
 app.get('/categories', (req, res) => {
     res.render('partials/header')
 })
-app.get('/edit', function(req, res) {
-    res.render('pages/edit');
+
+/*app.get('/login', (req, res) => {
+    res.render('pages/login')
 })
+
+app.post('/log', (req,res) => {
+    var username = req.body.username;
+    var password = req.body.password;
+    let sql = `SELECT * FROM ijs_money_tracker_g1.users`;
+    con.query(sql, (err, result) => {
+        for (var i = 0; i < result.length; i++) {
+            var db_username = result[i].users_username
+            var db_password = result[i].users_password
+        } 
+        if (username == db_username || password == db_password) {
+            res.json(req.body);
+            console.log('yes')
+        } else {
+            console.log('no')
+        }
+    })
+})*/
+
+
 
 app.get('/exp', (req, res) => {
     let sql = `SELECT categories_icons_id,categories_name,categories_id,icons FROM ijs_money_tracker_g1.categories JOIN ijs_money_tracker_g1.icons ON categories.categories_icons_id = icons.icons_id WHERE categories_inc_exp = '0'`;
@@ -56,18 +65,8 @@ app.get('/exp', (req, res) => {
             obj = { print: result }
             res.render('pages/categories', obj)
         }
-    });
-});
-        //    res.render('pages/edit', obj);
-
-// <<<<<<< HEAD
-app.get('/edit/new', function(req, res) {
-    console.log("======== RES ========");
-    console.log(req.query);
-    console.log("======== END RES ========");
-
-    res.render('pages/edit');
-});
+    })
+})
 
 app.get('/inc', (req, res) => {
     let sql = `SELECT categories_icons_id,categories_name,categories_id,icons FROM ijs_money_tracker_g1.categories JOIN ijs_money_tracker_g1.icons ON categories.categories_icons_id = icons.icons_id WHERE categories_inc_exp = '1'`;
@@ -90,8 +89,8 @@ app.get('/new', (req, res) => {
             obj = { print: result }
             res.render('pages/new', obj)
         }
-    });
-});
+    })
+})
 
 app.get('/delCat', (req, res) => {
     let sql = `SELECT categories_id,categories_name FROM ijs_money_tracker_g1.categories`
@@ -102,8 +101,8 @@ app.get('/delCat', (req, res) => {
             obj = { print: result }
             res.render('pages/delete', obj)
         }
-    });
-});
+    })
+})
 
 app.post('/delete', (req, res) => {
     let id = req.body.id;
@@ -112,11 +111,10 @@ app.post('/delete', (req, res) => {
         if (err) {
             throw err;
         } else {
-            var obj = {};
             res.json(req.body);
         }
-    });
-});
+    })
+})
 
 app.post('/addingNew', (req, res) => {
     let category = req.body.category;
@@ -128,11 +126,10 @@ app.post('/addingNew', (req, res) => {
         if (err) {
             throw err;
         } else {
-            var obj = {};
             res.json(req.body);
         }
-    });
-});
+    })
+})
 
 app.get('/adding', (req, res) => {
     data = res;
@@ -161,24 +158,10 @@ app.post('/addingNewInput', (req, res) => {
         if (err) {
             throw err;
         } else {
-            var obj = {};
             res.json(req.body);
         }
     })
 })
-//Tamara
-    /*con.query('INSERT into ijs_money_tracker_g1.main SET ?',newInput,function(err,res){
-    if(err){
-        throw err;
-    }
-        else{
-        console.log(res);
-    }
-        
-   res.send(JSON.stringify(req.body));
-})})
-
-
 /*===== BOGDAN END=====*/
 
 /*===== jovana transactions START=====*/
@@ -190,9 +173,9 @@ app.get('/transactions', (req, res) => {
             throw err;
         } else {
             obj = result;
-            res.render('pages/transactions', obj);
+            res.render('pages/transactions', obj)
         }
-    });
+    })
 });
 
 app.get('/btnexp', (req, res) => {
@@ -222,18 +205,54 @@ app.get('/btninc', (req, res) => {
 app.post('/del', (req, res) => {
 
     let id = req.body.id;
-    let sql = `DELETE FROM main WHERE main_transid = '${id}'`;
+    let sql = `DELETE FROM ijs_money_tracker_g1.transactions WHERE (transactions_id = ${id})`;
     con.query(sql, (err, result) => {
         if (err) {
             throw err;
         } else {
-            var obj = {};
             res.json(req.body);
         }
     })
 })
-
 /*===== Jovana transactions END=====*/
+//Jovana REGISTRATION //
+// app.get('/registration', (req, res) => {
+//     res.render('pages/registration')
+// })
+
+// app.get('/check', (req, res) =>{
+//     let username=req.body.username;
+//     let span1 = req.body.span;
+//     sql = 'SELECT users_username FROM  ijs_money_tracker_g1.users'
+//     con.query(sql,(err,result)=> {
+//         if (err) {
+//             throw err;
+//         } else {
+//             res.render('pages/registration');
+//         }
+//     })
+// })
+
+// app.post('/register', (req, res)=>{
+    
+//     let name = req.body.name;
+//     let lastname=req.body.lastname;
+//     let username=req.body.username;
+//     let email = req.body.email;
+//     let pass = req.body.pass;
+//   let sql = `INSERT INTO ijs_money_tracker_g1.users (users_name, users_lastname, users_username, users_email, users_password) VALUES ('${name}','${lastname}','${username}','${email}', '${pass}')`
+//     con.query(sql,(err, result)=> {
+//         if(err){
+//             throw err;
+//         } else{
+            
+//             res.json(req.body);
+//         }
+//     })
+  
+// })
+// JOVANA REGISTARTION END // 
+
 // Jovana EDIT
 app.get('/edit', (req, res) => {
     let sql = `select transactions_id, transactions_amount, main_transid, main_date, main_comment, main_catid, categories_id, categories_name FROM ijs_money_tracker_g1.transactions INNER JOIN main ON transactions.transactions_id=main.main_transid INNER JOIN categories ON main.main_catid = categories.categories_id`;
@@ -258,7 +277,6 @@ app.get('/edit', (req, res) => {
         if (err) {
             throw err;
         } else {
-            var obj = {};
             res.json(req.body);
         }
     })

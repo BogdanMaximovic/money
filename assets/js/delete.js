@@ -3,7 +3,6 @@ $(() => {
     let msg = $('#success');
     let btnSave = $('#save');
     let BtnClose = $('#close');
-    let selectField = $("#id option:selected");
     let url = 'http://localhost:4200/exp';
 
     function delaying(){
@@ -17,10 +16,10 @@ $(() => {
     btnSave.click((e) => {
         e.preventDefault();
         msg.show();
+        let selectField = $("#id option:selected");
         let id = selectField.val();
         let data = {};
         data.id = id;
-        
         $.ajax({
           type: 'post',
           data: JSON.stringify(data),
