@@ -190,12 +190,11 @@ table {
 th, td {
     height: 5vh;
 }
-#chartMy {
-    width: 50%;
-    height: 50vh;
-    margin: 0 auto;
-    padding: 5%;
+#chart2 {
+    align-content: center;
 }
-#divChart2 {
-    height: 50vh;
+#divChart3 {
+    align-items: stretch;
+    position: relative;
+    height: 100vh;
 }

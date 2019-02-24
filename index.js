@@ -347,7 +347,7 @@ app.get('/chart3', function(req, res) {
     // connection.end();
 });
 
-let sql4 = `SELECT main_date,categories_name, color, transactions_amount FROM transactions LEFT JOIN categories ON transactions_catid = categories_id LEFT JOIN main ON main_transid = transactions_id ORDER BY main_date DESC LIMIT 10`;
+let sql4 = `SELECT main_date,categories_name, color, transactions_amount FROM transactions LEFT JOIN categories ON transactions_catid = categories_id LEFT JOIN main ON main_transid = transactions_id ORDER BY main_date DESC LIMIT 12`;
 // Fetching data from database
 app.get('/chart4', function(req, res) {
     con.query(sql4, function (err, rows, fields) {
