@@ -149,10 +149,6 @@ app.post('/addingNewInput', (req, res) => {
         }
     })
 })
-<<<<<<< HEAD
-
-=======
->>>>>>> 35b0dc809c21b07883498aa1665e80312ac4027a
 /*===== BOGDAN END=====*/
 
 /*===== jovana transactions START=====*/
