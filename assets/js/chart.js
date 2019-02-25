@@ -9,12 +9,26 @@ $(document).ready(function () {
     chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
 
     chart.legend = new am4charts.Legend();
+    chart.legend.useDefaultMarker = true;
+    chart.legend.labelColor = am4core.color("#ccc");
+    var marker = chart.legend.markers.template.children.getIndex(0);
+    //marker.cornerRadius(12, 12, 12, 12);
+    marker.strokeWidth = 2;
+    marker.strokeOpacity = 1;
+    marker.stroke = am4core.color("#ccc");
+    marker.fill = am4core.color("#ccc");
 
     var series = chart.series.push(new am4charts.PieSeries3D());
     series.dataFields.value = "transactions_amount";
     series.dataFields.category = "categories_name";
+<<<<<<< HEAD
     series.slices.template.fill = am4core.color("color");
     series.stroke = am4core.color("color");
+=======
+    series.slices.template.propertyFields.fill = "color";
+    series.slices.template.propertyFields.stroke = "color";
+    series.legendSettings.labelColor = am4core.color("#ccc");
+>>>>>>> 24a6d8af9379d630266ebc083381b1df8b61ba3c
     series.labels.template.disabled = true;
     series.ticks.template.disabled = true;
 });
@@ -29,16 +43,33 @@ $(document).ready(function () {
     chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
 
     chart.legend = new am4charts.Legend();
+<<<<<<< HEAD
     chart.legend.valueLabels.template.text.colors = "red";
+=======
+    chart.legend.useDefaultMarker = true;
+    chart.legend.labels.template.text.color = am4core.color("#ccc");
+    var marker = chart.legend.markers.template.children.getIndex(0);
+    //marker.cornerRadius(12, 12, 12, 12);
+    marker.strokeWidth = 2;
+    marker.strokeOpacity = 1;
+    marker.stroke = am4core.color("#ccc");
+    marker.fill = am4core.color("#ccc");
+>>>>>>> 24a6d8af9379d630266ebc083381b1df8b61ba3c
 
     var series = chart.series.push(new am4charts.PieSeries3D());
     series.dataFields.value = "transactions_amount";
     series.dataFields.category = "categories_name";
+<<<<<<< HEAD
+=======
+    series.slices.template.propertyFields.fill = "color";
+    series.slices.template.propertyFields.stroke = "color";
+>>>>>>> 24a6d8af9379d630266ebc083381b1df8b61ba3c
     series.labels.template.disabled = true;
     series.ticks.template.disabled = true;
 });
 // Overall XYchart
 $(document).ready(function () {
+<<<<<<< HEAD
   am4core.useTheme(am4themes_animated);
   // Themes end
   
@@ -91,6 +122,56 @@ $(document).ready(function () {
   chart.cursor = new am4charts.XYCursor();
   chart.cursor.lineX.strokeOpacity = 0;
   chart.cursor.lineY.strokeOpacity = 0;
+=======
+  var SERVER_URL = "http://localhost:4200/chart3";
+$.get(SERVER_URL, function (record) {
+
+if (record !== null) {
+var value = record.map(function (rec) {
+  return rec.income;
+});
+var value2 = record.map(function (rec) {
+  return rec.expense;
+});
+var value3 = record.map(function (rec) {
+  return rec.balanc;
+});
+
+var ctx = document.getElementById("myChart3");
+var myChart = new Chart(ctx, {
+type: 'bar',
+data: {
+labels: ["Income", "Expense", "Balanc"],
+datasets: [{
+label: 'Sample Data',
+data: [parseInt(value), parseInt(value2), parseInt(value3)],
+backgroundColor: [
+    'rgba(40, 167, 69, 1)',
+    'rgba(220, 53, 69, 1)',
+    'rgba(23, 162, 184, 1)'
+],
+borderColor: [
+    'rgba(40, 167, 69,1)',
+    'rgba(220, 53, 69, 1)',
+    'rgba(23, 162, 184, 1)'
+]
+}]
+},
+options: {
+  responsive: true,
+    scales: {
+        yAxes: [{
+            ticks: {
+                beginAtZero:true
+            }
+        }]
+    }
+}
+});
+
+}
+});
+>>>>>>> 24a6d8af9379d630266ebc083381b1df8b61ba3c
 });
 
 // Chart of incomes and expenses
@@ -127,6 +208,8 @@ var series = chart.series.push(new am4charts.ColumnSeries());
 series.dataFields.valueY = "transactions_amount";
 series.dataFields.categoryX = "categories_name";
 series.name = "categories_name";
+series.columns.template.propertyFields.fill = "color";
+series.columns.template.propertyFields.stroke = "color";
 series.tooltipText = "{categoryX}: [bold]{valueY}[/]";
 series.columns.template.fillOpacity = .8;
 series.columns.template.stroke = am4core.color("color");
@@ -135,6 +218,7 @@ series.columns.template.fill = am4core.color("#00ff00");
 var columnTemplate = series.columns.template;
 columnTemplate.strokeWidth = 2;
 columnTemplate.strokeOpacity = 1;
+<<<<<<< HEAD
 //columnTemplate.stroke = am4core.color("color");
 //columnTemplate.fill = am4core.color("color");
 
@@ -145,6 +229,8 @@ columnTemplate.strokeOpacity = 1;
 columnTemplate.adapter.add("stroke", (stroke, target) => {
   return chart.colors.getIndex(target.dataItem.index);
 })*/
+=======
+>>>>>>> 24a6d8af9379d630266ebc083381b1df8b61ba3c
 
 chart.cursor = new am4charts.XYCursor();
 chart.cursor.lineX.strokeOpacity = 0;
