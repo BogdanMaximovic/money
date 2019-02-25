@@ -329,6 +329,10 @@ app.get('/', (req, res) => {
     });
 });
 
+app.get('/charts', (req, res) => {
+    res.render('pages/charts');
+})
+
 let sql1 = `SELECT main_date,categories_name, color, transactions_amount FROM transactions LEFT JOIN categories ON transactions_catid = categories_id LEFT JOIN main ON main_transid = transactions_id WHERE categories_inc_exp = '0' ORDER BY main_date`;
 // Fetching data from database
 app.get('/chart', function(req, res) {

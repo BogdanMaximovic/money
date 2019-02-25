@@ -313,3 +313,36 @@ textarea:focus:-ms-input-placeholder { color:transparent;}
         height: auto;
     } 
 }
+#divChart3 {
+    position: relative;
+    width: 50%;
+    height: 100vh;
+}
+@media only screen and (max-width: 37.5em) {
+    #divChart3 {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+    } 
+}
+#divChart4 {
+    position: relative;
+    width: 50%;
+    height: auto;
+}
+@media only screen and (max-width: 37.5em) {
+    #divChart4 {
+        position: relative;
+        width: 100%;
+        height: auto;
+    } 
+}
+#btnCharts {
+    margin: 2%;
+}
+#btnCharts a {
+    color: #ccc;
+}
+#btnCharts a:hover {
+    text-decoration: none;
+}
