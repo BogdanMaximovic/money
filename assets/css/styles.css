@@ -216,7 +216,7 @@ textarea:focus:-ms-input-placeholder { color:transparent;}
 }
 
 .divdt {
-    background-image: linear-gradient(to right,#4e54c8, #8f94fb);
+    background-color: lightgreen;
     font-size: 1.2rem;
 }
 
