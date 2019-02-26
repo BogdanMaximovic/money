@@ -35,6 +35,10 @@ body {
     font-weight: bold;
 }
 
+.navBg {
+    background-image: linear-gradient(to right, #56ab2f, #a8e063);
+}
+
 .center-screen {
     position: absolute;
     top: 50%;
@@ -212,7 +216,7 @@ textarea:focus:-ms-input-placeholder { color:transparent;}
 }
 
 .divdt {
-    background-color: lightgreen;
+    background-image: linear-gradient(to right,#4e54c8, #8f94fb);
     font-size: 1.2rem;
 }
 
@@ -336,13 +340,4 @@ textarea:focus:-ms-input-placeholder { color:transparent;}
         width: 100%;
         height: auto;
     } 
-}
-#btnCharts {
-    margin: 2%;
-}
-#btnCharts a {
-    color: #ccc;
-}
-#btnCharts a:hover {
-    text-decoration: none;
 }
