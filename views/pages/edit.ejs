@@ -47,6 +47,7 @@
                 <th>Date</th>
                 <th>Amount</th>
                 <th>Comment</th>
+                <th class="text-center">Edit</th>
             </tr>
         </thead>
         <tbody>
@@ -57,6 +58,7 @@
                 <td><%= name.main_date%></td>
                 <td><%= name.transactions_amount %></td>
                 <td><%= name.main_comment %></td>
+                <td class="text-center"><i id="ed" class="fas fa-edit"></i></td>
             </tr>
             <% }) %>
         </tbody>

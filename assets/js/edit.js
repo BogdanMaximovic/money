@@ -16,10 +16,10 @@ $(() => {
         }]
     });
 
-    $(document).on("click", "#tableedit tbody tr", function() {
+    $(document).on("click", "#tableedit tbody tr #ed", function() {
         modal.modal('show')
         let row = myTable.row();
-        let rowData = myTable.row(this).data();
+        let rowData = myTable.row(this.parentElement.parentElement).data();
         $('#id').val(`${rowData[0]}`)
         $("#nwct option:selected").text(`${rowData[1]}`);
         $('#nwdt').val(`${rowData[2]}`)

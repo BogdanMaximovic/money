@@ -10,16 +10,18 @@
         {
             "targets": [4],
             "visible" : false
-        }
+       }
     ]});
    
-    $(document).on("click", "#tabledata tbody tr", function () {
+    $(document).on("click", "#tabledata tbody tr #ic ", function () {
         var row = myTable.row();
-        var rowData = myTable.row( this ).data(); 
+        var rowData = myTable.row( this.parentElement.parentElement ).data(); 
         $('#myModal').modal('show')
         $('#id').val(`${rowData[4]}`)
         
   }); 
+
+  
     $('#delete').click((e) =>{
         e.preventDefault();
         var id = $('#id').val();
@@ -37,4 +39,6 @@
         });
         delaying()
     })
+
+    
 });

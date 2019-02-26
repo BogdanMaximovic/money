@@ -26,6 +26,7 @@
                 <th>Amount</th>
                 <th>Comment</th>
                 <th>ID</th>
+                <th class="text-center">Delete</th>
                 </tr>
         </thead>
         <tbody>
@@ -36,6 +37,7 @@
                 <td><%= name.transactions_amount %></td>
                 <td><%= name.main_comment %></td>
                 <td><%= name.main_transid %></td>
+                <td class="text-center"><i id="ic" class="fas fa-trash"></i></td>
                 </tr>
             <% }) %>
 
@@ -55,7 +57,7 @@
             <div class="modal-text p-3">
                 <form action="/del" method="POST">
                     <div class="form-group">
-                        <input class="form-control" type="hidden" name="idid" id="id" value="">
+                        <input class="form-control" type="hidden"  id="id" value="">
                     </div>
                 </form>
                 <button class="btn btn-danger" data-dismiss="modal" id="delete">Delete</button>
@@ -64,5 +66,40 @@
         </div>
     </div>
 </div>
-<p class="badge badge-info pt-1 m-1">Note: Click on row to delete transaction.</p>
+
+<div class="modal" id="myModalEdit">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editing Data</h5>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-text">
+                <form action="/editval" method="post">
+                    <div class="form-group m-1 p-3">
+                        <input class="form-control" type="hidden" id="id1" value="">
+                        <label for="nwct">Edit category</label>
+                        <select class="form-control browser-default custom-select" id="nwct">
+                            <% obj.forEach((name) => { %>
+                            <option value="<%= name.categories_id %>">
+                                <%= name.categories_name %>
+                            </option>
+                            <% }) %>
+                        </select>
+                        <label for="nwdt">Edit date</label>
+                        <input class="form-control" type="text" id="nwdt" placeholder="Enter new value">
+                        <label for="nwam">Edit amount</label>
+                        <input class="form-control" type="text" id="nwam" placeholder="Enter new value">
+                        <label for="nwcm">Edit comment</label>
+                        <input class="form-control" type="text" id="nwcm" placeholder="Enter new value">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer m-auto">
+                <button class="btn btn-success" data-dismiss="modal" id="save">Save</button>
+                <button class="btn btn-secondary" data-dismiss="modal" id="close">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 <% include ../partials/footer %>
